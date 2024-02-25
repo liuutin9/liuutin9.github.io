@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>TSHOAS</title>
+	<link href="TSHOAS.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<header>
+		<div class="title">
+			<p class="title_word">
+				<nobr>TS Hospital Online Appointment System</nobr>
+			</p>
+		</div>
+	</header>
+	
+	<section>
+		<br/>
+		<input id="name" type=text placeholder="enter the name" />
+		<br/>
+		<br/>
+		<input id="IDNumber" type=text placeholder="enter the ID" />
+		<br/>
+		<br/>
+		<input id="order" type=text placeholder="enter the order" />
+		<br/>
+		<br/>
+		<button onclick="add()">掛號</button>&nbsp
+		<button onclick="cancel()">取消</button>&nbsp
+		<button onclick="pass()">過號</button>&nbsp
+		<button onclick="finish()">完成</button>
+	</section>
+	
+	<article>
+		<p>Condition:</p>
+		<p id="na" style = "font-size: 18px"></p>
+		<p id="list"></p>
+	</article>
+	<script src="TSHOAS.js"></script>
+</body>
+
+</html>
