@@ -27990,7 +27990,7 @@ A.akO.prototype={
 $1(a){var s=A.ez().b
 if(s==null)s=null
 else{s=s.canvasKitBaseUrl
-if(s==null)s=null}return(s==null?"https://www.gstatic.com/flutter-canvaskit/04817c99c9fd4956f27505204f7e344335810aed/":s)+a},
+if(s==null)s=null}return(s==null?"https://www.gstatic.com/flutter-canvaskit/a5c24f538d05aaf66f7972fb23959d8cafb9f95a/":s)+a},
 $S:168}
 A.al_.prototype={
 $1(a){this.a.remove()
