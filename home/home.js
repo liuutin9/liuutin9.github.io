@@ -18,6 +18,10 @@ document.getElementById("Diary").onclick = function() {
     window.open("https://liuutin9.github.io/Diary/Diary.html", "_self");
 }
 
+document.getElementById("Signal-and-System").onclick = function() {
+    window.open("https://liuutin9.github.io/Signal-and-System/index.html", "_self");
+}
+
 document.getElementById("Expense-Tracker").onclick = function() {
     window.open("https://liuutin9.github.io/Expense-Tracker/index.html", "_self");
 }
