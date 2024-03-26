@@ -11,7 +11,7 @@ header {
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-	width: 99%;
+	width: 100%;
 	height: auto;
 	align-content: center;
 	/* text-align: center; */
@@ -21,9 +21,9 @@ header {
 	position: relative;
 	animation-name: example1;
 	animation-duration: 1.25s;
-	border-radius: 15px;
-	margin: 0.5%;
-	/* margin-bottom: 1%; */
+	/* border-radius: 15px; */
+	margin-top: 0.5%;
+	margin-bottom: 0.5%;
 }
 .title {
 	width: max-content;
