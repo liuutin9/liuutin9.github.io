@@ -20,7 +20,7 @@ header {
 	position: sticky;
 	top: 0;
 	opacity: 100%;
-	backdrop-filter: blur(5px);
+	backdrop-filter: blur(8px);
 	border-bottom-style: solid;
 	border-color: rgb(40,40,40);
 }
