@@ -14,14 +14,7 @@ header {
 	width: 100%;
 	height: auto;
 	align-content: center;
-	/* text-align: center; */
-	/* align-items: center; */
-	font-size: 35px;
 	background-color: rgb(75,75,75);
-	position: relative;
-	animation-name: example1;
-	animation-duration: 1.25s;
-	/* border-radius: 15px; */
 	margin-top: 0.5%;
 	margin-bottom: 0.5%;
 }
