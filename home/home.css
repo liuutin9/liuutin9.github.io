@@ -4,7 +4,8 @@ html {
 body{
 	margin: 0px;
 	color: white;
-	background-color: rgb(50,50,50)
+	background-color: rgb(50,50,50);
+	scroll-behavior: smooth;
 }
 header {
 	display: flex;
