@@ -23,6 +23,8 @@ header {
 	backdrop-filter: blur(8px);
 	border-bottom-style: solid;
 	border-color: rgb(40,40,40);
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
 }
 .title {
 	width: max-content;
