@@ -20,7 +20,7 @@ header {
 .title {
 	width: max-content;
 	height: auto;
-	padding: 1%;
+	padding: 20px;
 	text-align: center;
 	font-size: xx-large;
 	/* align-self: stretch; */
