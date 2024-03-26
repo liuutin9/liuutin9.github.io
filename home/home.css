@@ -21,12 +21,14 @@ header {
 	position: relative;
 	animation-name: example1;
 	animation-duration: 1.25s;
+	border-radius: 15px;
 }
 .title {
 	width: max-content;
 	height: auto;
 	padding: 1%;
 	text-align: center;
+	font-size: xx-large;
 	/* align-self: stretch; */
 }
 
@@ -52,31 +54,37 @@ li {
 	font-size: 25px;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 600px) {
 	.item {
-		min-width: 846px;
+		min-width: 564px;
 		height: auto;
-		font-size: xx-large;
+		font-size: x-large;
 		align-self: center;
 		color: white;
 		background-color: rgb(75,75,75);
-		border-radius: 10px;
-		padding: 10px;
-		margin: 10px;
+		border-radius: 15px;
+		padding: 1%;
+		/* margin-top: 1%;
+		margin-bottom: 1%; */
+		margin-left: 3%;
+		margin-right: 3%;
 	}
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 600px) {
 	.item {
 		width: 100%;
 		height: auto;
-		font-size: xx-large;
+		font-size: x-large;
 		align-self: center;
 		color: white;
 		background-color: rgb(75,75,75);
-		border-radius: 10px;
-		padding: 10px;
-		margin: 10px;
+		border-radius: 15px;
+		padding: 1%;
+		/* margin-top: 1%;
+		margin-bottom: 1%; */
+		margin-left: 3%;
+		margin-right: 3%;
 	}
 }
 
