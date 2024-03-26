@@ -22,7 +22,7 @@ header {
 	animation-name: example1;
 	animation-duration: 1.25s;
 	border-radius: 15px;
-	margin-bottom: 1%;
+	/* margin-bottom: 1%; */
 }
 .title {
 	width: max-content;
@@ -67,8 +67,8 @@ li {
 		padding: 1%;
 		/* margin-top: 1%;
 		margin-bottom: 1%; */
-		margin-left: 3%;
-		margin-right: 3%;
+		/* margin-left: 3%;
+		margin-right: 3%; */
 	}
 }
 
@@ -84,8 +84,8 @@ li {
 		padding: 1%;
 		/* margin-top: 1%;
 		margin-bottom: 1%; */
-		margin-left: 3%;
-		margin-right: 3%;
+		/* margin-left: 3%;
+		margin-right: 3%; */
 	}
 }
 
