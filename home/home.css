@@ -50,16 +50,32 @@ li {
 	font-size: 25px;
 }
 
-.item {
-	width: auto;
-	height: auto;
-	font-size: xx-large;
-	align-self: center;
-	color: white;
-	background-color: rgb(75,75,75);
-	border-radius: 10px;
-	padding: 10px;
-	margin: 10px;
+@media screen and (min-width: 900px) {
+	.item {
+		min-width: 846px;
+		height: auto;
+		font-size: xx-large;
+		align-self: center;
+		color: white;
+		background-color: rgb(75,75,75);
+		border-radius: 10px;
+		padding: 10px;
+		margin: 10px;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.item {
+		width: 100%;
+		height: auto;
+		font-size: xx-large;
+		align-self: center;
+		color: white;
+		background-color: rgb(75,75,75);
+		border-radius: 10px;
+		padding: 10px;
+		margin: 10px;
+	}
 }
 
 .buttonList {
@@ -68,4 +84,8 @@ li {
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	padding-left: 3%;
+	padding-right: 3%;
 }
