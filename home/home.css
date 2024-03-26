@@ -10,31 +10,33 @@ header {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: center;
 	width: 100%;
 	height: 100%;
-	text-align: left;
+	align-content: center;
+	/* text-align: center; */
+	/* align-items: center; */
 	font-size: 35px;
 	background-color: rgb(75,75,75);
 	position: relative;
 	animation-name: example1;
 	animation-duration: 1.25s;
 }
-header .title {
-	width: auto;
+.title {
+	width: max-content;
 	height: auto;
 	padding: 1%;
-	text-align: left;
-	align-self: stretch;
+	text-align: center;
+	/* align-self: stretch; */
 }
 
-header .menu {
+/* .menu {
 	width: auto;
 	height: auto;
 	padding: 1%;
 	text-align: center;
 	align-self: stretch;
-}
+} */
 
 li {
 	text-align: center;
