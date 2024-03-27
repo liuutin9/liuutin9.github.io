@@ -96,13 +96,13 @@ li {
 	font-size: 25px;
 }
 
-@keyframes item {
-	0% {font-size: 0; top: 20vw; opacity: 0%;}
-	85% {font-size: 0; top: 20vw; opacity: 0%;}
-	100% {font-size: x-large; top:0vw; opacity: 100%;}
-}
-
 @media screen and (min-width: 600px) {
+	@keyframes item {
+		0% {font-size: 0; top: 20vw; opacity: 0%;}
+		85% {font-size: 0; top: 20vw; opacity: 0%;}
+		100% {font-size: x-large; top:0vw; opacity: 100%;}
+	}
+	
 	.item {
 		position: relative;
 		min-width: 564px;
@@ -120,6 +120,12 @@ li {
 }
 
 @media screen and (max-width: 600px) {
+	@keyframes item {
+		0% {font-size: 0; top: 20vw; opacity: 0%;}
+		85% {font-size: x-large; top: 20vw; opacity: 0%;}
+		100% {font-size: x-large; top:0vw; opacity: 100%;}
+	}
+	
 	.item {
 		position: relative;
 		width: 100%;
@@ -136,11 +142,11 @@ li {
 	}
 }
 
-@keyframes buttonList {
+/* @keyframes buttonList {
 	0% {top: 0vw; opacity: 0%;}
 	85% {top: 0vw; opacity: 0%;}
 	100% {top:0vw; opacity: 100%;}
-}
+} */
 
 .buttonList {
 	width: auto;
@@ -152,8 +158,8 @@ li {
 	padding-right: 3%;
 	position: relative;
 	/* z-index: -1; */
-	animation-name: buttonList;
-	animation-duration: 1.25s;
+	/* animation-name: buttonList;
+	animation-duration: 1.25s; */
 }
 
 input {
