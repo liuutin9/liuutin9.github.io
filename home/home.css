@@ -35,6 +35,7 @@ header {
 	backdrop-filter: blur(8px);
 	animation-name: example1;
 	animation-duration: 1.25s;
+	z-index: 1;
 }
 
 /* header {
@@ -130,6 +131,7 @@ li {
 		margin-bottom: 1%; */
 		/* margin-left: 3%;
 		margin-right: 3%; */
+		
 	}
 }
 
@@ -148,7 +150,7 @@ li {
 	padding-left: 3%;
 	padding-right: 3%;
 	position: relative;
-	z-index: -1;
+	/* z-index: -1; */
 	animation-name: buttonList;
 	animation-duration: 1.25s;
 }
