@@ -96,22 +96,25 @@ li {
 	font-size: 25px;
 }
 
+@keyframes item {
+	0% {font-size: 0;}
+	85% {font-size: 0;}
+	100% {font-size: x-large;}
+}
+
 @media screen and (min-width: 600px) {
 	.item {
 		min-width: 564px;
 		height: auto;
 		font-size: x-large;
-		/* align-self: center; */
 		color: white;
 		background-color: rgb(75,75,75);
 		border-radius: 15px;
 		padding: 15px;
 		border-style: solid;
 		border-color: rgb(40,40,40);
-		/* margin-top: 1%;
-		margin-bottom: 1%; */
-		/* margin-left: 3%;
-		margin-right: 3%; */
+		animation-name: item;
+		animation-duration: 1.25s;
 	}
 }
 
@@ -120,24 +123,20 @@ li {
 		width: 100%;
 		height: auto;
 		font-size: x-large;
-		/* align-self: center; */
 		color: white;
 		background-color: rgb(75,75,75);
 		border-radius: 15px;
 		padding: 15px;
 		border-style: solid;
 		border-color: rgb(40,40,40);
-		/* margin-top: 1%;
-		margin-bottom: 1%; */
-		/* margin-left: 3%;
-		margin-right: 3%; */
-		
+		animation-name: item;
+		animation-duration: 1.25s;
 	}
 }
 
 @keyframes buttonList {
 	0% {top: 0vw; opacity: 0%;}
-	85% {top: 20vw; opacity: 0%;}
+	85% {top: 0vw; opacity: 0%;}
 	100% {top:0vw; opacity: 100%;}
 }
 
