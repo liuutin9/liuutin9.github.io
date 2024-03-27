@@ -97,13 +97,14 @@ li {
 }
 
 @keyframes item {
-	0% {font-size: 0;}
-	85% {font-size: 0;}
-	100% {font-size: x-large;}
+	0% {font-size: 0; top: 20vw; opacity: 0%;}
+	85% {font-size: 0; top: 20vw; opacity: 0%;}
+	100% {font-size: x-large; top:0vw; opacity: 100%;}
 }
 
 @media screen and (min-width: 600px) {
 	.item {
+		position: relative;
 		min-width: 564px;
 		height: auto;
 		font-size: x-large;
@@ -120,6 +121,7 @@ li {
 
 @media screen and (max-width: 600px) {
 	.item {
+		position: relative;
 		width: 100%;
 		height: auto;
 		font-size: x-large;
