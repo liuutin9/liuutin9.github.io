@@ -7,6 +7,26 @@ body{
 	background-color: rgb(50,50,50)
 }
 
+/* header {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	height: auto;
+	align-content: center;
+	background-color: rgba(75, 75, 75, 75%);
+	margin-bottom: 0.5%;
+	position: sticky;
+	top: 0;
+	opacity: 100%;
+	backdrop-filter: blur(8px);
+	border-bottom-style: solid;
+	border-color: rgb(40,40,40);
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
+} */
+
 @keyframes example5 {
 	0% {border: 2px solid rgb(50,50,50)}
 	80% {border: 2px solid rgb(50,50,50)}
@@ -74,7 +94,7 @@ caption {
 	25% {background-color: rgb(75,75,75); left: 200px; top: 0px; height: 35px; width: 35px; padding: 20px; font-size: 0px}
 	50% {background-color: rgb(75,75,75); left: 200px; top: 200px; height: 35px; width: 35px; padding: 20px; font-size: 0px}
 	75% {background-color: rgb(75,75,75); left: 0px; top: 200px; height: 35px; width: 35px; padding: 20px; font-size: 0px}
-	100% {background-color: rgb(75,75,75); left:0px; top:0px; height: 100%; width: 100%; padding-top: 20px; padding-bottom: 20px; font-size: 35px}
+	100% {background-color: rgb(75,75,75); left:0px; top:0px; height: 100%; width: 100%; padding-top: 20px; padding-bottom: 20px; font-size: 35px; position: sticky;}
 }
 header {
 	width: 100%;
@@ -84,9 +104,16 @@ header {
 	padding-bottom: 20px;
 	font-size: 35px;
 	background-color: rgb(75,75,75);
-	position: relative;
+	position: sticky;
+	top: 0;
 	animation-name: example1;
 	animation-duration: 1.25s;
+	opacity: 75%;
+	backdrop-filter: blur(8px);
+	border-bottom-style: solid;
+	border-color: rgb(40,40,40);
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
 }
 
 @keyframes example2 {
