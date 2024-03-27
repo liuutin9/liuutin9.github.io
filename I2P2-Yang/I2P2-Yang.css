@@ -83,10 +83,16 @@ header {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	font-size: 35px;
-	background-color: rgb(75,75,75);
-	position: relative;
+	background-color: rgba(75,75,75,75%);
+	position: sticky;
+	top: 0;
 	animation-name: example1;
 	animation-duration: 1.25s;
+	opacity: 100%;
+	border-bottom-style: solid;
+	border-color: rgb(40,40,40);
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
 }
 
 @keyframes example2 {
