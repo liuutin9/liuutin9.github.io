@@ -7,7 +7,7 @@ document.getElementById("HW2").onclick = function() {
 }
 
 document.getElementById("HW3").onclick = function() {
-    window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW3_111060013.pdf");
+    window.open("http://docs.google.com/gview?embedded=true&url=https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW3_111060013.pdf&amp;embedded=true");
 }
 
 document.getElementById("HW4").onclick = function() {
