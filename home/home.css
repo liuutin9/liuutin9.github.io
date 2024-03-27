@@ -134,8 +134,8 @@ li {
 }
 
 @keyframes buttonList {
-	0% {top: 20vw; opacity: 0%;}
-	90% {top: 20vw; opacity: 0%;}
+	0% {top: 0vw; opacity: 0%;}
+	85% {top: 20vw; opacity: 0%;}
 	100% {top:0vw; opacity: 100%;}
 }
 
