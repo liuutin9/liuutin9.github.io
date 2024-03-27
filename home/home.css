@@ -99,7 +99,7 @@ li {
 @media screen and (min-width: 600px) {
 	@keyframes item {
 		0% {font-size: 0; top: 20vw; opacity: 0%;}
-		85% {font-size: 0; top: 20vw; opacity: 0%;}
+		85% {font-size: x-large; top: 20vw; opacity: 0%;}
 		100% {font-size: x-large; top:0vw; opacity: 100%;}
 	}
 	
