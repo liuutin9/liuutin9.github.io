@@ -27,3 +27,8 @@ document.getElementById("HW5").onclick = function() {
     if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW5_111060013.pdf", "_self");
     else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW5_111060013.pdf", "_self");
 }
+
+// document.getElementById("HW6").onclick = function() {
+//     if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW6_111060013.pdf", "_self");
+//     else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW6_111060013.pdf", "_self");
+// }
