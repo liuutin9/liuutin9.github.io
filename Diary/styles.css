@@ -103,7 +103,7 @@ li {
 		100% {font-size: x-large; top:0vw; opacity: 100%;}
 	}
 	
-	.item {
+	.paragraph {
 		position: relative;
 		min-width: 564px;
 		height: auto;
@@ -126,7 +126,7 @@ li {
 		100% {font-size: x-large; top:0vw; opacity: 100%;}
 	}
 	
-	.item {
+	.paragraph {
 		position: relative;
 		width: 100%;
 		height: auto;
@@ -180,12 +180,14 @@ input {
 }
 
 .paragraphDate {
+	font-weight: bolder;
 	font-size: x-large;
 	padding: 0;
 	margin: 0;
 }
 
 .paragraphTitle {
+	font-weight: bold;
 	font-size: large;
 	padding: 0;
 	margin: 0;
