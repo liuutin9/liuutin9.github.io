@@ -11,24 +11,35 @@ xhr.onload = function() {
     var dataArr = xhr.responseText.split('\n');
     // console.log(dataArr);
 
+    var paragraphList = document.createElement('div');
+    paragraphList.setAttribute('class', 'paragraphList');
+    paragraphList.setAttribute('id', 'paragraphList');
+
     var paragraph = document.createElement('div');
+    paragraph.setAttribute('class', 'paragraph');
+
     var date = document.createElement('p');
     date.setAttribute('class', 'paragraphDate');
     date.append(dataArr[0]);
     paragraph.appendChild(date);
+
+    paragraph.appendChild(document.createElement('hr'));
 
     var title = document.createElement('p');
     title.setAttribute('class', 'paragraphTitle');
     title.append(dataArr[1]);
     paragraph.appendChild(title);
 
-    for (var i = 2; i < dataArr.length; i++) {
+    paragraph.appendChild(document.createElement('br'));
+
+    for (var i = 3; i < dataArr.length; i++) {
         var sentence = document.createElement('p');
         sentence.append(dataArr[i]);
         sentence.setAttribute('class', 'paragraphText');
         paragraph.appendChild(sentence);
     }
-    document.body.appendChild(paragraph);
+    paragraphList.appendChild(paragraph);
+    document.body.appendChild(paragraphList);
     // document.getElementById('p1').innerText += xhr.responseText.split('\n');
   }
 };
