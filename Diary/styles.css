@@ -128,6 +128,7 @@ li {
 	
 	.paragraph {
 		position: relative;
+		box-sizing: border-box;
 		width: 100%;
 		height: auto;
 		font-size: x-large;
@@ -148,7 +149,7 @@ li {
 	100% {top:0vw; opacity: 100%;}
 } */
 
-.buttonList {
+/* .buttonList {
 	width: auto;
 	display: flex;
 	flex-direction: column;
@@ -157,10 +158,7 @@ li {
 	padding-left: 3%;
 	padding-right: 3%;
 	position: relative;
-	/* z-index: -1; */
-	/* animation-name: buttonList;
-	animation-duration: 1.25s; */
-}
+} */
 
 input {
     -webkit-appearance: none;  /* Safari 和 Chrome，常用於iOS下移除內建樣式 */
