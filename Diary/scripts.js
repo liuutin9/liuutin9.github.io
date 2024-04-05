@@ -39,6 +39,7 @@ xhr.onload = function() {
         paragraph.appendChild(sentence);
     }
     paragraphList.appendChild(paragraph);
+    document.body.appendChild(document.createElement('br'));
     document.body.appendChild(paragraphList);
     // document.getElementById('p1').innerText += xhr.responseText.split('\n');
   }
