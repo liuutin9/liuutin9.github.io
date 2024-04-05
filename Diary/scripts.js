@@ -8,7 +8,28 @@ xhr.onload = function() {
   // 确保响应状态为成功
   if (xhr.status === 200) {
     // 将 .txt 文件的内容插入到页面中
-    document.getElementById('p1').innerText = xhr.responseText;
+    var dataArr = xhr.responseText.split('\n');
+    // console.log(dataArr);
+
+    var paragraph = document.createElement('div');
+    var date = document.createElement('p');
+    date.setAttribute('class', 'paragraphDate');
+    date.append(dataArr[0]);
+    paragraph.appendChild(date);
+
+    var title = document.createElement('p');
+    title.setAttribute('class', 'paragraphTitle');
+    title.append(dataArr[1]);
+    paragraph.appendChild(title);
+
+    for (var i = 2; i < dataArr.length; i++) {
+        var sentence = document.createElement('p');
+        sentence.append(dataArr[i]);
+        sentence.setAttribute('class', 'paragraphText');
+        paragraph.appendChild(sentence);
+    }
+    document.body.appendChild(paragraph);
+    // document.getElementById('p1').innerText += xhr.responseText.split('\n');
   }
 };
 // 发送请求
