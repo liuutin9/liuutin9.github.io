@@ -15,7 +15,7 @@ document.getElementById("TSHOAS").onclick = function() {
 }
 
 document.getElementById("Diary").onclick = function() {
-    window.open("https://liuutin9.github.io/Diary/Diary.html", "_self");
+    window.open("https://liuutin9.github.io/Diary/index.html", "_self");
 }
 
 document.getElementById("Signal-and-System").onclick = function() {
