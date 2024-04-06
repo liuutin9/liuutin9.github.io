@@ -98,7 +98,7 @@ li {
 	font-size: 25px;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
 	@keyframes item {
 		0% {font-size: 0; top: 20vw; opacity: 0%;}
 		85% {font-size: x-large; top: 20vw; opacity: 0%;}
@@ -107,7 +107,7 @@ li {
 	
 	.paragraph {
 		position: relative;
-		width: 564px;
+		width: 764px;
 		box-sizing: border-box;
 		height: auto;
 		font-size: x-large;
@@ -123,7 +123,7 @@ li {
 	}
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
 	@keyframes item {
 		0% {font-size: 0; top: 20vw; opacity: 0%;}
 		85% {font-size: x-large; top: 20vw; opacity: 0%;}
