@@ -71,7 +71,7 @@ header {
 	opacity: 100%;
 	animation-name: title;
 	animation-duration: 1.25s;
-	font-size: xx-large;
+	/* font-size: xx-large; */
 	font-weight: bolder;
 	/* align-self: stretch; */
 }
