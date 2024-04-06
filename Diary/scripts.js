@@ -107,7 +107,7 @@ for (var i = 0; i < filesName.length; i++) {
             console.log(paras.get(it));
             console.log(paras.size);
             console.log(filesName.length);
-            paragraph.setAttribute('style', 'order: ' + (it * 2 + 1) + ';');
+            paragraph.setAttribute('style', 'order: ' + (-(it * 2 + 1)) + ';');
             // var newLine = document.createElement('br');
             // newLine.setAttribute('style', 'order: ' + (it * 2) + ';');
             // paragraphList.appendChild(newLine);

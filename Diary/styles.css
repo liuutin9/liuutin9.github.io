@@ -71,6 +71,8 @@ header {
 	opacity: 100%;
 	animation-name: title;
 	animation-duration: 1.25s;
+	font-size: xx-large;
+	font-weight: bolder;
 	/* align-self: stretch; */
 }
 
@@ -106,8 +108,9 @@ li {
 	.paragraph {
 		position: relative;
 		width: 564px;
+		box-sizing: border-box;
 		height: auto;
-		/* font-size: x-large; */
+		font-size: x-large;
 		color: white;
 		background-color: rgb(50, 50, 50);
 		border-radius: 20px;
@@ -132,7 +135,7 @@ li {
 		box-sizing: border-box;
 		width: 100%;
 		height: auto;
-		/* font-size: x-large; */
+		font-size: x-large;
 		color: white;
 		background-color: rgb(50, 50, 50);
 		border-radius: 20px;
@@ -180,7 +183,7 @@ input {
 }
 
 .paragraphDate {
-	font-weight: bolder;
+	font-weight: bold;
 	font-size: x-large;
 	padding: 0;
 	margin: 0;
