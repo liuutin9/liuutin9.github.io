@@ -27,5 +27,6 @@ document.getElementById("Expense-Tracker").onclick = function() {
 }
 
 document.getElementById("Computer-Architecture").onclick = function() {
+    console.log("Computer-Architecture");
     window.open("https://liuutin9.github.io/Computer-Architecture/index.html", "_self");
 }
