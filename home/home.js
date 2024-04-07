@@ -25,3 +25,7 @@ document.getElementById("Signal-and-System").onclick = function() {
 document.getElementById("Expense-Tracker").onclick = function() {
     window.open("https://liuutin9.github.io/Expense-Tracker/index.html", "_self");
 }
+
+document.getElementById("Computer-Architecture").onclick = function() {
+    window.open("https://liuutin9.github.io/Computer-Architecture/index.html", "_self");
+}
