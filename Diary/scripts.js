@@ -37,7 +37,7 @@ const filesName = [
 
 // 创建 XMLHttpRequest 对象
 var xhr = [];
-var paras = new Map();
+// var paras = new Map();
 for (var i = 0; i < filesName.length; i++) xhr.push(new XMLHttpRequest());
 var paragraphList = document.createElement('div');
 paragraphList.setAttribute('class', 'paragraphList');
@@ -55,7 +55,7 @@ for (var i = 0; i < filesName.length; i++) {
         // 确保响应状态为成功
         var it = xhr.indexOf(this);
         if (this.status === 200) {
-            console.log("it = " + it);
+            // console.log("it = " + it);
             // 将 .txt 文件的内容插入到页面中
             var dataArr = this.responseText.split('\n');
             // console.log(dataArr);
@@ -103,10 +103,10 @@ for (var i = 0; i < filesName.length; i++) {
             }
             // paras[it] = paragraph;
             // console.log(paras[it]);
-            paras.set(it, paragraph);
-            console.log(paras.get(it));
-            console.log(paras.size);
-            console.log(filesName.length);
+            // paras.set(it, paragraph);
+            // console.log(paras.get(it));
+            // console.log(paras.size);
+            // console.log(filesName.length);
             paragraph.setAttribute('style', 'order: ' + (-(it * 2 + 1)) + ';');
             // var newLine = document.createElement('br');
             // newLine.setAttribute('style', 'order: ' + (it * 2) + ';');
@@ -134,37 +134,3 @@ for (var i = 0; i < filesName.length; i++) {
 
 document.body.appendChild(paragraphList);
 document.body.appendChild(document.createElement('br'));
-    
-
-// document.getElementById("HW1").onclick = function() {
-//     var markdown = "https://liuutin9.github.io/Diary/markdown/20240403.md";
-//     var html = marked(markdown);
-
-//     document.getElementById("p1").innerHTML = html;
-// }
-
-// let can;
-// let result;
-// function preload() {
-//   result = loadStrings('markdown/20240403.md', (result) =>{
-// 	for(txt of result){
-// 		console.log(txt);
-// 		select("#p1").child(createP(txt));
-// 	}
-// 	select("#p1").style("padding", "10px");
-//   });
-// }
-
-// function setup() {
-
-// 	can = createCanvas(200, 200);
-// 	can.id("can1");
-// 	can.class("c1");
-// 	can.style("padding", "10px");
-// 	background(0);
-
-// 	fill(255);
-// 	textAlign(LEFT, TOP);
-//     textSize(24);
-// 	text("canvas", 10, 10);
-// }
