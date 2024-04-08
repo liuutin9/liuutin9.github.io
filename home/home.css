@@ -1,3 +1,4 @@
+@import url("theme.css");
 html {
 	font-family: sans-serif;
 }
@@ -9,11 +10,11 @@ body{
 }
 
 @keyframes example1 {
-	0% {background-color: rgba(50, 50, 50, 75%); left: 0; top: 0; height: 10vh; width: 10vh; padding: 0;}
-	25% {background-color: rgba(50, 50, 50, 75%); left: 20vh; top: 0; height: 10vh; width: 10vh; padding: 0;}
-	50% {background-color: rgba(50, 50, 50, 75%); left: 20vh; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
-	75% {background-color: rgba(50, 50, 50, 75%); left: 0; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
-	100% {background-color: rgba(50, 50, 50, 75%); left: 0; top:0; height: 10vh; width: 100%; padding: 0;}
+	0% {left: 0; top: 0; height: 10vh; width: 10vh; padding: 0;}
+	25% {left: 20vh; top: 0; height: 10vh; width: 10vh; padding: 0;}
+	50% {left: 20vh; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
+	75% {left: 0; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
+	100% {left: 0; top:0; height: 10vh; width: 100%; padding: 0;}
 }
 header {
 	display: flex;
