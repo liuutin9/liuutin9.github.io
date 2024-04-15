@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
+
 html {
-	font-family: sans-serif;
+	font-family: 'Helvetica', 'Arial', 'Noto Sans TC', '黑體-繁','微軟正黑體', sans-serif !important;
 }
 body{
 	margin: 0px;
