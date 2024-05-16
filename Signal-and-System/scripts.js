@@ -52,3 +52,8 @@ document.getElementById("HW9").onclick = function() {
     if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW9_111060013.pdf", "_self");
     else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW9_111060013.pdf", "_self");
 }
+
+document.getElementById("HWA").onclick = function() {
+    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HWA_111060013.pdf", "_self");
+    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HWA_111060013.pdf", "_self");
+}
