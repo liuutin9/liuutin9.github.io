@@ -54,13 +54,11 @@ _start:
 
 _LCS:
     # save data
-    addi sp, sp, -24
-    sw ra, 20(sp)
-    sw a1, 16(sp)
-    sw a2, 12(sp)
-    sw a3, 8(sp)
-    sw a4, 4(sp)
-    sw a5, 0(sp)
+    addi sp, sp, -20
+    sw ra, 16(sp) # save return address
+    sw a2, 12(sp) # save i
+    sw a4, 8(sp) # save j
+    sw a5, 4(sp) # save count
 
     # (i == 0 || j == 0)
     beq a2, zero, _firstIf # check i, if i is 0 then skip checking j
@@ -69,7 +67,7 @@ _LCS:
 _firstIf:
     # return count
     mv a0, a5
-    addi sp, sp, 24
+    addi sp, sp, 20
     jr ra
 
 
@@ -111,19 +109,20 @@ _else:
     # a(t5) = LCS(i - 1, j, A, B, 0)
     addi a2, a2, -1
     jal _LCS
-    mv t5, a0
+    sw a0, 0(sp) # save a
 
     # restore the arguments
-    lw a1, 16(sp)
     lw a2, 12(sp)
-    lw a3, 8(sp)
-    lw a4, 4(sp)
-    lw a5, 0(sp)
+    lw a4, 8(sp)
+    lw a5, 4(sp)
 
     # b(t6) = LCS(i, j - 1, A, B, 0)
     addi a4, a4, -1
     jal _LCS
     mv t6, a0
+
+    # restore a
+    lw t5, 0(sp)
 
     # a < b
     bge t5, t6, _countLessThanA
@@ -131,15 +130,15 @@ _else:
 
 # count < a
 _countLessThanA:
-    lw a5, 0(sp)
+    lw a5, 4(sp)
     bge a5, t5, _functionEnd
     mv a5, t5
 
 # return count
 _functionEnd:
     mv a0, a5
-    lw ra, 20(sp)
-    addi sp, sp, 24
+    lw ra, 16(sp)
+    addi sp, sp, 20
     jr ra
 
 _exit:
