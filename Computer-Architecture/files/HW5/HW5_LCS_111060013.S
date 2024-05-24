@@ -108,16 +108,17 @@ _secondIf:
 _else:
     # a(t5) = LCS(i - 1, j, A, B, 0)
     addi a2, a2, -1
+    mv a5, zero
     jal _LCS
     sw a0, 0(sp) # save a
 
     # restore the arguments
     lw a2, 12(sp)
     lw a4, 8(sp)
-    lw a5, 4(sp)
 
     # b(t6) = LCS(i, j - 1, A, B, 0)
     addi a4, a4, -1
+    mv a5, zero
     jal _LCS
     mv t6, a0
 
