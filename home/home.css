@@ -30,7 +30,7 @@ body{
 		25% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 20vh; top: 0; height: 10vh; width: 10vh; padding: 0;}
 		50% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 20vh; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
 		75% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 0; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
-		100% {box-shadow: 0px 5px 10px rgba(210, 210, 210, 75%); left: 0; top:0; height: 10vh; width: 100%; padding: 0;}
+		100% {box-shadow: 0px 3px 10px rgba(100, 100, 100, 75%); left: 0; top:0; height: 10vh; width: 100%; padding: 0;}
 	}
 }
 
@@ -58,8 +58,8 @@ header {
 @media (prefers-color-scheme: light) {
 	header {
 		color: white;
-		background-color: rgba(0, 9, 81, 0.75);
-		box-shadow: 0px 5px 10px rgba(210, 210, 210, 75%);
+		background-color: rgba(0, 13, 80, 0.75);
+		box-shadow: 0px 3px 10px rgba(100, 100, 100, 75%);
 	}
 }
 
