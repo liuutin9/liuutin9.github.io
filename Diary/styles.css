@@ -9,14 +9,31 @@ body{
 	background-color: rgb(25, 25, 25);
 	scroll-behavior: smooth;
 }
+@media (prefers-color-scheme: light) {
+	body{
+		color: rgb(0, 0, 0);
+		background-color: rgb(230, 230, 230);
+	}
+}
+
 
 @keyframes example1 {
 	0% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 0; top: 0; height: 10vh; width: 10vh; padding: 0;}
 	25% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 20vh; top: 0; height: 10vh; width: 10vh; padding: 0;}
 	50% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 20vh; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
 	75% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 0; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
-	100% {box-shadow: 0px 5px 10px rgba(60, 60, 60, 75%); left: 0; top:0; height: 10vh; width: 100%; padding: 0;}
+	100% {box-shadow: 0px 5px 10px rgba(30, 30, 30, 75%); left: 0; top:0; height: 10vh; width: 100%; padding: 0;}
 }
+@media (prefers-color-scheme: light) {
+	@keyframes example1 {
+		0% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 0; top: 0; height: 10vh; width: 10vh; padding: 0;}
+		25% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 20vh; top: 0; height: 10vh; width: 10vh; padding: 0;}
+		50% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 20vh; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
+		75% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 0; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
+		100% {box-shadow: 0px 3px 10px rgba(100, 100, 100, 75%); left: 0; top:0; height: 10vh; width: 100%; padding: 0;}
+	}
+}
+
 header {
 	display: flex;
 	flex-direction: row;
@@ -31,74 +48,36 @@ header {
 	position: sticky;
 	top: 0;
 	opacity: 100%;
-	/* border-bottom-style: groove; */
-	box-shadow: 0px 5px 10px rgba(60, 60, 60, 75%);
-	/* border-color: rgb(255, 255, 255); */
+	box-shadow: 0px 5px 10px rgba(30, 30, 30, 75%);
 	-webkit-backdrop-filter: blur(8px);
 	backdrop-filter: blur(8px);
 	animation-name: example1;
 	animation-duration: 1.25s;
 	z-index: 1;
 }
-
-/* header {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-	width: 100%;
-	height: auto;
-	align-content: center;
-	background-color: rgba(75, 75, 75, 75%);
-	margin-bottom: 0.5%;
-	position: sticky;
-	top: 0;
-	opacity: 100%;
-	border-bottom-style: solid;
-	border-color: rgb(40,40,40);
-	-webkit-backdrop-filter: blur(8px);
-	backdrop-filter: blur(8px);
-} */
+@media (prefers-color-scheme: light) {
+	header {
+		color: white;
+		background-color: rgba(0, 13, 80, 0.75);
+		box-shadow: 0px 3px 10px rgba(100, 100, 100, 75%);
+	}
+}
 
 @keyframes title {
-	0% {opacity: 0%;/* font-size: 0;*/}
-	90% {opacity: 0%;/* font-size: 0;*/}
-	100% {opacity: 100%;/* font-size: xx-large;*/}
+	0% {opacity: 0%;}
+	90% {opacity: 0%;}
+	100% {opacity: 100%;}
 }
 .title {
 	width: max-content;
 	height: auto;
 	padding: 0;
 	text-align: center;
-	font-size: 5vh;
+	font-size: xx-large;
 	opacity: 100%;
 	animation-name: title;
 	animation-duration: 1.25s;
-	/* font-size: xx-large; */
 	font-weight: medium;
-	/* align-self: stretch; */
-}
-
-/* .menu {
-	width: auto;
-	height: auto;
-	padding: 1%;
-	text-align: center;
-	align-self: stretch;
-} */
-
-li {
-	text-align: center;
-	padding: 20px;
-}
-
-a {
-	color: white;
-	text-decoration: none;
-}
-
-li {
-	font-size: 25px;
 }
 
 @media screen and (min-width: 800px) {
@@ -119,10 +98,18 @@ li {
 		border-radius: 20px;
 		padding: 20px;
 		margin-top: 15px;
-		border-style: solid;
-		border-color: rgb(30, 30, 30);
+		border-style: none;
+		box-shadow: 5px 5px 10px rgba(30, 30, 30, 75%);
 		animation-name: item;
 		animation-duration: 1.25s;
+	}
+	
+	@media (prefers-color-scheme: light) {
+		.paragraph {
+			color: black;
+			background-color: rgb(250, 250, 250);
+			box-shadow: 5px 5px 10px rgba(210, 210, 210, 75%);
+		}
 	}
 }
 
@@ -144,34 +131,20 @@ li {
 		border-radius: 20px;
 		padding: 20px;
 		margin-top: 15px;
-		border-style: solid;
-		border-color: rgb(30, 30, 30);
+		border-style: none;
+		box-shadow: 5px 5px 10px rgba(30, 30, 30, 75%);
 		animation-name: item;
 		animation-duration: 1.25s;
 	}
-}
 
-/* @keyframes buttonList {
-	0% {top: 0vw; opacity: 0%;}
-	85% {top: 0vw; opacity: 0%;}
-	100% {top:0vw; opacity: 100%;}
-} */
+	@media (prefers-color-scheme: light) {
+		.paragraph {
+			color: black;
+			background-color: rgb(250, 250, 250);
+			box-shadow: 5px 5px 10px rgba(210, 210, 210, 75%);
+		}
+	}
 
-/* .buttonList {
-	width: auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-evenly;
-	padding-left: 3%;
-	padding-right: 3%;
-	position: relative;
-} */
-
-input {
-    -webkit-appearance: none;  /* Safari 和 Chrome，常用於iOS下移除內建樣式 */
-    -moz-appearance: none;     /* FireFox */
-    appearance: none;
 }
 
 .paragraphList {
@@ -203,4 +176,10 @@ input {
 	font-size: medium;
 	padding: 0;
 	margin: 0;
+}
+
+input {
+    -webkit-appearance: none;  /* Safari 和 Chrome，常用於iOS下移除內建樣式 */
+    -moz-appearance: none;     /* FireFox */
+    appearance: none;
 }
