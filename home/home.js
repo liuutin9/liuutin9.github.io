@@ -30,3 +30,18 @@ document.getElementById("Computer-Architecture").onclick = function() {
     console.log("Computer-Architecture");
     window.open("https://liuutin9.github.io/Computer-Architecture/index.html", "_self");
 }
+
+document.addEventListener('touchstart', handleTouchStart, { passive: true });
+document.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+function handleTouchStart(event) {
+    if (event.target.classList.contains('button')) {
+        event.target.classList.add('hover');
+    }
+}
+
+function handleTouchEnd(event) {
+    if (event.target.classList.contains('button')) {
+        event.target.classList.remove('hover');
+    }
+}
