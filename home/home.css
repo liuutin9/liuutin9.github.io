@@ -119,6 +119,10 @@ header {
 			background-color: #e3f2fd;
 			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 		}
+		.item:active {
+			background-color: #e3f2fd;
+			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+		}
 	}
 }
 
@@ -161,6 +165,10 @@ header {
 			background-color: #e3f2fd;
 			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 		}
+		.item:active {
+			background-color: #e3f2fd;
+			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+		}
 	}
 
 }
@@ -180,9 +188,4 @@ input {
 	padding-left: 3%;
 	padding-right: 3%;
 	position: relative;
-}
-
-.item:active {
-    background-color: #e3f2fd;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
