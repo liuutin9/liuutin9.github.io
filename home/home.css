@@ -104,7 +104,8 @@ header {
 		animation-duration: 1.25s;
 		transition: background-color 0.3s, box-shadow 0.3s;
 	}
-	.item:hover {
+	.item:hover,
+	.item:active {
 		background-color: rgb(70, 70, 70);
 		box-shadow: 8px 8px 10px rgba(30, 30, 30, 75%);
 	}
@@ -115,10 +116,7 @@ header {
 			background-color: rgb(250, 250, 250);
 			box-shadow: 5px 5px 10px rgba(210, 210, 210, 75%);
 		}
-		.item:hover {
-			background-color: #e3f2fd;
-			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-		}
+		.item:hover,
 		.item:active {
 			background-color: #e3f2fd;
 			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
@@ -150,7 +148,7 @@ header {
 		animation-duration: 1.25s;
 		transition: background-color 0.3s, box-shadow 0.3s;
 	}
-	.item:hover {
+	.item:active {
 		background-color: rgb(70, 70, 70);
 		box-shadow: 8px 8px 10px rgba(30, 30, 30, 75%);
 	}
@@ -161,10 +159,6 @@ header {
 			background-color: rgb(250, 250, 250);
 			box-shadow: 5px 5px 10px rgba(210, 210, 210, 75%);
 		}
-		/* .item:hover {
-			background-color: #e3f2fd;
-			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-		} */
 		.item:active {
 			background-color: #e3f2fd;
 			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
