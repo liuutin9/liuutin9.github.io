@@ -29,6 +29,7 @@ const filesName = [
     "20240504.md",
     "20240508.md",
     "20240509.md",
+    "20240610.md",
 ];
 
 var xhr = [];
@@ -89,7 +90,7 @@ for (var i = 0; i < filesName.length; i++) {
     };
 
     xhr[i].send();
-    ``
+    
 }
 
 document.body.appendChild(paragraphList);
