@@ -30,8 +30,3 @@ document.getElementById("Computer-Architecture").onclick = function() {
     console.log("Computer-Architecture");
     window.open("https://liuutin9.github.io/Computer-Architecture/index.html", "_self");
 }
-
-document.getElementById("EECamp").onclick = function() {
-    console.log("EECamp");
-    window.open("https://liuutin9.github.io/EECamp/index.html", "_self");
-}
