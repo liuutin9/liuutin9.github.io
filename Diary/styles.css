@@ -25,12 +25,15 @@ header {
 	/* height: 10vh; */
 	align-content: center;
 	background-color: rgba(40, 40, 40, 0.75);
-	margin-bottom: 0.5%;
+	/* margin-bottom: 0.5%; */
 	padding: 0;
 	position: sticky;
 	top: 0;
 	opacity: 100%;
-	box-shadow: 0px 5px 10px rgba(30, 30, 30, 75%);
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: black;
+	/* box-shadow: 0px 5px 10px rgba(30, 30, 30, 75%); */
 	-webkit-backdrop-filter: blur(8px);
 	backdrop-filter: blur(8px);
 	z-index: 1;
@@ -42,7 +45,7 @@ header {
 		/* background-color: rgba(0, 13, 80, 0.75); */
 		color: black;
 		background-color: rgba(255, 255, 255, 0.75);;
-		box-shadow: 0px 3px 10px rgba(100, 100, 100, 75%);
+		border-bottom-color: gray;
 	}
 }
 header.hidden {
