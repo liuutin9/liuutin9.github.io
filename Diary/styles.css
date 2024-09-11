@@ -59,7 +59,7 @@ header.hidden {
 	text-align: center;
 	font-size: x-large;
 	opacity: 100%;
-	font-weight: medium;
+	font-weight: bolder;
 }
 
 @media screen and (min-width: 800px) {
