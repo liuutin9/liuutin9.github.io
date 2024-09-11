@@ -16,24 +16,6 @@ body{
 	}
 }
 
-
-@keyframes example1 {
-	0% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 0; top: 0; height: 10vh; width: 10vh; padding: 0;}
-	25% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 20vh; top: 0; height: 10vh; width: 10vh; padding: 0;}
-	50% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 20vh; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
-	75% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 0; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
-	100% {box-shadow: 0px 5px 10px rgba(30, 30, 30, 75%); left: 0; top:0; height: 10vh; width: 100%; padding: 0;}
-}
-@media (prefers-color-scheme: light) {
-	@keyframes example1 {
-		0% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 0; top: 0; height: 10vh; width: 10vh; padding: 0;}
-		25% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 20vh; top: 0; height: 10vh; width: 10vh; padding: 0;}
-		50% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 20vh; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
-		75% {box-shadow: 0 0 0 rgba(60, 60, 60, 75%); left: 0; top: 20vh; height: 10vh; width: 10vh; padding: 0;}
-		100% {box-shadow: 0px 3px 10px rgba(100, 100, 100, 75%); left: 0; top:0; height: 10vh; width: 100%; padding: 0;}
-	}
-}
-
 header {
 	display: flex;
 	flex-direction: row;
@@ -51,9 +33,8 @@ header {
 	box-shadow: 0px 5px 10px rgba(30, 30, 30, 75%);
 	-webkit-backdrop-filter: blur(8px);
 	backdrop-filter: blur(8px);
-	animation-name: example1;
-	animation-duration: 1.25s;
 	z-index: 1;
+	transition: top 0.5s ease-in-out;
 }
 @media (prefers-color-scheme: light) {
 	header {
@@ -62,12 +43,10 @@ header {
 		box-shadow: 0px 3px 10px rgba(100, 100, 100, 75%);
 	}
 }
-
-@keyframes title {
-	0% {opacity: 0%;}
-	90% {opacity: 0%;}
-	100% {opacity: 100%;}
+header.hidden {
+	top: -15vh; /* 使 header 滑出視窗的上方 */
 }
+
 .title {
 	width: max-content;
 	height: auto;
@@ -75,17 +54,10 @@ header {
 	text-align: center;
 	font-size: xx-large;
 	opacity: 100%;
-	animation-name: title;
-	animation-duration: 1.25s;
 	font-weight: medium;
 }
 
 @media screen and (min-width: 800px) {
-	@keyframes item {
-		0% {font-size: 0; top: 20vw; opacity: 0%;}
-		85% {font-size: x-large; top: 20vw; opacity: 0%;}
-		100% {font-size: x-large; top:0vw; opacity: 100%;}
-	}
 	
 	.paragraph {
 		position: relative;
@@ -100,8 +72,6 @@ header {
 		margin-top: 15px;
 		border-style: none;
 		box-shadow: 5px 5px 10px rgba(30, 30, 30, 75%);
-		animation-name: item;
-		animation-duration: 1.25s;
 	}
 	
 	@media (prefers-color-scheme: light) {
@@ -114,11 +84,6 @@ header {
 }
 
 @media screen and (max-width: 800px) {
-	@keyframes item {
-		0% {font-size: 0; top: 20vw; opacity: 0%;}
-		85% {font-size: x-large; top: 20vw; opacity: 0%;}
-		100% {font-size: x-large; top:0vw; opacity: 100%;}
-	}
 	
 	.paragraph {
 		position: relative;
@@ -133,8 +98,6 @@ header {
 		margin-top: 15px;
 		border-style: none;
 		box-shadow: 5px 5px 10px rgba(30, 30, 30, 75%);
-		animation-name: item;
-		animation-duration: 1.25s;
 	}
 
 	@media (prefers-color-scheme: light) {

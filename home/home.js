@@ -1,3 +1,17 @@
+let lastScrollY = 0;
+const header = document.getElementById("header");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > lastScrollY) {
+    // 向下滾動，隱藏 header
+    header.classList.add("hidden");
+  } else {
+    // 向上滾動，顯示 header
+    header.classList.remove("hidden");
+  }
+  lastScrollY = window.scrollY;
+});
+
 document.getElementById("Dice-Roller").onclick = function() {
     window.open("https://liuutin9.github.io/Dice-Roller/index.html", "_self");
 }

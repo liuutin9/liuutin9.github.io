@@ -98,3 +98,17 @@ for (var i = 0; i < filesName.length; i++) {
 
 document.body.appendChild(paragraphList);
 document.body.appendChild(document.createElement('br'));
+
+let lastScrollY = 0;
+const header = document.getElementById("header");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > lastScrollY) {
+    // 向下滾動，隱藏 header
+    header.classList.add("hidden");
+  } else {
+    // 向上滾動，顯示 header
+    header.classList.remove("hidden");
+  }
+  lastScrollY = window.scrollY;
+});
