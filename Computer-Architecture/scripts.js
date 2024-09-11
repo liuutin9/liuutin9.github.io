@@ -1,4 +1,21 @@
-// const pdfViewer = "https://drive.google.com/viewerng/viewer?url=";
+let lastScrollY = 0;
+let isScrolling; // 記錄滑動的狀態
+const header = document.getElementById("header");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY != lastScrollY) {
+        // 向下滾動，隱藏 header
+        header.classList.add("hidden");
+    } else {
+        // 向上滾動，顯示 header
+        header.classList.remove("hidden");
+    }
+    lastScrollY = window.scrollY;
+
+    isScrolling = setTimeout(() => {
+        header.classList.remove("hidden");
+    }, 500); 
+});
 
 const pdfViewer = "https://docs.google.com/viewer?url=";
 var userAgent = navigator.userAgent;
