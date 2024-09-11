@@ -45,7 +45,7 @@ header {
 		/* background-color: rgba(0, 13, 80, 0.75); */
 		color: black;
 		background-color: rgba(255, 255, 255, 0.75);;
-		border-bottom-color: gray;
+		border-bottom-color: rgb(200, 200, 200);
 	}
 }
 header.hidden {
