@@ -28,7 +28,7 @@ header {
 	position: sticky;
 	top: 0;
 	opacity: 100%;
-	border-bottom-width: 1px;
+	border-bottom-width: 2px;
 	border-bottom-style: solid;
 	border-bottom-color: black;
 	-webkit-backdrop-filter: blur(6px);
@@ -73,7 +73,7 @@ header.hidden {
 }
 @media (prefers-color-scheme: light) {
 	.iconButton {
-		border-color: rgb(225, 225, 225);
+		border-color: rgb(200, 200, 200);
 	}
 }
 
