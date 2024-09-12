@@ -20,7 +20,7 @@ header {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: left;
+	justify-content: space-between;
 	width: 100%;
 	align-content: center;
 	background-color: rgba(40, 40, 40, 0.7);
@@ -28,7 +28,7 @@ header {
 	position: sticky;
 	top: 0;
 	opacity: 100%;
-	border-bottom-width: 1px;
+	border-bottom-width: 2px;
 	border-bottom-style: solid;
 	border-bottom-color: black;
 	-webkit-backdrop-filter: blur(6px);
@@ -40,7 +40,7 @@ header {
 	header {
 		color: black;
 		background-color: rgba(255, 255, 255, 0.75);;
-		border-bottom-color: rgb(200, 200, 200);
+		border-bottom-color: rgb(225, 225, 225);
 	}
 }
 header.hidden {
@@ -55,6 +55,37 @@ header.hidden {
 	font-size: x-large;
 	opacity: 100%;
 	font-weight: bolder;
+}
+
+.iconButton {
+	width: 40px;
+	height: 40px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: rgb(75, 75, 75);
+	border-radius: 10px;
+	background-color: transparent;
+	justify-content: center;
+	align-content: center;
+	align-self: center;
+	margin-right: 20px;
+	padding: 0;
+}
+@media (prefers-color-scheme: light) {
+	.iconButton {
+		border-color: rgb(200, 200, 200);
+	}
+}
+
+i {
+	color: white;
+	font-size: 30px;
+}
+@media (prefers-color-scheme: light) {
+	i {
+		color: black;
+		margin: 0;
+	}
 }
 
 @media screen and (min-width: 800px) {
