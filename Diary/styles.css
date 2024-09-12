@@ -60,9 +60,9 @@ header.hidden {
 .iconButton {
 	width: 40px;
 	height: 40px;
-	border-width: 1px;
+	border-width: 2px;
 	border-style: solid;
-	border-color: rgb(225, 225, 225);
+	border-color: rgb(75, 75, 75);
 	border-radius: 10px;
 	background-color: transparent;
 	justify-content: center;
@@ -72,15 +72,13 @@ header.hidden {
 	margin-right: 20px;
 }
 @media (prefers-color-scheme: light) {
-	header {
-		color: black;
-		background-color: rgba(255, 255, 255, 0.75);;
-		border-bottom-color: rgb(225, 225, 225);
+	.iconButton {
+		border-color: rgb(225, 225, 225);
 	}
 }
 
 i {
-	color: mediumturquoise;
+	color: white;
 	font-size: 30px;
 }
 @media (prefers-color-scheme: light) {
