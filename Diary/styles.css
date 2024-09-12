@@ -73,7 +73,7 @@ header.hidden {
 }
 
 i {
-	font-size: 100%;
+	font-size: 30px;
 }
 
 @media screen and (min-width: 800px) {
