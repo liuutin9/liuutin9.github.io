@@ -117,3 +117,8 @@ window.addEventListener("scroll", () => {
         header.classList.remove("hidden");
     }, 500); 
 });
+
+document.getElementById("githubButton").onclick = function() {
+    console.log("Computer-Architecture");
+    window.open("https://github.com/liuutin9");
+}
