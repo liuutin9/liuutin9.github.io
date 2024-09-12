@@ -66,11 +66,27 @@ header.hidden {
 	border-radius: 10px;
 	background-color: transparent;
 	justify-content: center;
+	align-content: center;
+	align-self: center;
+	align-content: center;
 	margin-right: 20px;
+}
+@media (prefers-color-scheme: light) {
+	header {
+		color: black;
+		background-color: rgba(255, 255, 255, 0.75);;
+		border-bottom-color: rgb(225, 225, 225);
+	}
 }
 
 i {
+	color: mediumturquoise;
 	font-size: 30px;
+}
+@media (prefers-color-scheme: light) {
+	i {
+		color: black;
+	}
 }
 
 @media screen and (min-width: 800px) {
