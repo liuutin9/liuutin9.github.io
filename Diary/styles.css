@@ -63,12 +63,9 @@ header.hidden {
 	border-width: 1px;
 	border-style: solid;
 	border-color: rgb(225, 225, 225);
-	border-radius: 5px;
+	border-radius: 10px;
 	background-color: transparent;
 	justify-content: center;
-	align-content: center;
-	align-self: center;
-	align-content: center;
 	margin-right: 20px;
 }
 
