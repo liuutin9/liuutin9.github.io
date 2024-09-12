@@ -68,8 +68,8 @@ header.hidden {
 	justify-content: center;
 	align-content: center;
 	align-self: center;
-	align-content: center;
 	margin-right: 20px;
+	padding: 0;
 }
 @media (prefers-color-scheme: light) {
 	.iconButton {
@@ -84,6 +84,7 @@ i {
 @media (prefers-color-scheme: light) {
 	i {
 		color: black;
+		margin: 0;
 	}
 }
 
