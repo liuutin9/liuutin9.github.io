@@ -79,7 +79,7 @@ header.hidden {
 
 i {
 	color: white;
-	font-size: 30px;
+	font-size: 25px;
 }
 @media (prefers-color-scheme: light) {
 	i {
