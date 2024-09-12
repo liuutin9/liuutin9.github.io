@@ -119,6 +119,5 @@ window.addEventListener("scroll", () => {
 });
 
 document.getElementById("githubButton").onclick = function() {
-    console.log("Computer-Architecture");
     window.open("https://github.com/liuutin9");
 }

@@ -49,3 +49,7 @@ document.getElementById("Computer-Architecture").onclick = function() {
     console.log("Computer-Architecture");
     window.open("https://liuutin9.github.io/Computer-Architecture/index.html", "_self");
 }
+
+document.getElementById("githubButton").onclick = function() {
+    window.open("https://github.com/liuutin9");
+}
