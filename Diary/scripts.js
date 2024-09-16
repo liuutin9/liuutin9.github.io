@@ -113,9 +113,9 @@ window.addEventListener("scroll", () => {
     }
     lastScrollY = window.scrollY;
 
-    // isScrolling = setTimeout(() => {
-    //     header.classList.remove("hidden");
-    // }, 500); 
+    isScrolling = setTimeout(() => {
+        header.classList.remove("hidden");
+    }, 500);
 });
 
 document.getElementById("githubButton").onclick = function() {

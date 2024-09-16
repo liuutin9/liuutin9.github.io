@@ -12,9 +12,9 @@ window.addEventListener("scroll", () => {
     }
     lastScrollY = window.scrollY;
 
-    // isScrolling = setTimeout(() => {
-    //     header.classList.remove("hidden");
-    // }, 500); 
+    isScrolling = setTimeout(() => {
+        header.classList.remove("hidden");
+    }, 500);
 });
 
 const pdfViewer = "https://docs.google.com/viewer?url=";
