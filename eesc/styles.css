@@ -87,19 +87,26 @@ main {
     cursor: pointer;
 }
 
-/* 只在支持 hover 的設備上應用 hover 效果 */
-@media (min-width: 800px) {
+.card:active {
+    background-color: #e0e0e0;
+}
+
+@media (max-width: 800px) {
     .card {
         transition: transform 0.3s ease, background-color 0.1s ease;
     }
-
-    .card:hover {
+    .card:active {
         transform: scale(1.05);
     }
 }
 
-.card:active {
-    background-color: #e0e0e0;
+@media (min-width: 800px) {
+    .card {
+        transition: transform 0.3s ease, background-color 0.1s ease;
+    }
+    .card:hover {
+        transform: scale(1.05);
+    }
 }
 
 footer {
