@@ -11,10 +11,6 @@ body {
 header {
     background-color: #333;
     color: white;
-    padding-top: 0.01rem;
-    padding-bottom: 0.01rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
     display: flex;
     justify-content: space-between;
     align-content: center;
@@ -23,12 +19,23 @@ header {
     top: 0;
 }
 
+.title {
+	width: max-content;
+	height: auto;
+	padding: 1rem;
+	text-align: center;
+	font-size: x-large;
+	opacity: 100%;
+	font-weight: bolder;
+}
+
 #menu-toggle {
     background: none;
     border: none;
     font-size: 1.5rem;
-    cursor: pointer;
+    /* cursor: pointer; */
     color: white;
+    padding: 1rem;
 }
 
 #sidebar {
@@ -84,7 +91,7 @@ main {
     width: calc(33% - 1rem);
     min-width: 250px;
     transition: background-color 0.1s ease;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .card:active {
