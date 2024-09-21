@@ -105,10 +105,14 @@ main {
     .card:active {
         transform: scale(1.05);
     }
+    #menu-toggle {
+        cursor: pointer;
+    }
 }
 
 @media (min-width: 800px) {
     .card {
+        cursor: pointer;
         transition: transform 0.3s ease, background-color 0.1s ease;
     }
     .card:hover {
