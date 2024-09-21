@@ -105,9 +105,6 @@ main {
     .card:active {
         transform: scale(1.05);
     }
-    #menu-toggle {
-        cursor: pointer;
-    }
 }
 
 @media (min-width: 800px) {
@@ -117,6 +114,9 @@ main {
     }
     .card:hover {
         transform: scale(1.05);
+    }
+    #menu-toggle {
+        cursor: pointer;
     }
 }
 
