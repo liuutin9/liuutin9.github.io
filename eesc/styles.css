@@ -88,7 +88,7 @@ main {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     margin-bottom: 2rem;
     padding: 1.5rem;
-    width: calc(33% - 1rem);
+    width: calc(28% - 1rem);
     min-width: 250px;
     transition: background-color 0.1s ease;
     /* cursor: pointer; */
