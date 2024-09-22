@@ -37,18 +37,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // 移除之前為卡片添加的點擊事件，因為我們現在使用 CSS :active 偽類
 });
 
-document.getElementById("projectsInfoCard").onclick = function() {
-    window.open("../Projects-Info/index.html", "_self");
+document.getElementById("eeLearningResourcesCard").onclick = function() {
+    window.open("https://drive.google.com/drive/folders/18lsPnehtjThgx5O8ux0PJnqlMW88mbsC?usp=drive_link");
 }
 
-document.getElementById("learningResourcesCard").onclick = function() {
-    window.open("../Learning-Resources/index.html", "_self");
+document.getElementById("csLearningResourcesCard").onclick = function() {
+    window.open("https://drive.google.com/drive/folders/1zoRayCwbnTJIZ_WJSXRyR0Z5-BThec8X?usp=drive_link");
 }
 
-document.getElementById("eecampCard").onclick = function() {
-    window.open("https://eecamp.nthuee.org", "_self");
-}
-
-document.getElementById("eeccCard").onclick = function() {
-    window.open("https://eecc.nthuee.org", "_self");
+document.getElementById("eeLearningResourcesUploadCard").onclick = function() {
+    window.open("https://drive.google.com/drive/folders/1VvK-21Defq3rbkgAfrcL-eyn9rxczBla?usp=drive_link");
 }
