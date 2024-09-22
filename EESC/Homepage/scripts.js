@@ -40,3 +40,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.getElementById("projectsInfoCard").onclick = function() {
     window.open("../Projects-Info/index.html", "_self");
 }
+
+document.getElementById("eecampCard").onclick = function() {
+    window.open("https://eecamp.nthuee.org", "_self");
+}
+
+document.getElementById("eeccCard").onclick = function() {
+    window.open("https://eecc.nthuee.org", "_self");
+}
