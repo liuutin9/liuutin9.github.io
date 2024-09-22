@@ -51,7 +51,7 @@ header {
     width: 200px;
     position: fixed;
     height: 100%;
-    left: -300px;
+    left: -250px;
     top: 0;
     transition: left 0.3s ease;
     z-index: 1000;
