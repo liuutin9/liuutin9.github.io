@@ -6,7 +6,13 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: #f0f0f0;
+    /* transition: background-color 0.3s ease; */
 }
+
+/* body.showNavigationBar {
+    background-color: #acacac23;
+    background-blend-mode: darken;
+} */
 
 header {
     background-color: #333;
@@ -17,6 +23,13 @@ header {
     position: sticky;
     z-index: 1;
     top: 0;
+    left: 0;
+    transition: opacity 0.3s ease;
+}
+
+header.showNavigationBar {
+    z-index: -1;
+    opacity: 0.5;
 }
 
 .title {
@@ -80,6 +93,7 @@ header {
 }
 
 main {
+    position: relative;
     padding: 2rem;
     display: flex;
     flex-wrap: wrap;
@@ -87,10 +101,13 @@ main {
     flex-grow: 1;
     max-width: 1200px;
     margin: 0 auto;
+    left: 0;
+    transition: opacity 0.3s ease;
 }
 
 main.showNavigationBar {
-    z-index: -1;
+    z-index: -2;
+    opacity: 0.5;
 }
 
 @keyframes card {
@@ -144,6 +161,12 @@ footer {
     text-align: center;
     padding: 1rem;
     margin-top: auto;
+    transition: opacity 0.3s ease;
+}
+
+footer.showNavigationBar {
+    z-index: -2;
+    opacity: 0.5;
 }
 
 @media (max-width: 800px) {
