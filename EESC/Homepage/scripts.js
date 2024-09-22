@@ -1,16 +1,19 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const menuToggle = document.getElementById('menu-toggle');
     const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
 
     // 切換側邊欄的顯示與隱藏
     menuToggle.addEventListener('click', () => {
         sidebar.classList.toggle('show');
+        mainContent.classList.toggle('showNavigationBar');
     });
 
     // 點擊側邊欄外的地方時隱藏側邊欄
     document.addEventListener('click', (e) => {
         if (!sidebar.contains(e.target) && e.target !== menuToggle) {
             sidebar.classList.remove('show');
+            mainContent.classList.remove('showNavigationBar');
         }
     });
 
