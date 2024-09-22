@@ -9,10 +9,26 @@ body {
     /* transition: background-color 0.3s ease; */
 }
 
-/* body.showNavigationBar {
-    background-color: #acacac23;
-    background-blend-mode: darken;
-} */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 10;
+    -webkit-backdrop-filter: blur(6px);
+	backdrop-filter: blur(6px);
+}
+
+#overlay.showNavigationBar {
+    display: block;
+}
+
+.bodyContent {
+    z-index: inherit - 1;
+}
 
 header {
     background-color: #333;
@@ -24,12 +40,6 @@ header {
     z-index: 1;
     top: 0;
     left: 0;
-    transition: opacity 0.3s ease;
-}
-
-header.showNavigationBar {
-    z-index: -1;
-    opacity: 0.5;
 }
 
 .title {
@@ -102,12 +112,6 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     left: 0;
-    transition: opacity 0.3s ease;
-}
-
-main.showNavigationBar {
-    z-index: -2;
-    opacity: 0.5;
 }
 
 @keyframes card {
@@ -161,12 +165,6 @@ footer {
     text-align: center;
     padding: 1rem;
     margin-top: auto;
-    transition: opacity 0.3s ease;
-}
-
-footer.showNavigationBar {
-    z-index: -2;
-    opacity: 0.5;
 }
 
 @media (max-width: 800px) {
