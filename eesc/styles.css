@@ -33,7 +33,14 @@ header {
     background: none;
     border: none;
     font-size: 1.5rem;
-    /* cursor: pointer; */
+    color: white;
+    padding: 1rem;
+}
+
+#menu-toggle-blank {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
     color: white;
     padding: 1rem;
 }
@@ -76,7 +83,7 @@ main {
     padding: 2rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-grow: 1;
     max-width: 1200px;
     margin: 0 auto;
@@ -91,7 +98,6 @@ main {
     width: calc(28% - 1rem);
     min-width: 250px;
     transition: background-color 0.1s ease;
-    /* cursor: pointer; */
 }
 
 .card:active {
