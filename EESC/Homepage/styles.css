@@ -39,7 +39,7 @@ header.showNavigationBar {
 	text-align: center;
 	font-size: x-large;
 	opacity: 100%;
-	font-weight: bolder;
+	font-weight: medium;
 }
 
 #menu-toggle {
