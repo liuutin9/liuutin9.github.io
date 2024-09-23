@@ -114,12 +114,9 @@ header {
 }
 
 main {
-    position: relative;
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
-    animation-name: main;
-    animation-duration: 0.5s;
 }
 
 .cover-image {
@@ -127,16 +124,24 @@ main {
     max-height: 400px;
     object-fit: cover;
     border-radius: 10px;
+    animation-name: main;
+    animation-duration: 0.5s;
 }
 
 h1, h2 {
     color: #333;
+    animation-name: main;
+    animation-duration: 0.5s;
+    position: relative;
 }
 
 .activity-intro {
     font-size: 1.2rem;
     line-height: 1.6;
     margin-bottom: 2rem;
+    animation-name: main;
+    animation-duration: 0.5s;
+    position: relative;
 }
 
 .departments {
@@ -144,6 +149,9 @@ h1, h2 {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     margin-bottom: 2rem;
+    animation-name: main;
+    animation-duration: 0.5s;
+    position: relative;
 }
 
 .department {
@@ -151,6 +159,9 @@ h1, h2 {
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    animation-name: main;
+    animation-duration: 0.5s;
+    position: relative;
 }
 
 .timeline {
@@ -159,6 +170,9 @@ h1, h2 {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     margin-bottom: 2rem;
+    animation-name: main;
+    animation-duration: 0.5s;
+    position: relative;
 }
 
 .contact-info {
@@ -166,6 +180,9 @@ h1, h2 {
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    animation-name: main;
+    animation-duration: 0.5s;
+    position: relative;
 }
 
 footer {
