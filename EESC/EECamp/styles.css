@@ -211,7 +211,7 @@ footer {
 .fa-instagram {
     /*color: #E1306C;*/ /* Instagram's brand color */
     color: #929292;
-    margin-left: 10px;
+    top: 1px;
 }
 
 .contactDetail {
