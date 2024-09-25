@@ -215,5 +215,10 @@ footer {
 
 .contactDetail {
     color: #929292;
-    margin-left: 10px;
+    align-items: center;
+    align-content: center;
+    margin-left: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
 }
