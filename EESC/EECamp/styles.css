@@ -176,6 +176,9 @@ h1, h2 {
 }
 
 .contact-info {
+    display: flex;
+    align-content: center;
+    align-items: center;
     background-color: white;
     padding: 1.5rem;
     border-radius: 10px;
@@ -206,6 +209,12 @@ footer {
 }
 
 .fa-instagram {
-    color: #E1306C; /* Instagram's brand color */
-    margin-left: 5px;
+    /*color: #E1306C;*/ /* Instagram's brand color */
+    color: #929292;
+    margin-left: 10px;
+}
+
+.contactDetail {
+    color: #929292;
+    margin-left: 10px;
 }
