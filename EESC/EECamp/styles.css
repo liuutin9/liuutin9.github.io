@@ -7,6 +7,9 @@
     --sidebar-text: #000;
     --card-bg: white;
     --card-shadow: rgba(0,0,0,0.1);
+    --card-hover-bg: #e0e0e0;
+    --footer-bg: #333;
+    --footer-text: #929292;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,6 +22,9 @@
         --sidebar-text: #f0f0f0;
         --card-bg: #2a2a2a;
         --card-shadow: rgba(255,255,255,0.1);
+        --card-hover-bg: #3a3a3a;
+        --footer-bg: #2a2a2a;
+        --footer-text: #929292;
     }
 }
 
@@ -215,8 +221,8 @@ h1, h2 {
 }
 
 footer {
-    background-color: #333;
-    color: #929292;
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
     text-align: center;
     padding: 1rem;
     margin-top: auto;
@@ -243,29 +249,4 @@ footer {
     color: #929292;
     align-items: center;
     align-content: center;
-}
-
-/* .contactPerson {
-    min-width: 1rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
-} */
-  
-/* Theme toggle button styles */
-#theme-toggle {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    padding: 1rem;
-    cursor: pointer;
-}
-
-.theme-icon {
-    display: none;
-}
-
-[data-theme="light"] .theme-icon.light,
-[data-theme="dark"] .theme-icon.dark,
-[data-theme="system"] .theme-icon.system {
-    display: inline;
 }

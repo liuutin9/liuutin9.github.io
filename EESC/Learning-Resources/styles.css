@@ -1,3 +1,33 @@
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --header-bg: #333;
+    --header-text: white;
+    --sidebar-bg: #f1f1f1;
+    --sidebar-text: #000;
+    --card-bg: white;
+    --card-shadow: rgba(0,0,0,0.1);
+    --card-hover-bg: #e0e0e0;
+    --footer-bg: #333;
+    --footer-text: #929292;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #f0f0f0;
+        --header-bg: #2a2a2a;
+        --header-text: #f0f0f0;
+        --sidebar-bg: #2a2a2a;
+        --sidebar-text: #f0f0f0;
+        --card-bg: #2a2a2a;
+        --card-shadow: rgba(255,255,255,0.1);
+        --card-hover-bg: #3a3a3a;
+        --footer-bg: #2a2a2a;
+        --footer-text: #929292;
+    }
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -5,7 +35,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 #overlay {
@@ -17,14 +48,14 @@ body {
     background-color: rgba(0, 0, 0, 0);
     z-index: -1;
     -webkit-backdrop-filter: blur(0);
-	backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
     transition: all 0.3s cubic-bezier(.26,.55,.07,.98);
 }
 
 #overlay.showNavigationBar {
     background-color: rgba(0, 0, 0, 0.5);
     -webkit-backdrop-filter: blur(6px);
-	backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
     z-index: 10;
 }
 
@@ -37,8 +68,8 @@ body {
 }
 
 header {
-    background-color: #333;
-    color: white;
+    background-color: var(--header-bg);
+    color: var(--header-text);
     display: flex;
     justify-content: space-between;
     align-content: center;
@@ -49,33 +80,25 @@ header {
 }
 
 .title {
-	width: max-content;
-	height: auto;
-	padding: 1rem;
-	text-align: center;
-	font-size: x-large;
-	opacity: 100%;
-	font-weight: medium;
-}
-
-#menu-toggle {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: white;
+    width: max-content;
+    height: auto;
     padding: 1rem;
+    text-align: center;
+    font-size: x-large;
+    opacity: 100%;
+    font-weight: medium;
 }
 
-#menu-toggle-blank {
+#menu-toggle, #menu-toggle-blank {
     background: none;
     border: none;
     font-size: 1.5rem;
-    color: white;
+    color: var(--header-text);
     padding: 1rem;
 }
 
 #sidebar {
-    background-color: #f1f1f1;
+    background-color: var(--sidebar-bg);
     padding: 1rem;
     width: 200px;
     position: fixed;
@@ -84,7 +107,7 @@ header {
     top: 0;
     transition: all 0.3s cubic-bezier(.26,.55,.07,.98);
     z-index: 1000;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    box-shadow: 2px 0 5px var(--card-shadow);
 }
 
 #sidebar.show {
@@ -98,14 +121,14 @@ header {
 
 #sidebar ul li a {
     display: block;
-    color: #000;
+    color: var(--sidebar-text);
     padding: 8px 16px;
     text-decoration: none;
 }
 
 #sidebar ul li a:hover {
-    background-color: #555;
-    color: white;
+    background-color: var(--card-hover-bg);
+    color: var(--text-color);
 }
 
 main {
@@ -121,15 +144,15 @@ main {
 }
 
 @keyframes card {
-	0% {opacity: 0; top: 20px}
-	100% {opacity: 1; top: 0px}
+    0% {opacity: 0; top: 20px}
+    100% {opacity: 1; top: 0px}
 }
 
 .card {
     position: relative;
-    background-color: white;
+    background-color: var(--card-bg);
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px var(--card-shadow);
     margin-bottom: 2rem;
     padding: 1.5rem;
     width: calc(28% - 1rem);
@@ -140,7 +163,7 @@ main {
 }
 
 .card:active {
-    background-color: #e0e0e0;
+    background-color: var(--card-hover-bg);
 }
 
 @media (max-width: 800px) {
@@ -166,8 +189,8 @@ main {
 }
 
 footer {
-    background-color: #333;
-    color: #929292;
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
     text-align: center;
     padding: 1rem;
     margin-top: auto;
