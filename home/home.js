@@ -21,6 +21,10 @@ document.getElementById("Dice-Roller").onclick = function() {
     window.open("../Dice-Roller/index.html", "_self");
 }
 
+document.getElementById("NTHU-EESC").onclick = function() {
+    window.open("../EESC/index.html", "_self");
+}
+
 document.getElementById("I2P1-Yang").onclick = function() {
     window.open("../I2P1-Yang/I2P1-Yang.html", "_self");
 }
