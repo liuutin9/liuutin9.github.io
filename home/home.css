@@ -20,7 +20,7 @@ header {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: left;
+	justify-content: space-between;
 	width: 100%;
 	align-content: center;
 	background-color: rgba(40, 40, 40, 0.7);
@@ -31,7 +31,7 @@ header {
 	-webkit-backdrop-filter: blur(6px);
 	backdrop-filter: blur(6px);
 	z-index: 1;
-	transition: all 0.3s ease;
+	transition: top 0.3s ease;
 }
 @media (prefers-color-scheme: light) {
 	header {
@@ -40,7 +40,7 @@ header {
 	}
 }
 header.hidden {
-	top: -15vh;
+	top: -20vh;
 }
 
 .title {
@@ -51,6 +51,37 @@ header.hidden {
 	font-size: x-large;
 	opacity: 100%;
 	font-weight: bolder;
+}
+
+.iconButton {
+	width: 40px;
+	height: 40px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: rgb(75, 75, 75);
+	border-radius: 10px;
+	background-color: transparent;
+	justify-content: center;
+	align-content: center;
+	align-self: center;
+	margin-right: 20px;
+	padding: 0;
+}
+@media (prefers-color-scheme: light) {
+	.iconButton {
+		border-color: rgb(200, 200, 200);
+	}
+}
+
+i {
+	color: white;
+	font-size: 30px;
+}
+@media (prefers-color-scheme: light) {
+	i {
+		color: black;
+		margin: 0;
+	}
 }
 
 @media screen and (min-width: 800px) {
@@ -68,8 +99,6 @@ header.hidden {
 		margin-top: 5px;
 		border-style: none;
 		box-shadow: 5px 5px 10px rgba(30, 30, 30, 75%);
-		animation-name: item;
-		animation-duration: 1.25s;
 		transition: background-color 0.3s, box-shadow 0.3s;
 	}
 	.item:hover,
@@ -107,8 +136,6 @@ header.hidden {
 		margin-top: 5px;
 		border-style: none;
 		box-shadow: 5px 5px 10px rgba(30, 30, 30, 75%);
-		animation-name: item;
-		animation-duration: 1.25s;
 		transition: background-color 0.3s, box-shadow 0.3s;
 	}
 	.item:active {
