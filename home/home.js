@@ -22,7 +22,7 @@ document.getElementById("Dice-Roller").onclick = function() {
 }
 
 document.getElementById("NTHU-EESC").onclick = function() {
-    window.open("../EESC/index.html", "_self");
+    window.open("../EESC/Homepage/index.html", "_self");
 }
 
 document.getElementById("I2P1-Yang").onclick = function() {
