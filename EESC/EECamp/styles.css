@@ -1,3 +1,27 @@
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --header-bg: #333;
+    --header-text: white;
+    --sidebar-bg: #f1f1f1;
+    --sidebar-text: #000;
+    --card-bg: white;
+    --card-shadow: rgba(0,0,0,0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #f0f0f0;
+        --header-bg: #2a2a2a;
+        --header-text: #f0f0f0;
+        --sidebar-bg: #2a2a2a;
+        --sidebar-text: #f0f0f0;
+        --card-bg: #2a2a2a;
+        --card-shadow: rgba(255,255,255,0.1);
+    }
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -5,7 +29,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 #overlay {
@@ -37,8 +62,8 @@ body {
 }
 
 header {
-    background-color: #333;
-    color: white;
+    background-color: var(--header-bg);
+    color: var(--header-text);
     display: flex;
     justify-content: space-between;
     align-content: center;
@@ -75,7 +100,7 @@ header {
 }
 
 #sidebar {
-    background-color: #f1f1f1;
+    background-color: var(--sidebar-bg);
     padding: 1rem;
     width: 200px;
     position: fixed;
@@ -98,7 +123,7 @@ header {
 
 #sidebar ul li a {
     display: block;
-    color: #000;
+    color: var(--sidebar-text);
     padding: 8px 16px;
     text-decoration: none;
 }
@@ -129,7 +154,6 @@ main {
 }
 
 h1, h2 {
-    color: #333;
     animation-name: main;
     animation-duration: 0.5s;
     position: relative;
@@ -155,20 +179,20 @@ h1, h2 {
 }
 
 .department {
-    background-color: white;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 5px var(--card-shadow);
     padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     animation-name: main;
     animation-duration: 0.5s;
     position: relative;
 }
 
 .timeline {
-    background-color: white;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 5px var(--card-shadow);
     padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     margin-bottom: 2rem;
     animation-name: main;
     animation-duration: 0.5s;
@@ -181,10 +205,10 @@ h1, h2 {
     gap: 2rem;
     align-content: center;
     align-items: center;
-    background-color: white;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 5px var(--card-shadow);
     padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     animation-name: main;
     animation-duration: 0.5s;
     position: relative;
@@ -226,3 +250,22 @@ footer {
     margin-left: 2rem;
     margin-right: 2rem;
 } */
+  
+/* Theme toggle button styles */
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.theme-icon {
+    display: none;
+}
+
+[data-theme="light"] .theme-icon.light,
+[data-theme="dark"] .theme-icon.dark,
+[data-theme="system"] .theme-icon.system {
+    display: inline;
+}
