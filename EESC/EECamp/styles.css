@@ -110,7 +110,8 @@ header.sticky {
 } */
 @media (prefers-color-scheme: dark) {
     header.sticky .sliver-bg {
-        bottom: -80px;
+        /* bottom: -80px; */
+        height: 0;
         opacity: 0; /* 背景圖片在 sticky 時淡出 */
     }
 }
