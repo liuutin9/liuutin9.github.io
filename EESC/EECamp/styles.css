@@ -76,6 +76,7 @@ header {
     align-items: flex-end;
     overflow: hidden;
     transition: all 0.3s ease;
+    z-index: 1;
 }
 
 .sliver-bg {
@@ -99,7 +100,6 @@ header.sticky {
     color: var(--header-text);
     display: flex;
     position: sticky;
-    z-index: 1;
 }
 
 header.sticky .sliver-bg {
@@ -126,6 +126,7 @@ header.sticky .sliver-title {
     background: none;
     border: none;
     font-size: 1.5rem;
+    height: 80px;
     color: white;
     padding: 1rem;
     z-index: 2;
