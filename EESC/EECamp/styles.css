@@ -76,7 +76,7 @@ header {
     justify-content: center;
     align-items: flex-end;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
     z-index: 1;
 }
 
@@ -92,7 +92,7 @@ header {
     background-color: rgba(40, 40, 40, 0.7);
     filter: brightness(0.3);
     z-index: -1;
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
 }
 
 header.sticky {
@@ -111,7 +111,7 @@ header.sticky .sliver-bg {
 .sliver-title {
     color: white;
     font-size: 2.5rem;
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
     margin: 0;
     padding: 20px;
 }
