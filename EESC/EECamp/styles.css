@@ -106,7 +106,7 @@ header.sticky {
 }
 
 header.sticky .sliver-bg {
-    height: 0;
+    bottom: -80px;
 }
 @media (prefers-color-scheme: dark) {
     header.sticky .sliver-bg {
