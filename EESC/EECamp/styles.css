@@ -71,7 +71,7 @@ header {
     padding: 0;
     position: relative;
     height: 300px;
-    background-color: transparent;
+    background-color: var(--header-bg);
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -99,21 +99,14 @@ header {
 
 header.sticky {
     top: -220px;
-    background-color: var(--header-bg);
     color: var(--header-text);
     display: flex;
     position: sticky;
 }
 
 header.sticky .sliver-bg {
+    height: 0;
     opacity: 0; /* 背景圖片在 sticky 時淡出 */
-}
-@media (prefers-color-scheme: dark) {
-    header.sticky .sliver-bg {
-        /* bottom: -80px; */
-        height: 0;
-        opacity: 0; /* 背景圖片在 sticky 時淡出 */
-    }
 }
 
 .sliver-title {
