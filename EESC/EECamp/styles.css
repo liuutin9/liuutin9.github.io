@@ -106,10 +106,11 @@ header.sticky {
 }
 
 header.sticky .sliver-bg {
-    bottom: -80px;
+    /* bottom: -80px; */
 }
 @media (prefers-color-scheme: dark) {
     header.sticky .sliver-bg {
+        bottom: -80px;
         opacity: 0; /* 背景圖片在 sticky 時淡出 */
     }
 }
@@ -243,7 +244,8 @@ h1, h2 {
 .contact-info {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    column-gap: 2rem;
+    row-gap: 1rem;
     align-content: center;
     align-items: center;
     background-color: var(--card-bg);
