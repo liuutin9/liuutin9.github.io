@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 190) {  // 當滾動超過 150px 時，縮小 header
+        if (window.scrollY > 185) {  // 當滾動超過 150px 時，縮小 header
             header.classList.add('sticky');
             menuToggle.classList.add('sticky');
         } else {
