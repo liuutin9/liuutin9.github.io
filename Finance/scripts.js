@@ -4,6 +4,8 @@ let stocks = [
     { name: "00692.TW", shares: 1489, currentPrice: 100, cost: 31.11 },
     { name: "00878.TW", shares: 355, currentPrice: 100, cost: 21.11 },
     { name: "2890.TW", shares: 3975, currentPrice: 100, cost: 16.9 },
+    { name: "VT", shares: 3975, currentPrice: 100, cost: 16.9 },
+    { name: "BND", shares: 3975, currentPrice: 100, cost: 16.9 },
 ];
 
 // 獲取股票價格的函數
