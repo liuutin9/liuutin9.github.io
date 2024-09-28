@@ -17,9 +17,12 @@ body {
 }
 .overall-info {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
 }
 .info-item {
+    margin-left: 20px;
+    margin-right: 20px;
     text-align: center;
 }
 .info-item h3 {
