@@ -4,8 +4,9 @@ let stocks = [
     { name: "00692.TW", shares: 1489, currentPrice: 100, cost: 31.11 },
     { name: "00878.TW", shares: 355, currentPrice: 100, cost: 21.11 },
     { name: "2890.TW", shares: 3975, currentPrice: 100, cost: 16.9 },
-    { name: "VT", shares: 3975, currentPrice: 100, cost: 16.9 },
-    { name: "BND", shares: 3975, currentPrice: 100, cost: 16.9 },
+    { name: "2891.TW", shares: 400, currentPrice: 100, cost: 33.25 },
+    { name: "VT", shares: 25.99646, currentPrice: 100, cost: 3309.07 },
+    { name: "BND", shares: 10.930935, currentPrice: 100, cost: 2244.27 },
 ];
 
 // 獲取股票價格的函數
@@ -51,17 +52,18 @@ function updateDashboard() {
             <div class="stock-info"><span>目前庫存:</span> <span>${stock.shares}</span></div>
             <div class="stock-info"><span>現價:</span> <span>$${stock.currentPrice}</span></div>
             <div class="stock-info"><span>成本:</span> <span>$${stock.cost}</span></div>
-            <div class="stock-info"><span>損益%數:</span> <span class="${profitLoss >= 0 ? 'profit' : 'loss'}">${profitLossPercentage}%</span></div>
+            <div class="stock-info"><span>損益:</span> <span class="${profitLoss >= 0 ? 'profit' : 'loss'}">${profitLoss.toFixed(0)}(${profitLossPercentage}%)</span></div>
         `;
 
         stockListElement.appendChild(stockElement);
     });
 
+    const totalProfitLoss = (totalMarketValue - totalCost);
     const totalProfitLossPercentage = (((totalMarketValue - totalCost) / totalCost) * 100).toFixed(2);
 
     document.getElementById('total-market-value').textContent = `$${totalMarketValue.toLocaleString()}`;
     document.getElementById('total-cost').textContent = `$${totalCost.toLocaleString()}`;
-    document.getElementById('total-profit-loss-percentage').textContent = `${totalProfitLossPercentage}%`;
+    document.getElementById('total-profit-loss-percentage').textContent = `${totalProfitLoss.toFixed(0)}(${totalProfitLossPercentage}%)`;
     document.getElementById('total-profit-loss-percentage').className = totalProfitLossPercentage >= 0 ? 'profit' : 'loss';
 }
 
