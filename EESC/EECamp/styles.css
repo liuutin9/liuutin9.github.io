@@ -158,7 +158,7 @@ header.sticky .sliver-title {
     color: white;
     /* padding-left: 1rem;
     padding-right: 1rem; */
-    z-index: 2;
+    /* z-index: 2; */
     transition: all 0.15s ease;
 }
 #menu-toggle.sticky {
