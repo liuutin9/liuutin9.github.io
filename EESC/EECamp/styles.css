@@ -147,9 +147,9 @@ header.sticky .sliver-title {
 }
 
 #menu-toggle {
-    /* align-self: flex-start;
-    justify-self: flex-start;
-    align-content: center;
+    align-self: center;
+    justify-self: center;
+    /* align-content: center;
     position: fixed;
     background: none;
     border: none; */
