@@ -11,7 +11,7 @@ body {
 }
 .overall-info, .stock-list {
     background-color: white;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
@@ -42,7 +42,7 @@ body {
 }
 .stock-item {
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 10px;
 }
 .stock-item h3 {

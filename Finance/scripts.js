@@ -48,11 +48,11 @@ function updateDashboard() {
         stockElement.className = 'stock-item';
         stockElement.innerHTML = `
             <h3>${stock.name}</h3>
-            <div class="stock-info"><span>目前市值:</span> <span>$${marketValue.toLocaleString()}</span></div>
-            <div class="stock-info"><span>目前庫存:</span> <span>${stock.shares}</span></div>
-            <div class="stock-info"><span>現價:</span> <span>$${stock.currentPrice}</span></div>
-            <div class="stock-info"><span>成本:</span> <span>$${stock.cost}</span></div>
-            <div class="stock-info"><span>損益:</span> <span class="${profitLoss >= 0 ? 'profit' : 'loss'}">${profitLoss.toFixed(0)}(${profitLossPercentage}%)</span></div>
+            <div class="stock-info"><span>目前市值:</span> <span>$${parseFloat(marketValue.toFixed(0)).toLocaleString()}</span></div>
+            <div class="stock-info"><span>目前庫存:</span> <span>${stock.shares.toLocaleString()}</span></div>
+            <div class="stock-info"><span>現價:</span> <span>$${parseFloat(stock.currentPrice.toFixed(2)).toLocaleString()}</span></div>
+            <div class="stock-info"><span>成本:</span> <span>$${parseFloat(stock.cost.toFixed(2)).toLocaleString()}</span></div>
+            <div class="stock-info"><span>損益:</span> <span class="${profitLoss >= 0 ? 'profit' : 'loss'}">${parseFloat(profitLoss.toFixed(0)).toLocaleString()}(${profitLossPercentage}%)</span></div>
         `;
 
         stockListElement.appendChild(stockElement);
@@ -63,7 +63,7 @@ function updateDashboard() {
 
     document.getElementById('total-market-value').textContent = `$${totalMarketValue.toLocaleString()}`;
     document.getElementById('total-cost').textContent = `$${totalCost.toLocaleString()}`;
-    document.getElementById('total-profit-loss-percentage').textContent = `${totalProfitLoss.toFixed(0)}(${totalProfitLossPercentage}%)`;
+    document.getElementById('total-profit-loss-percentage').textContent = `${parseFloat(totalProfitLoss.toFixed(0)).toLocaleString()}(${totalProfitLossPercentage}%)`;
     document.getElementById('total-profit-loss-percentage').className = totalProfitLossPercentage >= 0 ? 'profit' : 'loss';
 }
 
