@@ -135,7 +135,7 @@ header.sticky .sliver-title {
     left: 0;
     top: 0;
     display: flex;
-    align-content: center;
+    align-items: center;
     justify-items: center;
     position: fixed;
     background: none;
