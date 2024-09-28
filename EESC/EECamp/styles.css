@@ -134,7 +134,7 @@ header.sticky .sliver-title {
 #menu-toggle-container {
     left: 0;
     top: 0;
-    display: flex;
+    display: grid;
     align-items: center;
     justify-items: center;
     position: fixed;
