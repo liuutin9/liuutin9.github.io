@@ -125,7 +125,7 @@ header.sticky .sliver-bg {
 }
 
 header.sticky .sliver-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     height: 50px;
     padding: 0;
     color: var(--header-text);
@@ -149,18 +149,8 @@ header.sticky .sliver-title {
 #menu-toggle {
     align-self: center;
     justify-self: center;
-    /* align-content: center;
-    position: fixed;
-    background: none;
-    border: none; */
-    /* font-size: 1.5rem; */
-    /* height: 50px;
-    width: 50px; */
     position: relative;
     color: white;
-    /* padding-left: 1rem;
-    padding-right: 1rem; */
-    /* z-index: 2; */
     transition: all 0.15s ease;
 }
 #menu-toggle.sticky {
