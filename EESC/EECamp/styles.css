@@ -138,12 +138,12 @@ header.sticky .sliver-title {
     position: fixed;
     background: none;
     border: none;
+    size: 100%;
     /* font-size: 1.5rem; */
     height: 50px;
-    width: 50px;
     color: white;
-    /* padding-left: 1rem;
-    padding-right: 1rem; */
+    padding-left: 1rem;
+    padding-right: 1rem;
     z-index: 2;
     transition: all 0.15s ease;
 }
