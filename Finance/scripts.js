@@ -1,10 +1,10 @@
 // 模擬股票數據
 let stocks = [
-    { name: "006208.TW", shares: 388, currentPrice: 100, cost: 80.09 },
-    { name: "00692.TW", shares: 1489, currentPrice: 100, cost: 31.11 },
-    { name: "00878.TW", shares: 355, currentPrice: 100, cost: 21.11 },
-    { name: "2890.TW", shares: 3975, currentPrice: 100, cost: 16.9 },
-    { name: "2891.TW", shares: 400, currentPrice: 100, cost: 33.25 },
+    { name: "富邦台50", shares: 388, currentPrice: 100, cost: 80.09 },
+    { name: "富邦公司治理", shares: 1489, currentPrice: 100, cost: 31.11 },
+    { name: "國泰永續高股息", shares: 355, currentPrice: 100, cost: 21.11 },
+    { name: "永豐金", shares: 3975, currentPrice: 100, cost: 16.9 },
+    { name: "中信金", shares: 400, currentPrice: 100, cost: 33.25 },
     { name: "VT", shares: 25.99646, currentPrice: 100, cost: 3309.07 },
     { name: "BND", shares: 10.930935, currentPrice: 100, cost: 2244.27 },
 ];
