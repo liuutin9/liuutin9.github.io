@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('header');
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 200) {  // 當滾動超過 150px 時，縮小 header
+        if (window.scrollY > 190) {  // 當滾動超過 150px 時，縮小 header
             header.classList.add('sticky');
         } else {
             header.classList.remove('sticky');
