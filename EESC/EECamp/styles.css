@@ -8,7 +8,7 @@
     --sidebar-bg: #f1f1f1;
     --sidebar-text: #000;
     --card-bg: white;
-    --card-shadow: rgba(0,0,0,0.1);
+    --card-shadow: rgba(0, 0, 0, 0.1);
     --card-hover-bg: #e0e0e0;
     /* --footer-bg: #333;
     --footer-text: #929292; */
@@ -25,7 +25,7 @@
         --sidebar-bg: #2a2a2a;
         --sidebar-text: #f0f0f0;
         --card-bg: #2a2a2a;
-        --card-shadow: rgba(230,230,230,0.1);
+        --card-shadow: rgba(160, 160, 160, 0.1);
         --card-hover-bg: #3a3a3a;
         /* --footer-bg: #2a2a2a; */
         --footer-bg: #1a1a1a;
