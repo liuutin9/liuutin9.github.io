@@ -52,7 +52,7 @@ function updateDashboard() {
             <div class="stock-info"><span>目前庫存:</span> <span>${stock.shares.toLocaleString()}</span></div>
             <div class="stock-info"><span>現價:</span> <span>$${parseFloat(stock.currentPrice.toFixed(2)).toLocaleString()}</span></div>
             <div class="stock-info"><span>成本:</span> <span>$${parseFloat(stock.cost.toFixed(2)).toLocaleString()}</span></div>
-            <div class="stock-info"><span>損益:</span> <span class="${profitLoss >= 0 ? 'profit' : 'loss'}">${parseFloat(profitLoss.toFixed(0)).toLocaleString()}(${profitLossPercentage}%)</span></div>
+            <div class="stock-info"><span>損益:</span> <span class="${profitLoss >= 0 ? 'profit' : 'loss'}">$${parseFloat(profitLoss.toFixed(0)).toLocaleString()}(${profitLossPercentage}%)</span></div>
         `;
 
         stockListElement.appendChild(stockElement);
@@ -61,9 +61,9 @@ function updateDashboard() {
     const totalProfitLoss = (totalMarketValue - totalCost);
     const totalProfitLossPercentage = (((totalMarketValue - totalCost) / totalCost) * 100).toFixed(2);
 
-    document.getElementById('total-market-value').textContent = `$${totalMarketValue.toLocaleString()}`;
-    document.getElementById('total-cost').textContent = `$${totalCost.toLocaleString()}`;
-    document.getElementById('total-profit-loss-percentage').textContent = `${parseFloat(totalProfitLoss.toFixed(0)).toLocaleString()}(${totalProfitLossPercentage}%)`;
+    document.getElementById('total-market-value').textContent = `$${parseFloat(totalMarketValue.toFixed(2)).toLocaleString()}`;
+    document.getElementById('total-cost').textContent = `$${parseFloat(totalCost.toFixed(2)).toLocaleString()}`;
+    document.getElementById('total-profit-loss-percentage').textContent = `$${parseFloat(totalProfitLoss.toFixed(0)).toLocaleString()}(${totalProfitLossPercentage}%)`;
     document.getElementById('total-profit-loss-percentage').className = totalProfitLossPercentage >= 0 ? 'profit' : 'loss';
 }
 
