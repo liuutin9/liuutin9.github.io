@@ -1,14 +1,18 @@
 :root {
     --bg-color: #f0f0f0;
     --text-color: #333;
-    --header-bg: #333;
-    --header-text: white;
+    /* --header-bg: #333;
+    --header-text: white; */
+    --header-bg: rgba(240, 240, 240, 0.7);
+    --header-text: black;
     --sidebar-bg: #f1f1f1;
     --sidebar-text: #000;
     --card-bg: white;
     --card-shadow: rgba(0,0,0,0.1);
     --card-hover-bg: #e0e0e0;
-    --footer-bg: #333;
+    /* --footer-bg: #333;
+    --footer-text: #929292; */
+    --footer-bg: rgb(240, 240, 240);
     --footer-text: #929292;
 }
 
@@ -16,14 +20,15 @@
     :root {
         --bg-color: #1a1a1a;
         --text-color: #f0f0f0;
-        --header-bg: rgba(42, 42, 42, 0.8);
+        --header-bg: rgba(26, 26, 26, 0.7);
         --header-text: #f0f0f0;
         --sidebar-bg: #2a2a2a;
         --sidebar-text: #f0f0f0;
         --card-bg: #2a2a2a;
-        --card-shadow: rgba(255,255,255,0.1);
+        --card-shadow: rgba(230,230,230,0.1);
         --card-hover-bg: #3a3a3a;
-        --footer-bg: #2a2a2a;
+        /* --footer-bg: #2a2a2a; */
+        --footer-bg: #1a1a1a;
         --footer-text: #929292;
     }
 }
@@ -80,6 +85,7 @@ header {
     z-index: 1;
     -webkit-backdrop-filter: blur(20px);
 	backdrop-filter: blur(20px);
+    box-shadow: 0 2px 5px var(--card-shadow);
 }
 
 .sliver-bg {
@@ -122,6 +128,7 @@ header.sticky .sliver-title {
     font-size: 1.5rem; /* Sticky 狀態時字體變小 */
     height: 40px;
     padding: 5px;
+    color: var(--header-text);
 }
 
 #menu-toggle {
@@ -136,6 +143,10 @@ header.sticky .sliver-title {
     color: white;
     padding-left: 1rem;
     z-index: 2;
+    transition: all 0.15s ease;
+}
+#menu-toggle.sticky {
+    color: var(--header-text);
 }
 
 #sidebar {

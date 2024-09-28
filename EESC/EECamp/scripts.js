@@ -28,12 +28,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('header');
+    const menuToggle = document.getElementById('menu-toggle');
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 190) {  // 當滾動超過 150px 時，縮小 header
             header.classList.add('sticky');
+            menuToggle.classList.add('sticky');
         } else {
             header.classList.remove('sticky');
+            menuToggle.classList.remove('sticky');
         }
         lastScrollY = window.scrollY;
     });
