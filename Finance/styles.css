@@ -39,7 +39,7 @@ body {
     gap: 20px;
 }
 .stock-item {
-    border: 1px solid #ddd;
+    border: 1.5px solid #ddd;
     border-radius: 20px;
     padding: 20px;
 }
