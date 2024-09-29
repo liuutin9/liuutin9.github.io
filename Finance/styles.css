@@ -41,7 +41,7 @@ body {
 .stock-item {
     border: 1px solid #ddd;
     border-radius: 20px;
-    padding: 10px;
+    padding: 20px;
 }
 .stock-item h3 {
     margin-top: 0;
