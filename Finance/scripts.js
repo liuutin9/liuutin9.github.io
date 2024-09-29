@@ -1,31 +1,26 @@
-// 模擬股票數據
-let stocks = [
-    { name: "富邦台50", shares: 388, currentPrice: 100, cost: 80.09 },
-    { name: "富邦公司治理", shares: 1489, currentPrice: 100, cost: 31.11 },
-    { name: "國泰永續高股息", shares: 355, currentPrice: 100, cost: 21.11 },
-    { name: "永豐金", shares: 3975, currentPrice: 100, cost: 16.9 },
-    { name: "中信金", shares: 400, currentPrice: 100, cost: 33.25 },
-    { name: "VT", shares: 25.99646, currentPrice: 100, cost: 3309.07 },
-    { name: "BND", shares: 10.930935, currentPrice: 100, cost: 2244.27 },
-];
+// 全局變量來存儲股票數據
+let stocks = [];
 
-// 獲取股票價格的函數
-function fetchStockPrices() {
-    fetch('https://raw.githubusercontent.com/liuutin9/Finance/refs/heads/main/stock_price.txt')
-        .then(response => response.text())
+// 從 JSON 文件中獲取股票數據
+function fetchStockData() {
+    fetch('https://raw.githubusercontent.com/liuutin9/Finance/refs/heads/main/stock_repo.txt')
+        .then(response => response.json())
         .then(data => {
-            const lines = data.trim().split('\n');
-            lines.forEach(line => {
-                const [stockName, stockPrice] = line.split(',');
-                // 更新相應的股票價格
-                const stock = stocks.find(s => s.name === stockName);
-                if (stock) {
-                    stock.currentPrice = parseFloat(stockPrice);
+            stocks = [];
+            for (let market in data) {
+                for (let stockCode in data[market]) {
+                    const stock = data[market][stockCode];
+                    stocks.push({
+                        name: stock.Name,
+                        shares: stock.shares,
+                        currentPrice: stock.ClosingPrice,
+                        cost: stock.cost
+                    });
                 }
-            });
-            updateDashboard(); // 更新畫面
+            }
+            updateDashboard();
         })
-        .catch(error => console.error('Error fetching stock prices:', error));
+        .catch(error => console.error('Error fetching stock data:', error));
 }
 
 function updateDashboard() {
@@ -67,8 +62,8 @@ function updateDashboard() {
     document.getElementById('total-profit-loss-percentage').className = totalProfitLossPercentage >= 0 ? 'profit' : 'loss';
 }
 
-// 初始獲取股票價格並更新 dashboard
-fetchStockPrices();
+// 初始獲取股票數據並更新 dashboard
+fetchStockData();
 
 // 模擬實時更新（每5秒更新一次）
-setInterval(fetchStockPrices, 5000);
+setInterval(fetchStockData, 5000);
