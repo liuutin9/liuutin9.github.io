@@ -1,3 +1,9 @@
+@font-face {
+    font-family: "Tahoma";
+    src: url("path/to/tahoma.woff2") format("woff2"),
+         url("path/to/tahoma.woff") format("woff");
+}
+
 body {
     font-family: Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
