@@ -1,61 +1,113 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #f0f2f5;
+    color: #333;
 }
+
 .dashboard {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
-.overall-info, .stock-list {
-    background-color: white;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
 }
+
+h1 {
+    color: #1a237e;
+}
+
 .overall-info {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
 }
+
 .info-item {
-    margin: 10px;
     text-align: center;
 }
+
 .info-item h3 {
-    margin: 0;
-    color: #333;
+    font-size: 1.2em;
+    color: #555;
+    margin-top: 0;
+    margin-bottom: 10px;
 }
+
 .info-item p {
-    font-size: 24px;
+    font-size: 1.5em;
     font-weight: bold;
-    margin: 10px 0;
+    margin: 0;
 }
+
+.chart-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#portfolioChart {
+    position: relative;
+    max-height: 300px;
+    max-width: 300px;
+}
+
 .stock-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
 }
+
 .stock-item {
-    border: 1.5px solid #ddd;
-    border-radius: 20px;
+    background-color: white;
+    border-radius: 10px;
     padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
 }
+
+.stock-item:hover {
+    transform: translateY(-5px);
+}
+
 .stock-item h3 {
+    color: #1a237e;
     margin-top: 0;
-    color: #333;
-    font-weight: bold;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
 }
+
 .stock-info {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
+
 .profit {
-    color: red;
+    color: #f44336;
 }
+
 .loss {
-    color: green;
+    color: #4caf50;
+}
+
+@media (max-width: 768px) {
+    .overall-info {
+        flex-direction: column;
+    }
+    
+    .info-item {
+        margin-bottom: 20px;
+    }
 }

@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>股票庫存 Dashboard</title>
-    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <title>股票儀表板</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 </head>
 <body>
     <div class="dashboard">
+        <header>
+            <h1>股票投資組合儀表板</h1>
+        </header>
         <div class="overall-info">
             <div class="info-item">
                 <h3>總市值</h3>
@@ -22,9 +26,10 @@
                 <p id="total-profit-loss-percentage">-</p>
             </div>
         </div>
-        <div class="stock-list" id="stock-list">
-            <!-- 個股資訊將在這裡動態生成 -->
+        <div class="chart-container">
+            <canvas id="portfolioChart"></canvas>
         </div>
+        <div id="stock-list" class="stock-list"></div>
     </div>
     <script src="scripts.js"></script>
 </body>
