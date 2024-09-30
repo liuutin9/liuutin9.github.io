@@ -49,7 +49,8 @@ function updateDashboard() {
             <div class="stock-info"><span style="font-weight: bold;">Inventory:</span> <span style="font-weight: bold;">${formatNumber(stock.shares)}</span></div>
             <div class="stock-info"><span style="font-weight: bold;">Price:</span> <span style="font-weight: bold;">$${formatNumber(stock.currentPrice, 2)}</span></div>
             <div class="stock-info"><span style="font-weight: bold;">Cost:</span> <span style="font-weight: bold;">$${formatNumber(stock.cost, 2)}</span></div>
-            <div class="stock-info"><span style="font-weight: bold;">Profit and Loss:</span> <span class="${profitLoss >= 0 ? 'profit' : 'loss'}" style="font-weight: bold;">$${formatNumber(profitLoss)}(${profitLossPercentage}%)</span></div>
+            <div class="stock-info"><span style="font-weight: bold;">Return:</span> <span class="${profitLoss >= 0 ? 'profit' : 'loss'}" style="font-weight: bold;">$${formatNumber(profitLoss)}</span></div>
+            <div class="stock-info"><span style="font-weight: bold;">Profit and Loss:</span> <span class="${profitLoss >= 0 ? 'profit' : 'loss'}" style="font-weight: bold;">${profitLossPercentage}%</span></div>
         `;
 
         stockListElement.appendChild(stockElement);
@@ -60,7 +61,9 @@ function updateDashboard() {
 
     document.getElementById('total-market-value').textContent = `$${formatNumber(totalMarketValue)}`;
     document.getElementById('total-cost').textContent = `$${formatNumber(totalCost)}`;
-    document.getElementById('total-profit-loss-percentage').textContent = `$${formatNumber(totalProfitLoss)}(${totalProfitLossPercentage}%)`;
+    document.getElementById('total-return').textContent = `$${formatNumber(totalProfitLoss)}`;
+    document.getElementById('total-return').className = totalProfitLoss >= 0 ? 'profit' : 'loss';
+    document.getElementById('total-profit-loss-percentage').textContent = `${totalProfitLossPercentage}%`;
     document.getElementById('total-profit-loss-percentage').className = totalProfitLoss >= 0 ? 'profit' : 'loss';
 }
 
@@ -95,7 +98,7 @@ function updateChart() {
                     display: true,
                     text: 'Portfolio Allocation',
                     font: {
-                        size: 24  // Increased font size for the title
+                        size: 24
                     }
                 }
             }
