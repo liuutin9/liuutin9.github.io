@@ -122,4 +122,4 @@ function formatNumber(number, decimals = 0) {
 fetchStockData();
 
 // Simulate real-time updates (update every 5 seconds)
-setInterval(fetchStockData, 5000);
+// setInterval(fetchStockData, 5000);
