@@ -25,6 +25,35 @@ function fetchStockData() {
         .catch(error => console.error('Error fetching stock data:', error));
 }
 
+function fetchLastUpdateTime() {
+    fetch('https://raw.githubusercontent.com/liuutin9/Finance/refs/heads/main/stock_repo_log.txt')
+        .then(response => {
+            console.log(response);
+            console.log(response.text().then(data => {
+                const lastUpdateTime = new Date(data).toUTCString();
+                document.getElementById('last-update-time').textContent = `${lastUpdateTime.toLocaleString()}`;
+            }));
+            // response.json();
+        })
+        // .then(data => {
+        //     stocks = [];
+        //     for (let market in data) {
+        //         for (let stockCode in data[market]) {
+        //             const stock = data[market][stockCode];
+        //             stocks.push({
+        //                 name: stock.Name,
+        //                 shares: stock.shares,
+        //                 currentPrice: stock.ClosingPrice,
+        //                 cost: stock.cost
+        //             });
+        //         }
+        //     }
+        //     updateDashboard();
+        //     updateChart();
+        // })
+        .catch(error => console.error('Error fetching stock data:', error));
+}
+
 function updateDashboard() {
     let totalMarketValue = 0;
     let totalCost = 0;
@@ -123,6 +152,7 @@ function formatNumber(number, decimals = 0) {
 
 // Initially fetch stock data and update dashboard
 fetchStockData();
+fetchLastUpdateTime()
 
 // Simulate real-time updates (update every 5 seconds)
 // setInterval(fetchStockData, 5000);
