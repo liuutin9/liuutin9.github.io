@@ -1,5 +1,6 @@
 // Global variable to store stock data
 let stocks = [];
+let portfolioChart;
 
 // Fetch stock data from JSON file
 function fetchStockData() {
@@ -65,10 +66,17 @@ function updateDashboard() {
 
 function updateChart() {
     const ctx = document.getElementById('portfolioChart').getContext('2d');
+
+    // Destroy the old chart instance if it exists
+    if (portfolioChart) {
+        portfolioChart.destroy();
+    }
+
     const labels = stocks.map(stock => stock.name);
     const data = stocks.map(stock => stock.shares * stock.currentPrice);
 
-    new Chart(ctx, {
+    // Create a new chart and assign it to the global variable
+    portfolioChart = new Chart(ctx, {
         type: 'pie',
         data: {
             labels: labels,
@@ -87,7 +95,7 @@ function updateChart() {
                     display: true,
                     text: 'Portfolio Allocation',
                     font: {
-                        size: 24
+                        size: 24  // Increased font size for the title
                     }
                 }
             }
