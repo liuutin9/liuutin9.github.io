@@ -59,8 +59,7 @@ h1 {
 
 #portfolioChart {
     position: relative;
-    max-height: 300px;
-    max-width: 300px;
+    max-height: 350px;
 }
 
 .stock-list {
@@ -77,8 +76,10 @@ h1 {
     transition: transform 0.3s ease;
 }
 
-.stock-item:hover {
-    transform: translateY(-5px);
+@media (min-width: 768px) {
+    .stock-item:hover {
+        transform: translateY(-5px);
+    }
 }
 
 .stock-item h3 {
