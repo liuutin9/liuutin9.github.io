@@ -57,7 +57,7 @@ function updateDashboard() {
         stockElement.innerHTML = `
             <h3>${stock.name}</h3>
             <div class="stock-info"><span style="font-weight: bold;">Market Value:</span> <span style="font-weight: bold;">$${formatNumber(marketValue)}</span></div>
-            <div class="stock-info"><span style="font-weight: bold;">Inventory:</span> <span style="font-weight: bold;">${formatNumber(stock.shares)}</span></div>
+            <div class="stock-info"><span style="font-weight: bold;">Inventory:</span> <span style="font-weight: bold;">${stock.shares}</span></div>
             <div class="stock-info"><span style="font-weight: bold;">Price:</span> <span style="font-weight: bold;">$${formatNumber(stock.currentPrice, 2)}</span></div>
             <div class="stock-info"><span style="font-weight: bold;">Cost:</span> <span style="font-weight: bold;">$${formatNumber(stock.cost, 2)}</span></div>
             <div class="stock-info"><span style="font-weight: bold;">Return:</span> <span class="${profitLoss >= 0 ? 'profit' : 'loss'}" style="font-weight: bold;">$${formatNumber(profitLoss)}</span></div>
