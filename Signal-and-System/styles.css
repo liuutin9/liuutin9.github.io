@@ -61,7 +61,7 @@ header.hidden {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    padding: 25px;
+    padding: 20px;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -85,25 +85,29 @@ header.hidden {
     overflow: hidden;
 }
 
-.item:hover,
-.item:active {
-    background-color: rgb(70, 70, 70);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
+@media (min-width: 768px) {
+	.item:hover,
+	.item:active {
+		background-color: rgb(70, 70, 70);
+		box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+		transform: translateY(-2px);
+	}
+
+	@media (prefers-color-scheme: light) {
+		.item {
+			color: black;
+			background-color: rgb(250, 250, 250);
+			box-shadow: 5px 5px 10px rgba(210, 210, 210, 75%);
+		}
+		.item:hover,
+		.item:active {
+			background-color: #e3f2fd;
+			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+		}
+	}
 }
 
-@media (prefers-color-scheme: light) {
-    .item {
-        color: black;
-        background-color: rgb(250, 250, 250);
-        box-shadow: 5px 5px 10px rgba(210, 210, 210, 75%);
-    }
-    .item:hover,
-    .item:active {
-        background-color: #e3f2fd;
-        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-    }
-}
+
 
 @media screen and (max-width: 768px) {
     .buttonList {
