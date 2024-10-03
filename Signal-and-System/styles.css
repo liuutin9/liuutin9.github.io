@@ -85,6 +85,14 @@ header.hidden {
     overflow: hidden;
 }
 
+@media (prefers-color-scheme: light) {
+	.item {
+		color: black;
+		background-color: rgb(250, 250, 250);
+		box-shadow: 5px 5px 10px rgba(210, 210, 210, 75%);
+	}
+}
+
 @media (min-width: 768px) {
 	.item:hover,
 	.item:active {
@@ -94,11 +102,6 @@ header.hidden {
 	}
 
 	@media (prefers-color-scheme: light) {
-		.item {
-			color: black;
-			background-color: rgb(250, 250, 250);
-			box-shadow: 5px 5px 10px rgba(210, 210, 210, 75%);
-		}
 		.item:hover,
 		.item:active {
 			background-color: #e3f2fd;
