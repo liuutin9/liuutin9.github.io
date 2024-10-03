@@ -41,6 +41,10 @@ document.getElementById("Diary").onclick = function() {
     window.open("../Diary/index.html", "_self");
 }
 
+document.getElementById("Investment-Portfolio").onclick = function() {
+    window.open("../Finance/index.html", "_self");
+}
+
 document.getElementById("Signal-and-System").onclick = function() {
     window.open("../Signal-and-System/index.html", "_self");
 }
