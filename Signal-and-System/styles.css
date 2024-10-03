@@ -78,7 +78,6 @@ header.hidden {
     border: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    cursor: pointer;
     text-align: center;
     padding: 10px;
     word-wrap: break-word;
@@ -94,6 +93,9 @@ header.hidden {
 }
 
 @media (min-width: 768px) {
+	.item {
+		cursor: pointer;
+	}
 	.item:hover,
 	.item:active {
 		background-color: rgb(70, 70, 70);
