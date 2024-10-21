@@ -11,10 +11,6 @@ window.addEventListener("scroll", () => {
         header.classList.remove("hidden");
     }
     lastScrollY = window.scrollY;
-
-    isScrolling = setTimeout(() => {
-        header.classList.remove("hidden");
-    }, 500); 
 });
 
 const pdfViewer = "https://docs.google.com/viewer?url=";
