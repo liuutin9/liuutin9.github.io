@@ -18,7 +18,7 @@ document.getElementById("Dice-Roller").onclick = function() {
 }
 
 document.getElementById("NTHU-EESC").onclick = function() {
-    window.open("./EESC/Homepage", "_self");
+    window.open("https://nthu-eesc.github.io/");
 }
 
 document.getElementById("I2P1-Yang").onclick = function() {
