@@ -20,7 +20,7 @@ function fetchStockData() {
                 }
             }
             updateDashboard();
-            updateChart();
+            // updateChart();
         })
         .catch(error => console.error('Error fetching stock data:', error));
 }
