@@ -41,6 +41,10 @@ document.getElementById("Investment-Portfolio").onclick = function() {
     window.open("./Finance", "_self");
 }
 
+document.getElementById("Intro-to-AI").onclick = function() {
+    window.open("./Intro-to-AI", "_self");
+}
+
 document.getElementById("Signal-and-System").onclick = function() {
     window.open("./Signal-and-System", "_self");
 }
