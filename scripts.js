@@ -45,6 +45,10 @@ document.getElementById("Intro-to-AI").onclick = function() {
     window.open("./Intro-to-AI", "_self");
 }
 
+document.getElementById("Regular-Language").onclick = function() {
+    window.open("./Regular-Language", "_self");
+}
+
 document.getElementById("Signal-and-System").onclick = function() {
     window.open("./Signal-and-System", "_self");
 }
