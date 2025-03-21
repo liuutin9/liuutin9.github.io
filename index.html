@@ -1,43 +1,272 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>liuutin9</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width">
-		<link href="styles.css" rel="stylesheet" type="text/css"/>
-		<script src="https://kit.fontawesome.com/5b119b2aa8.js" crossorigin="anonymous"></script>
-		<meta property="og:image" content="../logo.png">
-    	<meta property="og:image:type" content="image/png">
-    	<meta property="og:image:width" content="2400">
-    	<meta property="og:image:height" content="2400">
-    	<meta property="og:title" content="liuutin9">
-    	<meta property="og:description" content="liuutin9">
-    	<link rel="shortcut icon" href="../icon.ico" type="image/x-icon">
-	</head>
-	<body>
-		<header id = "header">
-			<div class = "title">liuutin9</div>
-			<button class = "iconButton" id = "githubButton">
-				<i class = "fab fa-github"></i>
-			</button>
-		</header>
-		<div class = "buttonList">
-			<button class = "item" id = "Diary">Diary</button>
-			<button class = "item" id = "Investment-Portfolio">Investment Portfolio</button>
-			<button class = "item" id = "NTHU-EESC">NTHU EESC</button>
-			<button class = "item" id = "Intro-to-AI">Introduction to Artificial Intelligence</button>
-			<button class = "item" id = "Regular-Language">Regular Language</button>
-			<button class = "item" id = "Signal-and-System">Signal and System</button>
-			<button class = "item" id = "Computer-Architecture">Computer Architecture</button>
-			<button class = "item" id = "Dice-Roller">Dice Roller</button>
-			<button class = "item" id = "Expense-Tracker">Expense Tracker</button>
-			<button class = "item" id = "I2P1-Yang">Introduction to Programming I</button>
-			<button class = "item" id = "I2P2-Yang">Introduction to Programming II</button>
-			<button class = "item" id = "TSHOAS">TS Hospital Online Appointment System</button>
-		</div>
-		<footer>
-			<p>Copyright &copy; 2024 Utin</p>
-		</footer>
-		<script src="scripts.js"></script>
-	</body>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <script src="https://kit.fontawesome.com/5b119b2aa8.js" crossorigin="anonymous"></script>
+    <meta property="og:image" content="../logo.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="2400">
+    <meta property="og:image:height" content="2400">
+    <meta property="og:title" content="You-Ting Liu">
+    <meta property="og:description" content="You-Ting Liu">
+    <link rel="shortcut icon" href="../icon.ico" type="image/x-icon">
+    <title>You-Ting Liu</title>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>You-Ting Liu</h1>
+            <p class="title">NTHU EECS Student</p>
+            <!-- <a href="#contact" class="btn">Contact</a>
+            <a href="#projects" class="btn">Projects</a> -->
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#course-archives">Courses</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="Selfie.jpg" alt="個人照片">
+                </div>
+                <div class="about-text">
+                    <p>您好，我是王小明，一位熱衷於創造美觀且實用的網頁體驗的前端開發工程師。我擁有3年的專業經驗，專注於打造響應式、高性能且用戶友好的網站和應用程序。</p>
+                    <p>我熱愛解決複雜問題並持續學習新技術。在閒暇時間，我喜歡參加技術社群活動並為開源專案貢獻代碼。</p>
+                    
+                    <div class="skills">
+                        <h3>Professional Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">C / C++</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Verilog</span>
+                            <span class="skill-tag">Flutter</span>
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <!-- <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>資深前端開發工程師</h3>
+                        <p class="date">2023年1月 - 現在</p>
+                        <p>創新科技有限公司</p>
+                        <p>負責企業級應用程序的前端架構設計與實現，優化網站性能，提升用戶體驗</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>前端開發工程師</h3>
+                        <p class="date">2021年3月 - 2022年12月</p>
+                        <p>數位媒體科技公司</p>
+                        <p>參與多個電商網站的開發，實現響應式設計和跨瀏覽器兼容性</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>網頁設計實習生</h3>
+                        <p class="date">2020年7月 - 2021年2月</p>
+                        <p>創意設計工作室</p>
+                        <p>協助網站設計和前端開發工作，學習各種網頁技術和最佳實踐</p>
+                    </div>
+                </div> -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>EECS Bachelor</h3>
+                        <p class="date">Sep, 2022 - Now</p>
+                        <p>National Tsing Hua University, Taiwan</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <a href="https://nthu-eesc.github.io/" class="project-card" target="_blank">
+                    <div class="project-image">
+                        <img src="./pictures/EESC.jpg" alt="系學會網站">
+                    </div>
+                    <div class="project-info">
+                        <h3>清大電機系學會網頁</h3>
+                        <p>清大電機系學會官方網站，提供專題資訊、活動招供資訊與系傳。</p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">JavaScript</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://github.com/liuutin9/arduino_car_bluetooth_controller_ble" class="project-card" target="_blank">
+                    <div class="project-image">
+                        <img src="./pictures/EECamp_App.jpg" alt="藍芽遙控車專案">
+                    </div>
+                    <div class="project-info">
+                        <h3>清大電機營藍芽遙控車應用</h3>
+                        <p>藍芽遙控 Arduino 車車的應用程式。</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Flutter</span>
+                            <span class="project-tag">Bluetooth</span>
+                            <span class="project-tag">Google Admobs</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://liuutin9.github.io/Finance/" class="project-card" target="_blank">
+                    <div class="project-image">
+                        <img src="./pictures/Investment.jpg" alt="Investment Portfolio Dashboard">
+                    </div>
+                    <div class="project-info">
+                        <h3>Investment Portfolio Dashboard</h3>
+                        <p>A financial application that helps users track and manage their investment portfolios.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">JavaScript</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="course-archives">
+        <div class="container">
+            <h2 class="section-title">Course Archives</h2>
+            <div class="course-archives-grid">
+                <a href="./Intro-to-AI/" class="course-archives-card" target="_blank">
+                    <div class="course-archives-image">
+                        <img src="./pictures/Course.jpg" alt="Investment Portfolio Dashboard">
+                    </div>
+                    <div class="course-archives-info">
+                        <h3>Introduction to Artificial Intelligence</h3>
+                        <p>NTHU 2025 Spring 11320 CS460100</p>
+                        <p>Introduction to Artificial Intelligence</p>
+                        <!-- <div class="course-archives-tags">
+                            <span class="course-archives-tag">Python</span>
+                        </div> -->
+                    </div>
+                </a>
+                <a href="./Regular-Language/" class="course-archives-card" target="_blank">
+                    <div class="course-archives-image">
+                        <img src="./pictures/Course.jpg" alt="Investment Portfolio Dashboard">
+                    </div>
+                    <div class="course-archives-info">
+                        <h3>Regular Language</h3>
+                        <p>NTHU 2025 Spring 11320 CS337100</p>
+                        <p>Regular Language</p>
+                        <!-- <div class="course-archives-tags">
+                            <span class="course-archives-tag">Python</span>
+                        </div> -->
+                    </div>
+                </a>
+                <a href="./Computer-Architecture/" class="course-archives-card" target="_blank">
+                    <div class="course-archives-image">
+                        <img src="./pictures/Course.jpg" alt="Investment Portfolio Dashboard">
+                    </div>
+                    <div class="course-archives-info">
+                        <h3>Computer Architecture</h3>
+                        <p>NTHU 2024 Spring 11220 CS410001</p>
+                        <p>Computer Architecture</p>
+                        <!-- <div class="course-archives-tags">
+                            <span class="course-archives-tag">Python</span>
+                        </div> -->
+                    </div>
+                </a>
+                <a href="./Signal-and-System/" class="course-archives-card" target="_blank">
+                    <div class="course-archives-image">
+                        <img src="./pictures/Course.jpg" alt="Investment Portfolio Dashboard">
+                    </div>
+                    <div class="course-archives-info">
+                        <h3>Signal and System</h3>
+                        <p>NTHU 2024 Spring 11220 EECS202003</p>
+                        <p>Signal and System</p>
+                        <!-- <div class="course-archives-tags">
+                            <span class="course-archives-tag">Python</span>
+                        </div> -->
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Info</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>liuutin9@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="icon">
+                            <i class="fa-solid fa-mobile"></i>
+                        </div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>(+886) 0966 676 484</p>
+                        </div>
+                    </div>
+                    <!-- <div class="info-item">
+                        <div class="icon">📍</div>
+                        <div>
+                            <h4>地址</h4>
+                            <p>台北市信義區信義路五段</p>
+                        </div>
+                    </div> -->
+                    
+                    <h4>Social Media</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/18pkcLBzWt/" class="social-link">
+                            <i class = "fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/youting_0402?igsh=OGQyMTR2N28wMzA1" class="social-link">
+                            <i class = "fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/liuutin9" class="social-link">
+                            <i class = "fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <a href="./Diary" id="diary">
+                <p>Copyright &copy; 2024 Utin</p>
+            </a>
+        </div>
+    </footer>
+</body>
 </html>

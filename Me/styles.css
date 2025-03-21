@@ -421,6 +421,11 @@ footer {
     padding: 30px 20px;
 }
 
+#diary {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
 @media (max-width: 768px) {
     .timeline::after {
         left: 31px;
