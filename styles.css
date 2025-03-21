@@ -433,12 +433,12 @@ footer {
     
     .timeline-item {
         width: 100%;
-        padding-left: 70px;
-        padding-right: 25px;
+        padding-left: 59px;
+        padding-right: 10px;
     }
     
     .timeline-item::after {
-        left: 21px;
+        left: 10px;
     }
     
     .left, .right {
