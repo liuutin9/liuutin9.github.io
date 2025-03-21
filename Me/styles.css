@@ -73,15 +73,23 @@ nav ul {
     display: flex;
     justify-content: center;
     list-style: none;
+    flex-wrap: wrap; /* 允許項目在需要時換行 */
+}
+
+nav ul li {
+    flex-grow: 1; /* 讓項目平均分配空間 */
+    text-align: center; /* 文字居中 */
+    max-width: 150px; /* 設定最大寬度避免項目過寬 */
 }
 
 nav ul li a {
     display: block;
-    padding: 20px;
+    padding: 15px 10px; /* 減少左右內邊距 */
     text-decoration: none;
     color: var(--text-color);
     font-weight: bold;
     transition: all 0.3s;
+    font-size: 0.9rem; /* 稍微減小字體大小 */
 }
 
 nav ul li a:hover {
