@@ -245,6 +245,9 @@ section:nth-child(even) {
 }
 
 .project-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
