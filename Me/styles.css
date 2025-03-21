@@ -244,6 +244,11 @@ section:nth-child(even) {
     gap: 30px;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .project-card {
     display: block;
     text-decoration: none;
