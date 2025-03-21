@@ -447,6 +447,6 @@ footer {
     }
     
     .left::after, .right::after {
-        left: 21px;
+        left: 10px;
     }
 }
