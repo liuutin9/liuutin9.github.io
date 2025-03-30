@@ -170,3 +170,10 @@ body.dark-mode .file-button:hover {
 body.dark-mode .file-button.active {
     background-color: #1f4e96;
 }
+
+footer {
+    color: #929292;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+}
