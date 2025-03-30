@@ -114,7 +114,7 @@ header.hidden {
     gap: 6px;
 }
 
-.download-btn:hover {
+.download-btn:active {
     background-color: rgba(80, 80, 80, 0.95);
     transform: translateX(-50%) scale(1.05);
 }
@@ -130,8 +130,8 @@ header.hidden {
         background-color: rgba(220, 220, 220, 0.9);
         color: black;
     }
-    
-    .download-btn:hover {
+
+    .download-btn:active {
         background-color: rgba(180, 180, 180, 0.95);
     }
 }
@@ -158,11 +158,18 @@ header.hidden {
         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         transform: translateY(-2px);
     }
+    .download-btn:hover {
+        background-color: rgba(80, 80, 80, 0.95);
+        transform: translateX(-50%) scale(1.05);
+    }
 
     @media (prefers-color-scheme: light) {
         .item:hover {
             background-color: #e3f2fd;
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+        .download-btn:hover {
+            background-color: rgba(180, 180, 180, 0.95);
         }
     }
 }
