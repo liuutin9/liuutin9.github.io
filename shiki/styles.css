@@ -101,7 +101,7 @@ h1 {
         font-size: 1.5em;
     }
 
-    .file-selector {
+    /* .file-selector {
         flex-direction: column;
         align-items: center;
     }
@@ -109,7 +109,7 @@ h1 {
     .file-button {
         width: 100%;
         font-size: 14px;
-    }
+    } */
 
     #code-container {
         border-radius: 4px;
