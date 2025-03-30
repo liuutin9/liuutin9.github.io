@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Introduction to Artificial Intellegence</title>
+		<title>Introduction to Artificial Intelligence</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width">
 		<link href="styles.css" rel="stylesheet" type="text/css"/>
@@ -9,52 +9,87 @@
 	</head>
 	<body>
 		<header id="header">
-			<div class="title">Introduction to AI</div>
+			<div class="title">
+				<i class="fas fa-robot"></i>
+				<span>Introduction to AI</span>
+			</div>
+			<!-- <nav>
+				<a href="#" class="active">Assignments</a>
+				<a href="#">Resources</a>
+				<a href="#">About</a>
+			</nav> -->
 		</header>
-		<div class="buttonList">
-			<div class="button-container">
-				<button class="item" id="HW1">HW1 Report</button>
-				<!-- <a href="files/HW1/HW1_source.zip" class="code-btn" code title="View Source Code">
-					<i class="fas fa-code"></i> Source Code
-				</a> -->
+		
+		<main>
+			<div class="page-title">
+				<h1>Course Assignments</h1>
+				<p>NTHU CS460100 - Spring 2025</p>
 			</div>
-			<div class="button-container">
-				<button class="item" id="HW2">HW2 Report</button>
-				<a href="files/HW2/code/" class="code-btn" code title="View Source Code">
-					<i class="fas fa-code"></i> Source Code
-				</a>
+			
+			<div class="buttonList">
+				<div class="card-container">
+					<div class="card" id="HW1">
+						<div class="card-content">
+							<h2>Assignment 1</h2>
+							<p>Intelligent Agents</p>
+							<div class="card-actions">
+								<button class="primary-btn">View Report</button>
+								<button class="secondary-btn" disabled><i class="fas fa-code"></i> Code</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="card-container">
+					<div class="card" id="HW2">
+						<div class="card-content">
+							<h2>Assignment 2</h2>
+							<p>Search in Pacman</p>
+							<div class="card-actions">
+								<button class="primary-btn">View Report</button>
+								<a href="files/HW2/code/" class="secondary-btn"><i class="fas fa-code"></i> Code</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="card-container">
+					<div class="card" id="HW3">
+						<div class="card-content">
+							<h2>Assignment 3</h2>
+							<p>The n-Queen Problem</p>
+							<div class="card-actions">
+								<button class="primary-btn">View Report</button>
+								<a href="files/HW3/code/" class="secondary-btn"><i class="fas fa-code"></i> Code</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="card-container">
+					<div class="card upcoming">
+						<div class="card-content">
+							<h2>Assignment 4</h2>
+							<p>---</p>
+							<span class="status-badge">Coming Soon</span>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="button-container">
-				<button class="item" id="HW3">HW3 Report</button>
-				<a href="files/HW3/code/" class="code-btn" code title="View Source Code">
-					<i class="fas fa-code"></i> Source Code
-				</a>
-			</div>
-			<!-- <div class="button-container">
-				<button class="item" id="HW4">HW4</button>
-				<a href="files/HW4/HW4_source.zip" class="code-btn" code title="View Source Code">
-					<i class="fas fa-code"></i> Source Code
-				</a>
-			</div> -->
-			<!-- <div class="button-container">
-				<button class="item" id="HW5">HW5</button>
-				<a href="files/HW5/HW5_source.zip" class="code-btn" code title="View Source Code">
-					<i class="fas fa-code"></i> Source Code
-				</a>
-			</div> -->
-			<!-- <div class="button-container">
-				<button class="item" id="HW6">HW6</button>
-				<a href="files/HW6/HW6_source.zip" class="code-btn" code title="View Source Code">
-					<i class="fas fa-code"></i> Source Code
-				</a>
-			</div> -->
-		</div>
+		</main>
+		
 		<footer>
-			<p>NTHU 2025 Spring</p>
-			<p>11320 CS460100</p>
-			<p>Introduction to Artificial Intelligence</p>
-			<p>Copyright &copy; 2024 Utin</p>
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>Course Information</h3>
+					<p>NTHU Spring 2025</p>
+                    <p>11320 CS460100</p>
+					<p>Introduction to Artificial Intelligence</p>
+                    <p>Copyright &copy; 2025 Utin</p>
+				</div>
+			</div>
 		</footer>
+		
 		<script src="scripts.js"></script>
 	</body>
 </html>

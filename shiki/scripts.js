@@ -1,81 +1,65 @@
-import { codeToHtml } from 'https://esm.sh/shiki';
-        
-// List of code files in the folder (you can customize this)
-const codeFiles = [
-    { name: 'script.py', language: 'python' },
-    { name: 'index.html', language: 'html' },
-    { name: 'styles.css', language: 'css' },
-    { name: 'main.js', language: 'javascript' }
-];
+// Header visibility control
+let lastScrollY = 0;
+const header = document.getElementById("header");
 
-// Populate file selector buttons
-const fileSelector = document.getElementById('file-selector');
-codeFiles.forEach(file => {
-    const button = document.createElement('button');
-    button.textContent = file.name;
-    button.className = 'file-button';
-    button.dataset.file = file.name;
-    button.dataset.language = file.language;
-    button.addEventListener('click', () => selectFile(file.name, file.language));
-    fileSelector.appendChild(button);
+window.addEventListener("scroll", () => {
+    if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        // 向下滾動超過100px，隱藏 header
+        header.classList.add("hidden");
+    } else {
+        // 向上滾動，顯示 header
+        header.classList.remove("hidden");
+    }
+    lastScrollY = window.scrollY;
 });
 
-// Function to handle file selection
-async function selectFile(fileName, language) {
-    // Update active button
-    document.querySelectorAll('.file-button').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.dataset.file === fileName) {
-            btn.classList.add('active');
-        }
+// PDF viewer configuration
+const pdfViewer = "https://docs.google.com/viewer?url=";
+const userAgent = navigator.userAgent;
+
+// PDF URLs
+const pdfUrls = {
+    "HW1": "https://liuutin9.github.io/Intro-to-AI/files/HW1/HW1_111060013.pdf",
+    "HW2": "https://liuutin9.github.io/Intro-to-AI/files/HW2/HW2_111060013.pdf",
+    "HW3": "https://liuutin9.github.io/Intro-to-AI/files/HW3/HW3_111060013.pdf",
+    "HW4": "https://liuutin9.github.io/Intro-to-AI/files/HW4/HW4_111060013.pdf",
+    "HW5": "https://liuutin9.github.io/Intro-to-AI/files/HW5/HW5_111060013.pdf",
+    "HW6": "https://liuutin9.github.io/Intro-to-AI/files/HW6/HW6_111060013.pdf"
+};
+
+// Add click event listeners to all report buttons
+document.querySelectorAll('.primary-btn').forEach(button => {
+    const card = button.closest('.card');
+    if (card && pdfUrls[card.id]) {
+        button.addEventListener('click', function() {
+            const url = pdfUrls[card.id];
+            if (userAgent.includes("Android")) {
+                window.open(pdfViewer + url, "_self");
+            } else {
+                window.open(url, "_self");
+            }
+        });
+    }
+});
+
+// Add animations on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, 100 * index);
     });
-    
-    // Update file info
-    document.getElementById('current-file').textContent = fileName;
-    document.getElementById('file-language').textContent = language;
-    
-    // Show loading indicator
-    document.getElementById('code-block').innerHTML = '<div id="loading">Loading code...</div>';
-    
-    try {
-        // Fetch and highlight the selected code file
-        await fetchAndHighlightCode(fileName, language);
-    } catch (error) {
-        document.getElementById('code-block').innerHTML = `<div id="loading">Error loading file: ${error.message}</div>`;
-    }
-}
+});
 
-// Function to fetch and highlight code
-async function fetchAndHighlightCode(fileName, language) {
-    try {
-        // Fetch the file content
-        const response = await fetch(fileName);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch ${fileName} (${response.status})`);
-        }
-        
-        const code = await response.text();
-        
-        // Highlight the code using Shiki
-        const html = await codeToHtml(code, {
-            lang: language,
-            theme: 'dark-plus'
-        });
-        
-        // Insert the highlighted code into the page
-        document.getElementById('code-block').innerHTML = html;
-        
-        // Apply Consolas font to all code elements after rendering
-        document.querySelectorAll('#code-block pre, #code-block code, #code-block .shiki, #code-block .shiki span').forEach(el => {
-            el.style.fontFamily = "Consolas, 'Courier New', monospace";
-        });
-    } catch (error) {
-        console.error('Error fetching or highlighting code:', error);
-        throw error;
-    }
-}
-
-// If code files exist, select the first one by default
-if (codeFiles.length > 0) {
-    selectFile(codeFiles[0].name, codeFiles[0].language);
-}
+// Prevent propagation for secondary buttons
+document.querySelectorAll('.secondary-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+});

@@ -1,10 +1,10 @@
+// Header visibility control
 let lastScrollY = 0;
-let isScrolling; // 記錄滑動的狀態
 const header = document.getElementById("header");
 
 window.addEventListener("scroll", () => {
-    if (window.scrollY > lastScrollY) {
-        // 向下滾動，隱藏 header
+    if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        // 向下滾動超過100px，隱藏 header
         header.classList.add("hidden");
     } else {
         // 向上滾動，顯示 header
@@ -13,8 +13,9 @@ window.addEventListener("scroll", () => {
     lastScrollY = window.scrollY;
 });
 
+// PDF viewer configuration
 const pdfViewer = "https://docs.google.com/viewer?url=";
-var userAgent = navigator.userAgent;
+const userAgent = navigator.userAgent;
 
 // PDF URLs
 const pdfUrls = {
@@ -26,12 +27,12 @@ const pdfUrls = {
     "HW6": "https://liuutin9.github.io/Intro-to-AI/files/HW6/HW6_111060013.pdf"
 };
 
-// 為所有按鈕添加事件監聽器
-document.querySelectorAll('.item').forEach(button => {
-    const hwId = button.id;
-    if (pdfUrls[hwId]) {
+// Add click event listeners to all report buttons
+document.querySelectorAll('.primary-btn').forEach(button => {
+    const card = button.closest('.card');
+    if (card && pdfUrls[card.id]) {
         button.addEventListener('click', function() {
-            const url = pdfUrls[hwId];
+            const url = pdfUrls[card.id];
             if (userAgent.includes("Android")) {
                 window.open(pdfViewer + url, "_self");
             } else {
@@ -41,8 +42,23 @@ document.querySelectorAll('.item').forEach(button => {
     }
 });
 
-// 防止點擊下載按鈕時觸發按鈕的點擊事件
-document.querySelectorAll('.download-btn').forEach(btn => {
+// Add animations on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, 100 * index);
+    });
+});
+
+// Prevent propagation for secondary buttons
+document.querySelectorAll('.secondary-btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
         e.stopPropagation();
     });

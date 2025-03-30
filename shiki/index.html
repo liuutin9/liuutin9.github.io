@@ -1,28 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Viewer</title>
-    <link href="styles.css" rel="stylesheet" type="text/css"/>
-</head>
-<body>
-    <h1>Code Viewer</h1>
-    
-    <div class="file-selector" id="file-selector">
-        <!-- File buttons will be dynamically added here -->
-    </div>
-    
-    <div id="code-container">
-        <div id="code-info">
-            <span id="current-file">No file selected</span>
-            <span id="file-language"></span>
-        </div>
-        <div id="code-block">
-            <div id="loading">Select a file to view code...</div>
-        </div>
-    </div>
-    
-    <script type="module" src="scripts.js"></script>
-</body>
+<html>
+	<head>
+		<title>Introduction to Artificial Intelligence</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<link href="styles.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	</head>
+	<body>
+		<header id="header">
+			<div class="title">
+				<i class="fas fa-robot"></i>
+				<span>Introduction to AI</span>
+			</div>
+			<!-- <nav>
+				<a href="#" class="active">Assignments</a>
+				<a href="#">Resources</a>
+				<a href="#">About</a>
+			</nav> -->
+		</header>
+		
+		<main>
+			<div class="page-title">
+				<h1>Course Assignments</h1>
+				<p>NTHU CS460100 - Spring 2025</p>
+			</div>
+			
+			<div class="buttonList">
+				<div class="card-container">
+					<div class="card" id="HW1">
+						<div class="card-content">
+							<h2>Assignment 1</h2>
+							<p>Intelligent Agents</p>
+							<div class="card-actions">
+								<button class="primary-btn">View Report</button>
+								<button class="secondary-btn" disabled><i class="fas fa-code"></i> Code</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="card-container">
+					<div class="card" id="HW2">
+						<div class="card-content">
+							<h2>Assignment 2</h2>
+							<p>Search in Pacman</p>
+							<div class="card-actions">
+								<button class="primary-btn">View Report</button>
+								<a href="files/HW2/code/" class="secondary-btn"><i class="fas fa-code"></i> Code</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="card-container">
+					<div class="card" id="HW3">
+						<div class="card-content">
+							<h2>Assignment 3</h2>
+							<p>The n-Queen Problem</p>
+							<div class="card-actions">
+								<button class="primary-btn">View Report</button>
+								<a href="files/HW3/code/" class="secondary-btn"><i class="fas fa-code"></i> Code</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="card-container">
+					<div class="card upcoming">
+						<div class="card-content">
+							<h2>Assignment 4</h2>
+							<p>---</p>
+							<span class="status-badge">Coming Soon</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		
+		<footer>
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>Course Information</h3>
+					<p>NTHU Spring 2025</p>
+                    <p>11320 CS460100</p>
+					<p>Introduction to Artificial Intelligence</p>
+                    <p>Copyright &copy; 2025 Utin</p>
+				</div>
+			</div>
+		</footer>
+		
+		<script src="scripts.js"></script>
+	</body>
 </html>
