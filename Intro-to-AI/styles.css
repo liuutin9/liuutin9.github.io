@@ -93,7 +93,7 @@ header.hidden {
     overflow: hidden;
 }
 
-.download-btn {
+.code-btn {
     position: absolute;
     bottom: 10px;
     left: 50%;
@@ -114,7 +114,7 @@ header.hidden {
     gap: 6px;
 }
 
-.download-btn:active {
+.code-btn:active {
     background-color: rgba(80, 80, 80, 0.95);
     transform: translateX(-50%) scale(1.05);
 }
@@ -126,12 +126,12 @@ header.hidden {
         box-shadow: 5px 5px 10px rgba(210, 210, 210, 75%);
     }
     
-    .download-btn {
+    .code-btn {
         background-color: rgba(220, 220, 220, 0.9);
         color: black;
     }
 
-    .download-btn:active {
+    .code-btn:active {
         background-color: rgba(180, 180, 180, 0.95);
     }
 }
@@ -158,7 +158,7 @@ header.hidden {
         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         transform: translateY(-2px);
     }
-    .download-btn:hover {
+    .code-btn:hover {
         background-color: rgba(80, 80, 80, 0.95);
         transform: translateX(-50%) scale(1.05);
     }
@@ -168,7 +168,7 @@ header.hidden {
             background-color: #e3f2fd;
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
-        .download-btn:hover {
+        .code-btn:hover {
             background-color: rgba(180, 180, 180, 0.95);
         }
     }
@@ -187,11 +187,11 @@ header.hidden {
     .item {
         font-size: 20px;
     }
-    .download-btn {
+    .code-btn {
         height: 32px;
         padding: 0;
     }
-    .download-btn span {
+    .code-btn span {
         display: none;
     }
     .button-container {
