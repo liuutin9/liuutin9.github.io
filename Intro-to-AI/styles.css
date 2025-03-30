@@ -62,12 +62,18 @@ header.hidden {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 20px;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
+.button-container {
+    position: relative;
+    aspect-ratio: 8 / 5;
+}
+
 .item {
-    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,58 +90,98 @@ header.hidden {
     overflow: hidden;
 }
 
+.download-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    min-width: 134px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    background-color: rgba(60, 60, 60, 0.9);
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 0 12px;
+    z-index: 2;
+    transition: all 0.2s ease;
+    gap: 6px;
+}
+
+.download-btn:hover {
+    background-color: rgba(80, 80, 80, 0.95);
+    transform: scale(1.05);
+}
+
 @media (prefers-color-scheme: light) {
-	.item {
-		color: black;
-		background-color: rgb(250, 250, 250);
-		box-shadow: 5px 5px 10px rgba(210, 210, 210, 75%);
-	}
+    .item {
+        color: black;
+        background-color: rgb(250, 250, 250);
+        box-shadow: 5px 5px 10px rgba(210, 210, 210, 75%);
+    }
+    
+    .download-btn {
+        background-color: rgba(220, 220, 220, 0.9);
+        color: black;
+    }
+    
+    .download-btn:hover {
+        background-color: rgba(180, 180, 180, 0.95);
+    }
 }
 
 .item:active {
-	background-color: rgb(70, 70, 70);
-	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-	transform: translateY(-2px);
+    background-color: rgb(70, 70, 70);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
+
 @media (prefers-color-scheme: light) {
-	.item:active {
-		background-color: #e3f2fd;
-		box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-	}
+    .item:active {
+        background-color: #e3f2fd;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
 }
 
-@media (min-width: 768px) {
-	.item {
-		cursor: pointer;
-	}
-	.item:hover {
-		background-color: rgb(70, 70, 70);
-		box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-		transform: translateY(-2px);
-	}
+@media (min-width: 1000px) {
+    .item {
+        cursor: pointer;
+    }
+    .item:hover {
+        background-color: rgb(70, 70, 70);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+    }
 
-	@media (prefers-color-scheme: light) {
-		.item:hover {
-			background-color: #e3f2fd;
-			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-		}
-	}
+    @media (prefers-color-scheme: light) {
+        .item:hover {
+            background-color: #e3f2fd;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+    }
 }
 
-
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
     .buttonList {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 800px) {
     .buttonList {
         grid-template-columns: repeat(2, 1fr);
     }
     .item {
         font-size: 20px;
+    }
+    .download-btn {
+        height: 32px;
+        padding: 0;
+    }
+    .download-btn span {
+        display: none;
     }
 }
 

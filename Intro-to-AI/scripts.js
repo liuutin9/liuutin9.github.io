@@ -16,36 +16,34 @@ window.addEventListener("scroll", () => {
 const pdfViewer = "https://docs.google.com/viewer?url=";
 var userAgent = navigator.userAgent;
 
-let urls = [
-    "https://liuutin9.github.io/Intro-to-AI/files/HW1/HW1_111060013.pdf",
-]
+// PDF URLs
+const pdfUrls = {
+    "HW1": "https://liuutin9.github.io/Intro-to-AI/files/HW1/HW1_111060013.pdf",
+    "HW2": "https://liuutin9.github.io/Intro-to-AI/files/HW2/HW2_111060013.pdf",
+    "HW3": "https://liuutin9.github.io/Intro-to-AI/files/HW3/HW3_111060013.pdf",
+    "HW4": "https://liuutin9.github.io/Intro-to-AI/files/HW4/HW4_111060013.pdf",
+    "HW5": "https://liuutin9.github.io/Intro-to-AI/files/HW5/HW5_111060013.pdf",
+    "HW6": "https://liuutin9.github.io/Intro-to-AI/files/HW6/HW6_111060013.pdf"
+};
 
-document.getElementById("HW1").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + urls[0], "_self");
-    else window.open(urls[0], "_self");
-}
+// 為所有按鈕添加事件監聽器
+document.querySelectorAll('.item').forEach(button => {
+    const hwId = button.id;
+    if (pdfUrls[hwId]) {
+        button.addEventListener('click', function() {
+            const url = pdfUrls[hwId];
+            if (userAgent.includes("Android")) {
+                window.open(pdfViewer + url, "_self");
+            } else {
+                window.open(url, "_self");
+            }
+        });
+    }
+});
 
-document.getElementById("HW2").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Intro-to-AI/files/HW2/HW2_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Intro-to-AI/files/HW2/HW2_111060013.pdf", "_self");
-}
-
-document.getElementById("HW3").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Intro-to-AI/files/HW3/HW3_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Intro-to-AI/files/HW3/HW3_111060013.pdf", "_self");
-}
-
-document.getElementById("HW4").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Intro-to-AI/files/HW4/HW4_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Intro-to-AI/files/HW4/HW4_111060013.pdf", "_self");
-}
-
-document.getElementById("HW5").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Intro-to-AI/files/HW5/HW5_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Intro-to-AI/files/HW5/HW5_111060013.pdf", "_self");
-}
-
-document.getElementById("HW6").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Intro-to-AI/files/HW6/HW6_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Intro-to-AI/files/HW6/HW6_111060013.pdf", "_self");
-}
+// 防止點擊下載按鈕時觸發按鈕的點擊事件
+document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+});
