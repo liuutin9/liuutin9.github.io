@@ -51,10 +51,15 @@ header.hidden {
     width: max-content;
     height: auto;
     padding: 20px;
-    text-align: center;
+    /* text-align: center; */
     font-size: x-large;
     opacity: 100%;
     font-weight: bolder;
+    /* Add these properties to prevent wrapping and show ellipsis */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80%; /* Adjust this value based on your layout needs */
 }
 
 .buttonList {

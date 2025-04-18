@@ -35,22 +35,22 @@ document.getElementById("HW2").onclick = function() {
     else window.open(urls[1], "_self");
 }
 
-document.getElementById("HW3").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + urls[2], "_self");
-    else window.open(urls[2], "_self");
-}
+// document.getElementById("HW3").onclick = function() {
+//     if (userAgent.includes("Android")) window.open(pdfViewer + urls[2], "_self");
+//     else window.open(urls[2], "_self");
+// }
 
-document.getElementById("HW4").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + urls[3], "_self");
-    else window.open(urls[3], "_self");
-}
+// document.getElementById("HW4").onclick = function() {
+//     if (userAgent.includes("Android")) window.open(pdfViewer + urls[3], "_self");
+//     else window.open(urls[3], "_self");
+// }
 
-document.getElementById("HW5").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + urls[4], "_self");
-    else window.open(urls[4], "_self");
-}
+// document.getElementById("HW5").onclick = function() {
+//     if (userAgent.includes("Android")) window.open(pdfViewer + urls[4], "_self");
+//     else window.open(urls[4], "_self");
+// }
 
-document.getElementById("HW6").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + urls[5], "_self");
-    else window.open(urls[5], "_self");
-}
+// document.getElementById("HW6").onclick = function() {
+//     if (userAgent.includes("Android")) window.open(pdfViewer + urls[5], "_self");
+//     else window.open(urls[5], "_self");
+// }
