@@ -17,12 +17,12 @@ const pdfViewer = "https://docs.google.com/viewer?url=";
 var userAgent = navigator.userAgent;
 
 let urls = [
-    "https://liuutin9.github.io/Formal-Language-&-Automata/files/HW1/HW1_111060013.pdf",
-    "https://liuutin9.github.io/Formal-Language-&-Automata/files/HW2/HW2_111060013.pdf",
-    "https://liuutin9.github.io/Formal-Language-&-Automata/files/HW3/HW3_111060013.pdf",
-    "https://liuutin9.github.io/Formal-Language-&-Automata/files/HW4/HW4_111060013.pdf",
-    "https://liuutin9.github.io/Formal-Language-&-Automata/files/HW5/HW5_111060013.pdf",
-    "https://liuutin9.github.io/Formal-Language-&-Automata/files/HW6/HW6_111060013.pdf",
+    "https://liuutin9.github.io/Formal-Language-and-Automata/files/HW1/HW1_111060013.pdf",
+    "https://liuutin9.github.io/Formal-Language-and-Automata/files/HW2/HW2_111060013.pdf",
+    "https://liuutin9.github.io/Formal-Language-and-Automata/files/HW3/HW3_111060013.pdf",
+    "https://liuutin9.github.io/Formal-Language-and-Automata/files/HW4/HW4_111060013.pdf",
+    "https://liuutin9.github.io/Formal-Language-and-Automata/files/HW5/HW5_111060013.pdf",
+    "https://liuutin9.github.io/Formal-Language-and-Automata/files/HW6/HW6_111060013.pdf",
 ]
 
 document.getElementById("HW1").onclick = function() {
