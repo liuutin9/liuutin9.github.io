@@ -25,32 +25,19 @@ let urls = [
     "https://liuutin9.github.io/Formal-Language-and-Automata/files/HW6/HW6_111060013.pdf",
 ]
 
-document.getElementById("HW1").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + urls[0], "_self");
-    else window.open(urls[0], "_self");
+const pdfUrls = {
+    "HW1": "./files/HW1/HW1_111060013.pdf",
+    "HW2": "./files/HW2/HW2_111060013.pdf",
+    "HW3": "./files/HW3/HW3_111060013.pdf",
+    "HW4": "./files/HW4/HW4_111060013.pdf",
+    "HW5": "./files/HW5/HW5_111060013.pdf",
+    "HW6": "./files/HW6/HW6_111060013.pdf",
+};
+
+for (const [key, value] of Object.entries(pdfUrls)) {
+    document.getElementById(key).onclick = function() {
+        // if (userAgent.includes("Android")) window.open(pdfViewer + value, "_self");
+        // else window.open(value, "_self");
+        window.open(value, "_self");
+    }
 }
-
-document.getElementById("HW2").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + urls[1], "_self");
-    else window.open(urls[1], "_self");
-}
-
-// document.getElementById("HW3").onclick = function() {
-//     if (userAgent.includes("Android")) window.open(pdfViewer + urls[2], "_self");
-//     else window.open(urls[2], "_self");
-// }
-
-// document.getElementById("HW4").onclick = function() {
-//     if (userAgent.includes("Android")) window.open(pdfViewer + urls[3], "_self");
-//     else window.open(urls[3], "_self");
-// }
-
-// document.getElementById("HW5").onclick = function() {
-//     if (userAgent.includes("Android")) window.open(pdfViewer + urls[4], "_self");
-//     else window.open(urls[4], "_self");
-// }
-
-// document.getElementById("HW6").onclick = function() {
-//     if (userAgent.includes("Android")) window.open(pdfViewer + urls[5], "_self");
-//     else window.open(urls[5], "_self");
-// }

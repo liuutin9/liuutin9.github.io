@@ -32,12 +32,13 @@ document.querySelectorAll('.primary-btn').forEach(button => {
     const card = button.closest('.card');
     if (card && pdfUrls[card.id]) {
         button.addEventListener('click', function() {
-            const url = pdfUrls[card.id];
-            if (userAgent.includes("Android")) {
-                window.open(pdfViewer + url, "_self");
-            } else {
-                window.open(url, "_self");
-            }
+            window.open(pdfUrls[card.id], "_self");
+            // const url = pdfUrls[card.id];
+            // if (userAgent.includes("Android")) {
+            //     window.open(pdfViewer + url, "_self");
+            // } else {
+            //     window.open(url, "_self");
+            // }
         });
     }
 });
