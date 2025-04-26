@@ -16,32 +16,19 @@ window.addEventListener("scroll", () => {
 const pdfViewer = "https://docs.google.com/viewer?url=";
 var userAgent = navigator.userAgent;
 
-document.getElementById("HW1").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Computer-Architecture/files/HW1/HW1_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Computer-Architecture/files/HW1/HW1_111060013.pdf", "_self");
-}
+const pdfUrls = {
+    "HW1": "./files/HW1/HW1_111060013.pdf",
+    "HW2": "./files/HW2/HW2_111060013.pdf",
+    "HW3": "./files/HW3/HW3_111060013.pdf",
+    "HW4": "./files/HW4/HW4_111060013.pdf",
+    "HW5": "./files/HW5/HW5_111060013.pdf",
+    "HW6": "./files/HW6/HW6_111060013.pdf",
+};
 
-document.getElementById("HW2").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Computer-Architecture/files/HW2/HW2_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Computer-Architecture/files/HW2/HW2_111060013.pdf", "_self");
-}
-
-document.getElementById("HW3").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Computer-Architecture/files/HW3/HW3_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Computer-Architecture/files/HW3/HW3_111060013.pdf", "_self");
-}
-
-document.getElementById("HW4").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Computer-Architecture/files/HW4/HW4_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Computer-Architecture/files/HW4/HW4_111060013.pdf", "_self");
-}
-
-document.getElementById("HW5").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Computer-Architecture/files/HW5/HW5_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Computer-Architecture/files/HW5/HW5_111060013.pdf", "_self");
-}
-
-document.getElementById("HW6").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Computer-Architecture/files/HW6/HW6_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Computer-Architecture/files/HW6/HW6_111060013.pdf", "_self");
+for (const [key, value] of Object.entries(pdfUrls)) {
+    document.getElementById(key).onclick = function() {
+        // if (userAgent.includes("Android")) window.open(pdfViewer + value, "_self");
+        // else window.open(value, "_self");
+        window.open(value, "_self");
+    }
 }
