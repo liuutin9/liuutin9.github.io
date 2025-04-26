@@ -16,72 +16,27 @@ window.addEventListener("scroll", () => {
 const pdfViewer = "https://docs.google.com/viewer?url=";
 var userAgent = navigator.userAgent;
 
-document.getElementById("HW1").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW1_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW1_111060013.pdf", "_self");
-}
+const pdfUrls = {
+    "HW1": "./files/Signal_and_System_2024_HW1_111060013.pdf",
+    "HW2": "./files/Signal_and_System_2024_HW2_111060013.pdf",
+    "HW3": "./files/Signal_and_System_2024_HW3_111060013.pdf",
+    "HW4": "./files/Signal_and_System_2024_HW4_111060013.pdf",
+    "HW5": "./files/Signal_and_System_2024_HW5_111060013.pdf",
+    "HW6": "./files/Signal_and_System_2024_HW6_111060013.pdf",
+    "HW7": "./files/Signal_and_System_2024_HW7_111060013.pdf",
+    "HWM": "./files/Signal_and_System_2024_HWM_111060013.pdf",
+    "HW8": "./files/Signal_and_System_2024_HW8_111060013.pdf",
+    "HW9": "./files/Signal_and_System_2024_HW9_111060013.pdf",
+    "HWA": "./files/Signal_and_System_2024_HWA_111060013.pdf",
+    "HWB": "./files/Signal_and_System_2024_HWB_111060013.pdf",
+    "HWC": "./files/Signal_and_System_2024_HWC_111060013.pdf",
+    "HWD": "./files/Signal_and_System_2024_HWD_111060013.pdf",
+};
 
-document.getElementById("HW2").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW2_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW2_111060013.pdf", "_self");
-}
-
-document.getElementById("HW3").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW3_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW3_111060013.pdf", "_self");
-}
-
-document.getElementById("HW4").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW4_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW4_111060013.pdf", "_self");
-}
-
-document.getElementById("HW5").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW5_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW5_111060013.pdf", "_self");
-}
-
-document.getElementById("HW6").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW6_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW6_111060013.pdf", "_self");
-}
-
-document.getElementById("HW7").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW7_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW7_111060013.pdf", "_self");
-}
-
-document.getElementById("HWM").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HWM_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HWM_111060013.pdf", "_self");
-}
-
-document.getElementById("HW8").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW8_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW8_111060013.pdf", "_self");
-}
-
-document.getElementById("HW9").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW9_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HW9_111060013.pdf", "_self");
-}
-
-document.getElementById("HWA").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HWA_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HWA_111060013.pdf", "_self");
-}
-
-document.getElementById("HWB").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HWB_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HWB_111060013.pdf", "_self");
-}
-
-document.getElementById("HWC").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HWC_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HWC_111060013.pdf", "_self");
-}
-
-document.getElementById("HWD").onclick = function() {
-    if (userAgent.includes("Android")) window.open(pdfViewer + "https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HWD_111060013.pdf", "_self");
-    else window.open("https://liuutin9.github.io/Signal-and-System/files/Signal_and_System_2024_HWD_111060013.pdf", "_self");
+for (const [key, value] of Object.entries(pdfUrls)) {
+    document.getElementById(key).onclick = function() {
+        // if (userAgent.includes("Android")) window.open(pdfViewer + value, "_self");
+        // else window.open(value, "_self");
+        window.open(value, "_self");
+    }
 }
