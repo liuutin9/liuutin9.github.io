@@ -137,7 +137,7 @@ async function fetchAndRenderContent(fileName, language, filePath) {
         } else {
             const html = await codeToHtml(code, {
                 lang: language,
-                theme: 'dark-plus'
+                theme: isDarkMode ? 'dark-plus' : 'light-plus',
             });
             document.getElementById('code-block').innerHTML = html;
             document.querySelectorAll('#code-block pre, #code-block code, #code-block .shiki, #code-block .shiki span').forEach(el => {

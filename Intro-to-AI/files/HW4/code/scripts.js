@@ -1,6 +1,8 @@
 import { codeToHtml } from 'https://esm.sh/shiki';
 import { marked } from 'https://esm.sh/marked';
 
+const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
 const fileStructure = {
     'root': {
         type: 'folder',
@@ -159,7 +161,7 @@ async function fetchAndRenderContent(fileName, language, filePath) {
         } else {
             const html = await codeToHtml(code, {
                 lang: language,
-                theme: 'dark-plus'
+                theme: isDarkMode ? 'dark-plus' : 'light-plus',
             });
             document.getElementById('code-block').innerHTML = html;
             document.querySelectorAll('#code-block pre, #code-block code, #code-block .shiki, #code-block .shiki span').forEach(el => {
