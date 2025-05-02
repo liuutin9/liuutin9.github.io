@@ -2,7 +2,7 @@ import { codeToHtml } from 'https://esm.sh/shiki';
 import { marked } from 'https://esm.sh/marked';
 
 const fileStructure = {
-    'code': {
+    'root': {
         type: 'folder',
         items: {
             // 'main.py': { type: 'file', language: 'python' },
