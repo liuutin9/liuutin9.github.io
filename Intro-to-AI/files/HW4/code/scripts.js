@@ -10,6 +10,14 @@ const fileStructure = {
                     'data_processor.py': { type: 'file', language: 'python' },
                 },
             },
+            'XGBoost': {
+                type: 'folder',
+                items: {
+                    'main.py': { type: 'file', language: 'python' },
+                    'loader.py': { type: 'file', language: 'python' },
+                    'plot.py': { type: 'file', language: 'python' },
+                },
+            },
             'neural_network': {
                 type: 'folder',
                 items: {
