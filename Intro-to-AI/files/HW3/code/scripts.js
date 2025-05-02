@@ -1,63 +1,14 @@
 import { codeToHtml } from 'https://esm.sh/shiki';
 
-// File structure with folders and files
-// const fileStructure = {
-//     'root': {
-//         type: 'folder',
-//         items: {
-//             'main.py': { type: 'file', language: 'python' },
-//             'utils.py': { type: 'file', language: 'python' },
-//             'search': {
-//                 type: 'folder',
-//                 items: {
-//                     'ids.py': { type: 'file', language: 'python' },
-//                 }
-//             },
-//             'optimization': {
-//                 type: 'folder',
-//                 items: {
-//                     'hc.py': { type: 'file', language: 'python' },
-//                     'ga.py': { type: 'file', language: 'python' },
-//                     'advanced': {
-//                         type: 'folder',
-//                         items: {
-//                             'pso.py': { type: 'file', language: 'python' },
-//                             'sa.py': { type: 'file', language: 'python' },
-//                         }
-//                     }
-//                 }
-//             },
-//             'docs': {
-//                 type: 'folder',
-//                 items: {
-//                     'readme.md': { type: 'file', language: 'markdown' },
-//                     'examples': {
-//                         type: 'folder',
-//                         items: {
-//                             'example1.md': { type: 'file', language: 'markdown' },
-//                             'example2.md': { type: 'file', language: 'markdown' },
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// };
-
 const fileStructure = {
     'root': {
         type: 'folder',
         items: {
-            'code': {
-                type: 'folder',
-                items: {
-                    'main.py': { type: 'file', language: 'python' },
-                    'utils.py': { type: 'file', language: 'python' },
-                    'ids.py': { type: 'file', language: 'python' },
-                    'hc.py': { type: 'file', language: 'python' },
-                    'ga.py': { type: 'file', language: 'python' },
-                },
-            },
+            'main.py': { type: 'file', language: 'python' },
+            'utils.py': { type: 'file', language: 'python' },
+            'ids.py': { type: 'file', language: 'python' },
+            'hc.py': { type: 'file', language: 'python' },
+            'ga.py': { type: 'file', language: 'python' },
         },
     },
 };
