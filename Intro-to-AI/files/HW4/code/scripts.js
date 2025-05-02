@@ -1,6 +1,8 @@
 import { codeToHtml } from 'https://esm.sh/shiki';
 import { marked } from 'https://esm.sh/marked';
 
+const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
 const fileStructure = {
     'root': {
         type: 'folder',
