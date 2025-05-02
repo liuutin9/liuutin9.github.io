@@ -1,7 +1,7 @@
 import { codeToHtml } from 'https://esm.sh/shiki';
 
 const fileStructure = {
-    'root': {
+    'code': {
         type: 'folder',
         items: {
             'search.py': { type: 'file', language: 'python' },

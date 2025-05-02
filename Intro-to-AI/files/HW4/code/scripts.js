@@ -1,7 +1,8 @@
 import { codeToHtml } from 'https://esm.sh/shiki';
+import { marked } from 'https://esm.sh/marked';
 
 const fileStructure = {
-    'root': {
+    'code': {
         type: 'folder',
         items: {
             // 'main.py': { type: 'file', language: 'python' },
@@ -30,7 +31,7 @@ function renderFileTree() {
     fileTree.innerHTML = '';
     
     // Get the current folder based on the path
-    let currentFolder = fileStructure.root;
+    let currentFolder = fileStructure;
     for (const segment of currentPath) {
         currentFolder = currentFolder.items[segment];
     }
@@ -172,23 +173,66 @@ async function fetchAndHighlightCode(fileName, language) {
             code = generatePlaceholderContent(fileName, language);
         }
         
-        // Highlight the code using Shiki
-        const html = await codeToHtml(code, {
-            lang: language,
-            theme: 'dark-plus'
-        });
-        
-        // Insert the highlighted code into the page
-        document.getElementById('code-block').innerHTML = html;
-        
-        // Apply Consolas font to all code elements after rendering
-        document.querySelectorAll('#code-block pre, #code-block code, #code-block .shiki, #code-block .shiki span').forEach(el => {
-            el.style.fontFamily = "Consolas, 'Courier New', monospace";
-        });
+        // Special handling for markdown files
+        if (language === 'markdown') {
+            renderMarkdown(code);
+        } else {
+            // Highlight the code using Shiki
+            const html = await codeToHtml(code, {
+                lang: language,
+                theme: 'dark-plus'
+            });
+            
+            // Insert the highlighted code into the page
+            document.getElementById('code-block').innerHTML = html;
+            
+            // Apply Consolas font to all code elements after rendering
+            document.querySelectorAll('#code-block pre, #code-block code, #code-block .shiki, #code-block .shiki span').forEach(el => {
+                el.style.fontFamily = "Consolas, 'Courier New', monospace";
+            });
+        }
     } catch (error) {
         console.error('Error highlighting code:', error);
         throw error;
     }
+}
+
+// Function to render markdown content
+function renderMarkdown(markdownContent) {
+    // Convert markdown to HTML
+    const htmlContent = marked.parse(markdownContent);
+    
+    // Create a container for the rendered markdown
+    const markdownContainer = document.createElement('div');
+    markdownContainer.className = 'markdown-body';
+    markdownContainer.innerHTML = htmlContent;
+    
+    // Clear the code block and append the markdown container
+    const codeBlock = document.getElementById('code-block');
+    codeBlock.innerHTML = '';
+    codeBlock.appendChild(markdownContainer);
+    
+    // Handle code blocks within the markdown
+    codeBlock.querySelectorAll('pre code').forEach(async (block) => {
+        const language = block.className.replace('language-', '');
+        if (language) {
+            const codeContent = block.textContent;
+            try {
+                const highlightedCode = await codeToHtml(codeContent, {
+                    lang: language,
+                    theme: 'dark-plus'
+                });
+                
+                // Replace the original code block with the highlighted version
+                const preElement = block.parentNode;
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = highlightedCode;
+                preElement.replaceWith(tempDiv.firstChild);
+            } catch (error) {
+                console.error('Error highlighting code block in markdown:', error);
+            }
+        }
+    });
 }
 
 // Generate placeholder content for demo purposes
