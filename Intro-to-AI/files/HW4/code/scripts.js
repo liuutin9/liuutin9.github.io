@@ -97,9 +97,9 @@ function renderFileTree() {
 // Function to update the path navigation display
 function updatePathDisplay() {
     const pathElement = document.getElementById('current-path');
-    pathElement.innerHTML = '<span class="path-item root" data-path="">root</span>';
+    pathElement.innerHTML = '<span class="path-item root" data-path="">/</span>';
     
-    let currentPathStr = '';
+    let currentPathStr = 'https://raw.githubusercontent.com/liuutin9/liuutin9.github.io/refs/heads/main/Intro-to-AI/files/HW4/code/';
     currentPath.forEach((segment, index) => {
         currentPathStr += (currentPathStr ? '/' : '') + segment;
         const segmentElement = document.createElement('span');
