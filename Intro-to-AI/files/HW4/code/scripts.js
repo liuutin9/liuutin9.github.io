@@ -5,11 +5,15 @@ const fileStructure = {
     'root': {
         type: 'folder',
         items: {
-            // 'main.py': { type: 'file', language: 'python' },
-            // 'utils.py': { type: 'file', language: 'python' },
-            // 'ids.py': { type: 'file', language: 'python' },
-            // 'hc.py': { type: 'file', language: 'python' },
-            // 'ga.py': { type: 'file', language: 'python' },
+            'neural_network': {
+                type: 'folder',
+                items: {
+                    'main.py': { type: 'file', language: 'python' },
+                    'model.py': { type: 'file', language: 'python' },
+                    'loader.py': { type: 'file', language: 'python' },
+                    'plot.py': { type: 'file', language: 'python' },
+                },
+            },
             'README.md': { type: 'file', language: 'markdown' },
         },
     },
