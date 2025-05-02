@@ -148,6 +148,7 @@ async function selectFile(fileName, language) {
         filePath = '/' + filePath;
     }
     console.log('Selected file:', ...currentPath, '::::', fileName);
+    console.log('File path:', filePath);
     
     // Update file info
     document.getElementById('current-file').textContent = fileName;
