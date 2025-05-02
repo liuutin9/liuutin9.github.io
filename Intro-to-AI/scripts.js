@@ -19,12 +19,12 @@ const userAgent = navigator.userAgent;
 
 // PDF URLs
 const pdfUrls = {
-    "HW1": "https://liuutin9.github.io/Intro-to-AI/files/HW1/HW1_111060013.pdf",
-    "HW2": "https://liuutin9.github.io/Intro-to-AI/files/HW2/HW2_111060013.pdf",
-    "HW3": "https://liuutin9.github.io/Intro-to-AI/files/HW3/HW3_111060013.pdf",
-    "HW4": "https://liuutin9.github.io/Intro-to-AI/files/HW4/HW4_111060013.pdf",
-    "HW5": "https://liuutin9.github.io/Intro-to-AI/files/HW5/HW5_111060013.pdf",
-    "HW6": "https://liuutin9.github.io/Intro-to-AI/files/HW6/HW6_111060013.pdf"
+    "HW1": "./files/HW1/HW1_111060013.pdf",
+    "HW2": "./files/HW2/HW2_111060013.pdf",
+    "HW3": "./files/HW3/HW3_111060013.pdf",
+    "HW4": "./files/HW4/HW4_111060013.pdf",
+    "HW5": "./files/HW5/HW5_111060013.pdf",
+    "HW6": "./files/HW6/HW6_111060013.pdf"
 };
 
 // Add click event listeners to all report buttons
