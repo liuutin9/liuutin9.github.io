@@ -4,8 +4,12 @@ const fileStructure = {
     'root': {
         type: 'folder',
         items: {
-            'search.py': { type: 'file', language: 'python' },
-            'searchAgents.py': { type: 'file', language: 'python' },
+            // 'main.py': { type: 'file', language: 'python' },
+            // 'utils.py': { type: 'file', language: 'python' },
+            // 'ids.py': { type: 'file', language: 'python' },
+            // 'hc.py': { type: 'file', language: 'python' },
+            // 'ga.py': { type: 'file', language: 'python' },
+            'README.md': { type: 'file', language: 'markdown' },
         },
     },
 };

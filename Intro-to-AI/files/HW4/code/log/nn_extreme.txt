@@ -1,0 +1,15 @@
+======== Model summary ========
+Feature size: 12
+Batch size: 32
+Pos weight: 4.3299
+Hyperparameters summary:
+Num epochs: 50
+Learning rate: 0.001
+Decay step: 12
+Decay rate: 0.3
+Data optimization: extreme
+Validation flag: True
+===============================
+Validation F1 Score: 0.4782
+Training time: 545.24 seconds
+Test prediction time: 3.24 seconds

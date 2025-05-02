@@ -1,0 +1,7 @@
+======== Model summary ========
+Feature size: 36
+Pos weight: 4.3299
+===============================
+Training time: 0.62 seconds
+Validation F1 Score: 0.4599
+Test prediction time: 0.07 seconds
