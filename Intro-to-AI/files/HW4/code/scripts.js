@@ -33,7 +33,7 @@ const fileStructure = {
 };
 
 // Keep track of the current path and navigation
-let rawContentPath = 'https://raw.githubusercontent.com/liuutin9/liuutin9.github.io/refs/heads/main/Intro-to-AI/files/HW4/code/';
+let rawContentPath = 'https://raw.githubusercontent.com/liuutin9/liuutin9.github.io/refs/heads/main/Intro-to-AI/files/HW4/code';
 let currentPath = [];
 let currentFile = null;
 
@@ -147,8 +147,7 @@ async function selectFile(fileName, language) {
     if (filePath) {
         filePath = '/' + filePath;
     }
-    console.log('Selected file:', ...currentPath, '::::', fileName);
-    console.log('File path:', filePath);
+    filePath = rawContentPath + filePath;
     
     // Update file info
     document.getElementById('current-file').textContent = fileName;
@@ -168,20 +167,20 @@ async function selectFile(fileName, language) {
     try {
         // In a real implementation, we would fetch the actual file
         // For this demo, we'll simulate content based on the filename
-        await fetchAndHighlightCode(fileName, language);
+        await fetchAndHighlightCode(fileName, language, filePath);
     } catch (error) {
         document.getElementById('code-block').innerHTML = `<div id="loading">Error loading file: ${error.message}</div>`;
     }
 }
 
 // Function to fetch and highlight code
-async function fetchAndHighlightCode(fileName, language) {
+async function fetchAndHighlightCode(fileName, language, filePath) {
     try {
         let code = '';
         
         // Try to fetch the actual file if it exists
         try {
-            const response = await fetch(fileName);
+            const response = await fetch(filePath);
             if (response.ok) {
                 code = await response.text();
             } else {
