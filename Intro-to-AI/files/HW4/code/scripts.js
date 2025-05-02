@@ -4,6 +4,12 @@ const fileStructure = {
     'root': {
         type: 'folder',
         items: {
+            'preprocess': {
+                type: 'folder',
+                items: {
+                    'data_processor.py': { type: 'file', language: 'python' },
+                },
+            },
             'neural_network': {
                 type: 'folder',
                 items: {
