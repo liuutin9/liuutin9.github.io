@@ -33,7 +33,8 @@ const fileStructure = {
 };
 
 // Keep track of the current path and navigation
-let rawContentPath = 'https://raw.githubusercontent.com/liuutin9/liuutin9.github.io/refs/heads/main/Intro-to-AI/files/HW4/code';
+let rawContentPath = ''
+// let rawContentPath = 'https://raw.githubusercontent.com/liuutin9/liuutin9.github.io/refs/heads/main/Intro-to-AI/files/HW4/code';
 let currentPath = [];
 let currentFile = null;
 
