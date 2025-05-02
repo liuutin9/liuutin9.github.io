@@ -4,6 +4,15 @@ const fileStructure = {
     'root': {
         type: 'folder',
         items: {
+            'neural_network': {
+                type: 'folder',
+                items: {
+                    'main.py': { type: 'file', language: 'python' },
+                    'model.py': { type: 'file', language: 'python' },
+                    'loader.py': { type: 'file', language: 'python' },
+                    'plot.py': { type: 'file', language: 'python' },
+                },
+            },
             'README.md': { type: 'file', language: 'markdown' },
         },
     },
