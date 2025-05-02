@@ -33,7 +33,8 @@ const fileStructure = {
 };
 
 // Keep track of the current path and navigation
-let currentPath = ['https://raw.githubusercontent.com/liuutin9/liuutin9.github.io/refs/heads/main/Intro-to-AI/files/HW4/code/'];
+let rawContentPath = 'https://raw.githubusercontent.com/liuutin9/liuutin9.github.io/refs/heads/main/Intro-to-AI/files/HW4/code/';
+let currentPath = [];
 let currentFile = null;
 
 // Initialize the file explorer when the page loads
@@ -146,6 +147,7 @@ async function selectFile(fileName, language) {
     if (filePath) {
         filePath = '/' + filePath;
     }
+    console.log('Selected file:', ...currentPath, '::::', fileName);
     
     // Update file info
     document.getElementById('current-file').textContent = fileName;
