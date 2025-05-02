@@ -11,6 +11,7 @@ const fileStructure = {
 };
 
 // Keep track of the current path and navigation
+let rawContentPath = './'
 let currentPath = [];
 let currentFile = null;
 
@@ -121,9 +122,7 @@ function navigateToFolder(folderName) {
 async function selectFile(fileName, language) {
     // Construct the full file path
     let filePath = [...currentPath, fileName].join('/');
-    if (filePath) {
-        filePath = '/' + filePath;
-    }
+    filePath = rawContentPath + filePath;
     
     // Update file info
     document.getElementById('current-file').textContent = fileName;
@@ -143,20 +142,20 @@ async function selectFile(fileName, language) {
     try {
         // In a real implementation, we would fetch the actual file
         // For this demo, we'll simulate content based on the filename
-        await fetchAndHighlightCode(fileName, language);
+        await fetchAndHighlightCode(fileName, language, filePath);
     } catch (error) {
         document.getElementById('code-block').innerHTML = `<div id="loading">Error loading file: ${error.message}</div>`;
     }
 }
 
 // Function to fetch and highlight code
-async function fetchAndHighlightCode(fileName, language) {
+async function fetchAndHighlightCode(fileName, language, filePath) {
     try {
         let code = '';
         
         // Try to fetch the actual file if it exists
         try {
-            const response = await fetch(fileName);
+            const response = await fetch(filePath);
             if (response.ok) {
                 code = await response.text();
             } else {
