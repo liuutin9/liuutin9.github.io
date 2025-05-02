@@ -33,7 +33,7 @@ const fileStructure = {
 };
 
 // Keep track of the current path and navigation
-let rawContentPath = ''
+let rawContentPath = './'
 // let rawContentPath = 'https://raw.githubusercontent.com/liuutin9/liuutin9.github.io/refs/heads/main/Intro-to-AI/files/HW4/code';
 let currentPath = [];
 let currentFile = null;
@@ -145,9 +145,6 @@ function navigateToFolder(folderName) {
 async function selectFile(fileName, language) {
     // Construct the full file path
     let filePath = [...currentPath, fileName].join('/');
-    if (filePath) {
-        filePath = '/' + filePath;
-    }
     filePath = rawContentPath + filePath;
     
     // Update file info
