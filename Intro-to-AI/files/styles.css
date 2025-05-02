@@ -112,8 +112,8 @@ h1 {
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    background-color: #24292e;
-    color: #fff;
+    background-color: #f1f1f1;
+    color: #586069;
     font-size: 14px;
 }
 
@@ -219,6 +219,7 @@ footer {
     
     #code-info {
         background-color: #24292e;
+        color: #fff;
     }
     
     #code-block {
