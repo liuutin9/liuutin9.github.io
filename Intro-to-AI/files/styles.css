@@ -142,7 +142,7 @@ h1 {
 #loading {
     text-align: center;
     padding: 20px;
-    color: #fff;
+    color: #586069;
     font-family: "Consolas", "Menlo", "Roboto Mono", "Courier", monospace !important;
 }
 
@@ -224,6 +224,10 @@ footer {
     
     #code-block {
         background-color: #1e1e1e;
+    }
+
+    #loading {
+        color: #f1f1f1;
     }
 }
 
