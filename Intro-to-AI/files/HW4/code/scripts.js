@@ -159,11 +159,20 @@ async function fetchAndRenderContent(fileName, language, filePath) {
             const html = marked.parse(code);
             document.getElementById('code-block').innerHTML = `<div class="markdown-body">${html}</div>`;
         } else {
-            const html = await codeToHtml(code, {
+            const htmlLight = await codeToHtml(code, {
                 lang: language,
-                theme: isDarkMode ? 'dark-plus' : 'light-plus',
+                theme: 'light-plus',
             });
-            document.getElementById('code-block').innerHTML = html;
+            const htmlDark = await codeToHtml(code, {
+                lang: language,
+                theme: 'dark-plus',
+            });
+
+            document.getElementById('code-block').innerHTML = `
+              <div class="code-theme-light">${htmlLight}</div>
+              <div class="code-theme-dark">${htmlDark}</div>
+            `;
+
             document.querySelectorAll('#code-block pre, #code-block code, #code-block .shiki, #code-block .shiki span').forEach(el => {
                 el.style.fontFamily = "Consolas, 'Courier New', monospace";
             });
@@ -173,6 +182,7 @@ async function fetchAndRenderContent(fileName, language, filePath) {
         throw error;
     }
 }
+
 
 function generatePlaceholderContent(fileName, language) {
     const ext = fileName.split('.').pop();

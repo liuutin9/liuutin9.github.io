@@ -279,3 +279,20 @@ body.dark-mode #code-block {
     font-size: 16px;
     line-height: 1.6;
 }
+
+.code-theme-dark {
+    display: none;
+}
+.code-theme-light {
+    display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+.code-theme-dark {
+    display: block;
+}
+.code-theme-light {
+    display: none;
+}
+}
+  
