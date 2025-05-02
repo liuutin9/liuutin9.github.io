@@ -120,7 +120,7 @@ h1 {
 #code-block {
     flex-grow: 1;
     overflow-y: auto;
-    background-color: #1e1e1e;
+    background-color: #fff;
 }
 
 /* Code styling */
