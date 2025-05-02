@@ -1,7 +1,9 @@
 import { codeToHtml } from 'https://esm.sh/shiki';
 import { marked } from 'https://esm.sh/marked';
 
-const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+let currentPath = [];
+let currentFile = null;
+let rawContentPath = './';
 
 const fileStructure = {
     'root': {
@@ -35,15 +37,31 @@ const fileStructure = {
     },
 };
 
-let rawContentPath = './'
-let currentPath = [];
-let currentFile = null;
-
 document.addEventListener('DOMContentLoaded', () => {
+    setMarkdownTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
     renderFileTree();
     setupPathNavigation();
 });
 
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    setMarkdownTheme(e.matches);
+});
+
+// ---------- 主題切換：Markdown ----------
+function setMarkdownTheme(isDarkMode) {
+    const existing = document.getElementById('markdown-theme');
+    if (existing) existing.remove();
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.id = 'markdown-theme';
+    link.href = isDarkMode
+        ? 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.min.css'
+        : 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-light.min.css';
+    document.head.appendChild(link);
+}
+
+// ---------- 檔案管理 ----------
 function renderFileTree() {
     const fileTree = document.getElementById('file-tree');
     fileTree.innerHTML = '';
@@ -93,7 +111,7 @@ function updatePathDisplay() {
     const pathElement = document.getElementById('current-path');
     pathElement.innerHTML = '<span class="path-item root" data-path="">root</span>';
     let currentPathStr = '';
-    currentPath.forEach((segment, index) => {
+    currentPath.forEach((segment) => {
         currentPathStr += (currentPathStr ? '/' : '') + segment;
         const segmentElement = document.createElement('span');
         segmentElement.className = 'path-separator';
@@ -129,6 +147,7 @@ async function selectFile(fileName, language) {
     filePath = rawContentPath + filePath;
     document.getElementById('current-file').textContent = fileName;
     document.getElementById('file-language').textContent = language;
+    currentFile = { name: fileName, language }; // 儲存目前檔案
     document.querySelectorAll('.file-item').forEach(item => {
         item.classList.remove('active');
         if (item.querySelector('.item-name').textContent === fileName) {
@@ -143,6 +162,7 @@ async function selectFile(fileName, language) {
     }
 }
 
+// ---------- 顯示檔案 ----------
 async function fetchAndRenderContent(fileName, language, filePath) {
     try {
         let code = '';
@@ -169,8 +189,8 @@ async function fetchAndRenderContent(fileName, language, filePath) {
             });
 
             document.getElementById('code-block').innerHTML = `
-              <div class="code-theme-light">${htmlLight}</div>
-              <div class="code-theme-dark">${htmlDark}</div>
+                <div class="code-theme-light">${htmlLight}</div>
+                <div class="code-theme-dark">${htmlDark}</div>
             `;
 
             document.querySelectorAll('#code-block pre, #code-block code, #code-block .shiki, #code-block .shiki span').forEach(el => {
@@ -183,9 +203,8 @@ async function fetchAndRenderContent(fileName, language, filePath) {
     }
 }
 
-
+// ---------- 假資料 ----------
 function generatePlaceholderContent(fileName, language) {
-    const ext = fileName.split('.').pop();
     if (language === 'python') {
         return `# ${fileName}\n# This is a placeholder for demonstration purposes\n\ndef main():\n    print("This is a sample function in ${fileName}")\n\nif __name__ == "__main__":\n    main()`;
     } else if (language === 'markdown') {
