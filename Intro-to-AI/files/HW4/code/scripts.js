@@ -33,7 +33,7 @@ const fileStructure = {
 };
 
 // Keep track of the current path and navigation
-let currentPath = [];
+let currentPath = ['https://raw.githubusercontent.com/liuutin9/liuutin9.github.io/refs/heads/main/Intro-to-AI/files/HW4/code/'];
 let currentFile = null;
 
 // Initialize the file explorer when the page loads
@@ -97,9 +97,9 @@ function renderFileTree() {
 // Function to update the path navigation display
 function updatePathDisplay() {
     const pathElement = document.getElementById('current-path');
-    pathElement.innerHTML = '<span class="path-item root" data-path="">/</span>';
+    pathElement.innerHTML = '<span class="path-item root" data-path="">root</span>';
     
-    let currentPathStr = 'https://raw.githubusercontent.com/liuutin9/liuutin9.github.io/refs/heads/main/Intro-to-AI/files/HW4/code/';
+    let currentPathStr = '';
     currentPath.forEach((segment, index) => {
         currentPathStr += (currentPathStr ? '/' : '') + segment;
         const segmentElement = document.createElement('span');
