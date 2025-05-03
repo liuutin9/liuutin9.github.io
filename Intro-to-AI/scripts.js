@@ -24,7 +24,8 @@ const pdfUrls = {
     "HW3": "./files/HW3/HW3_111060013.pdf",
     "HW4": "./files/HW4/HW4_111060013.pdf",
     "HW5": "./files/HW5/HW5_111060013.pdf",
-    "HW6": "./files/HW6/HW6_111060013.pdf"
+    "HW6": "./files/HW6/HW6_111060013.pdf",
+    "Final_Project": "./files/Final_Project/Report.pdf",
 };
 
 // Add click event listeners to all report buttons
