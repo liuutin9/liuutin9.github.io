@@ -1,0 +1,87 @@
+{
+    "root": {
+        "type": "folder",
+        "items": {
+            "config": {
+                "type": "folder",
+                "items": {
+                    "README.md": {
+                        "type": "file",
+                        "language": "markdown"
+                    },
+                    "tools": {
+                        "type": "folder",
+                        "items": {
+                            "config_sample.json": {
+                                "type": "file",
+                                "language": "json"
+                            },
+                            "config_validation.py": {
+                                "type": "file",
+                                "language": "python"
+                            },
+                            "__init__.py": {
+                                "type": "file",
+                                "language": "python"
+                            }
+                        }
+                    },
+                    "__init__.py": {
+                        "type": "file",
+                        "language": "python"
+                    }
+                }
+            },
+            "method": {
+                "type": "folder",
+                "items": {
+                    "scan.py": {
+                        "type": "file",
+                        "language": "python"
+                    },
+                    "__init__.py": {
+                        "type": "file",
+                        "language": "python"
+                    }
+                }
+            },
+            "README.md": {
+                "type": "file",
+                "language": "markdown"
+            },
+            "run_test.py": {
+                "type": "file",
+                "language": "python"
+            },
+            "utils": {
+                "type": "folder",
+                "items": {
+                    "data_structures.py": {
+                        "type": "file",
+                        "language": "python"
+                    },
+                    "objects.py": {
+                        "type": "file",
+                        "language": "python"
+                    },
+                    "README.md": {
+                        "type": "file",
+                        "language": "markdown"
+                    },
+                    "test.py": {
+                        "type": "file",
+                        "language": "python"
+                    },
+                    "__init__.py": {
+                        "type": "file",
+                        "language": "python"
+                    }
+                }
+            },
+            "__init__.py": {
+                "type": "file",
+                "language": "python"
+            }
+        }
+    }
+}

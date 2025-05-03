@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Final Project</title>
+        <link href="../../styles.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <h1>Final Project</h1>
+        
+        <div class="file-explorer">
+            <div class="folder-path" id="current-path">
+                <span class="path-item root" data-path="">root</span>
+            </div>
+            
+            <div class="file-explorer-container">
+                <div class="file-tree" id="file-tree">
+                    <!-- Folder structure will be added here -->
+                </div>
+                
+                <div id="code-container">
+                    <div id="code-info">
+                        <span id="current-file">No file selected</span>
+                        <span id="file-language"></span>
+                    </div>
+                    <div id="code-block">
+                        <div id="loading">Select a file to view code...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>NTHU 2025 Spring</p>
+            <p>11320 CS460100</p>
+            <p>Introduction to Artificial Intelligence</p>
+            <p>Copyright &copy; 2024 Utin</p>
+        </footer>
+        
+        <!-- Import marked library for markdown rendering -->
+        <script type="module" src="scripts.js"></script>
+    </body>
+</html>
