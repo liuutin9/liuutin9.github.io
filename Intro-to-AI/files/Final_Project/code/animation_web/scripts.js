@@ -7,11 +7,11 @@ let playInterval = null;
 let playSpeed = 400; // milliseconds
 
 // Select elements
+const resetBtn = document.getElementById('resetBtn');
 const prevBtn = document.getElementById('prevBtn');
 const playPauseBtn = document.getElementById('playPauseBtn');
 const nextBtn = document.getElementById('nextBtn');
 const stepDisplay = document.getElementById('stepDisplay');
-const speedSlider = document.getElementById('speedSlider');
 const floorsContainer = document.getElementById('floors');
 const elevatorShaftsContainer = document.getElementById('elevatorShafts');
 const infoPanel = document.getElementById('infoPanel');
@@ -81,6 +81,29 @@ function initializeSimulation() {
     document.querySelectorAll('.elevator').forEach(el => {
         el.style.height = `${floorHeight}%`;
     });
+    
+    // Check screen size and adjust if necessary
+    adjustForScreenSize();
+    
+    // Add resize event listener for responsiveness
+    window.addEventListener('resize', adjustForScreenSize);
+}
+
+// Adjust elements based on screen size
+function adjustForScreenSize() {
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+    
+    // Adjust the waiting text for smaller screens
+    const waitingElements = document.querySelectorAll('.waiting');
+    waitingElements.forEach(el => {
+        const text = el.textContent;
+        if (isMobile && text.includes('Waiting: ')) {
+            el.textContent = text.replace('Waiting: ', '');
+        } else if (!isMobile && !text.includes('Waiting: ') && text !== '') {
+            el.textContent = 'Waiting: ' + text;
+        }
+    });
 }
 
 // Keep track of previous elevator positions for smooth transitions
@@ -105,11 +128,23 @@ function renderStep(step) {
     floors.forEach(floor => {
         const waitingEl = document.getElementById(`floor-${floor.floor}-waiting`);
         if (waitingEl) {
-            waitingEl.textContent = `Waiting: ${floor.waiting}`;
+            // Adapt text based on screen size
+            if (window.innerWidth < 768) {
+                waitingEl.textContent = `${floor.waiting}`;
+            } else {
+                waitingEl.textContent = `Waiting: ${floor.waiting}`;
+            }
+            
+            // Change color based on waiting count
+            if (floor.waiting === 0) {
+                waitingEl.classList.add('no-waiting');
+            } else {
+                waitingEl.classList.remove('no-waiting');
+            }
         }
     });
 
-            // Update elevator positions and information
+    // Update elevator positions and information
     elevators.forEach((elevator, index) => {
         const elevatorEl = document.getElementById(`elevator-${index}`);
         if (!elevatorEl) return;
@@ -168,9 +203,7 @@ function renderStep(step) {
 function updateInfoPanel(step, data) {
     const { elevators, energy_consumption } = data;
 
-    // units: J
-    // Convert energy consumption to MJ for display
-    const energyConsumptionInMJ = energy_consumption / 1e6; // Convert to MJ
+    // Convert energy consumption to kWh for display
     const energyConsumptionInKWh = energy_consumption / 3.6e6; // Convert to kWh
 
     let html = `
@@ -252,32 +285,19 @@ function prevStep() {
     }
 }
 
-// Speed control
-function updateSpeed() {
-    // playSpeed = parseInt(speedSlider.value);
+function resetSimulation() {
+    currentStep = 0;
+    renderStep(currentStep);
     if (isPlaying) {
-        clearInterval(playInterval);
-        playInterval = setInterval(() => {
-            if (currentStep < maxStep) {
-                // Store previous positions before changing step
-                if (simulationData && simulationData[currentStep]) {
-                    previousElevatorPositions = simulationData[currentStep].elevators.map(e => e.curr_floor);
-                }
-                
-                currentStep++;
-                renderStep(currentStep);
-            } else {
-                togglePlay(); // Auto stop
-            }
-        }, playSpeed);
+        togglePlay(); // Stop playing if currently playing
     }
 }
 
 // Event listeners
+resetBtn.addEventListener('click', resetSimulation);
 playPauseBtn.addEventListener('click', togglePlay);
 nextBtn.addEventListener('click', nextStep);
 prevBtn.addEventListener('click', prevStep);
-// speedSlider.addEventListener('input', updateSpeed);
 
 // Load data and start simulation
 window.addEventListener('DOMContentLoaded', loadData);
