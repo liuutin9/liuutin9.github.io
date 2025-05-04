@@ -643,26 +643,31 @@ class Test:
     """This class is used to run the simulation and get the energy consumption of the elevator system.  
     Do not use this class to estimate the energy consumption of the elevator system!
     """
-    _instance = None
+    # _instance = None
 
-    def __new__(cls, *args, **kwargs):
-        if cls._instance is None:
-            cls._instance = super(Test, cls).__new__(cls)
-        return cls._instance
+    # def __new__(cls, *args, **kwargs):
+    #     if cls._instance is None:
+    #         cls._instance = super(Test, cls).__new__(cls)
+    #     return cls._instance
 
-    def __init__(self, config: dict, debug: bool = False, ticktime: int = 1, clr: bool = False):
-        if hasattr(self, "_initialized") and self._initialized:
-            print(f"Error: It is allowed to create only one instance of Test.")
-            sys.exit(1)
-            return
-        self.__building: Building = Building(config['building_config'], config['strategy'], debug, ticktime, clr)
+    def __init__(self, config:dict, debug:bool = False, ticktime:int = 1, clr:bool = False):
+        # if hasattr(self, "_initialized") and self._initialized:
+        #     print(f"Error: It is allowed to create only one instance of Test.")
+        #     sys.exit(1)
+        #     return
+        self.__config:dict = config
+        self.__debug:bool = debug
+        self.__ticktime:int = ticktime
+        self.__clr:bool = clr
+        self.__building:Building = None
         self._initialized = True
 
     @property
     def building(self) -> Building:
         return self.__building
 
-    def run(self, human_requests:list) -> float:
+    def run(self, human_requests:list, strategy:callable) -> float:
+        self.__building = Building(self.__config['building_config'], strategy, self.__debug, self.__ticktime, self.__clr)
         self.__building.set_each_floor_waiting_queue(human_requests)
         return self.__building.start()
 

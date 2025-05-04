@@ -321,6 +321,62 @@ button:disabled {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+.algorithm-select {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+    min-width: 200px;
+    flex: 1;
+    max-width: 220px;
+}
+
+.algorithm-select:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.algorithm-select:active {
+    transform: translateY(0);
+}
+
+.algorithm-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+/* 調整下拉菜單選項的樣式 */
+.algorithm-select option {
+    background-color: white;
+    color: #2c3e50;
+    padding: 10px;
+}
+
+/* 針對不同螢幕尺寸的調整 */
+@media (max-width: 768px) {
+    .algorithm-select {
+        min-width: 150px;
+        font-size: 14px;
+        padding: 8px 12px;
+        padding-right: 36px;
+    }
+}
+
 /* Tablet styles */
 @media (min-width: 768px) {
     body {

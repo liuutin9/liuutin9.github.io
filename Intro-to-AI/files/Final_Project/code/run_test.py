@@ -1,5 +1,7 @@
 import argparse
+import copy
 import json
+import os
 import sys
 
 from utils.objects import Test, random_generate_human
@@ -55,6 +57,19 @@ else:
     ticktime = 0
 
 human_requests = random_generate_human(config['total_flow'], config['building_config']['num_floors'])
+
 test = Test(config, debug=args.debug, ticktime=ticktime, clr=args.clear)
-energy_consumption = test.run(human_requests)
+energy_consumption = test.run(copy.deepcopy(human_requests), config['strategy'])
 print(f"Energy consumption: {energy_consumption} J")
+new_name = f"animation_log/simulation_log_{config['strategy'].__name__}.json"
+if os.path.exists(new_name):
+    os.remove(new_name)
+os.rename("animation_log/simulation_log.json", new_name)
+
+config['strategy'] = scan_algorithm
+energy_consumption = test.run(copy.deepcopy(human_requests), config['strategy'])
+print(f"Energy consumption: {energy_consumption} J")
+new_name = f"animation_log/simulation_log_{config['strategy'].__name__}.json"
+if os.path.exists(new_name):
+    os.remove(new_name)
+os.rename("animation_log/simulation_log.json", new_name)

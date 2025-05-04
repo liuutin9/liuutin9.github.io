@@ -5,7 +5,11 @@
             "animation_log": {
                 "type": "folder",
                 "items": {
-                    "simulation_log.json": {
+                    "simulation_log_scan_algorithm.json": {
+                        "type": "file",
+                        "language": "json"
+                    },
+                    "simulation_log_scan_plus_algorithm.json": {
                         "type": "file",
                         "language": "json"
                     }

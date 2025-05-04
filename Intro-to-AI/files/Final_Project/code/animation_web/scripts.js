@@ -1,3 +1,8 @@
+const jsonFilePath = {
+    'scan': '../animation_log/simulation_log_scan_algorithm.json',
+    'scan_plus': '../animation_log/simulation_log_scan_plus_algorithm.json',
+}
+
 // Global variables
 let simulationData = null;
 let currentStep = 0;
@@ -5,8 +10,10 @@ let maxStep = 0;
 let isPlaying = false;
 let playInterval = null;
 let playSpeed = 400; // milliseconds
+let currentAlgorithm = Object.keys(jsonFilePath)[0];
 
 // Select elements
+const algorithmSelect = document.getElementById('algorithmSelect');
 const resetBtn = document.getElementById('resetBtn');
 const prevBtn = document.getElementById('prevBtn');
 const playPauseBtn = document.getElementById('playPauseBtn');
@@ -14,13 +21,13 @@ const nextBtn = document.getElementById('nextBtn');
 const stepDisplay = document.getElementById('stepDisplay');
 const floorsContainer = document.getElementById('floors');
 const elevatorShaftsContainer = document.getElementById('elevatorShafts');
-const infoPanel = document.getElementById('infoPanel');
+const infoPanel = document.getElementById('infoPanel')
 
 // Load JSON data
-async function loadData() {
+async function loadData(algorithm) {
     try {
-        // Load simulation data
-        const response = await fetch('../animation_log/simulation_log.json');
+        // Load simulation data based on selected algorithm
+        const response = await fetch(jsonFilePath[algorithm]);
         const jsonData = await response.json();
 
         simulationData = jsonData;
@@ -154,12 +161,9 @@ function renderStep(step) {
         const bottomPosition = elevator.curr_floor * floorHeight;
 
         // Smooth animation for elevator movement
-        // Only animate when the current bottom position is different from the target position
         const currentBottom = parseFloat(elevatorEl.style.bottom) || 0;
         
-        // If we're in continuous movement, animate smoothly
         if (Math.abs(currentBottom - bottomPosition) > 0.1) {
-            // Remove the transition temporarily if the distance is large (for step jumps)
             if (Math.abs(currentBottom - bottomPosition) > floorHeight * 2) {
                 elevatorEl.style.transition = 'none';
                 setTimeout(() => {
@@ -242,7 +246,6 @@ function togglePlay() {
         playPauseBtn.textContent = 'Pause';
         playInterval = setInterval(() => {
             if (currentStep < maxStep) {
-                // Store previous positions before changing step
                 if (simulationData && simulationData[currentStep]) {
                     previousElevatorPositions = simulationData[currentStep].elevators.map(e => e.curr_floor);
                 }
@@ -262,7 +265,6 @@ function togglePlay() {
 // Move forward one step
 function nextStep() {
     if (currentStep < maxStep) {
-        // Store previous positions before changing step
         if (simulationData && simulationData[currentStep]) {
             previousElevatorPositions = simulationData[currentStep].elevators.map(e => e.curr_floor);
         }
@@ -275,7 +277,6 @@ function nextStep() {
 // Move back one step
 function prevStep() {
     if (currentStep > 0) {
-        // Store previous positions before changing step
         if (simulationData && simulationData[currentStep]) {
             previousElevatorPositions = simulationData[currentStep].elevators.map(e => e.curr_floor);
         }
@@ -287,6 +288,7 @@ function prevStep() {
 
 function resetSimulation() {
     currentStep = 0;
+    previousElevatorPositions = [];
     renderStep(currentStep);
     if (isPlaying) {
         togglePlay(); // Stop playing if currently playing
@@ -299,5 +301,14 @@ playPauseBtn.addEventListener('click', togglePlay);
 nextBtn.addEventListener('click', nextStep);
 prevBtn.addEventListener('click', prevStep);
 
+// Handle algorithm selection
+algorithmSelect.addEventListener('change', (e) => {
+    currentAlgorithm = e.target.value;
+    resetSimulation();
+    loadData(currentAlgorithm);
+});
+
 // Load data and start simulation
-window.addEventListener('DOMContentLoaded', loadData);
+window.addEventListener('DOMContentLoaded', () => {
+    loadData(currentAlgorithm);
+});
