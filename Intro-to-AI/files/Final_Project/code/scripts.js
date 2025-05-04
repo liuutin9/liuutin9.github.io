@@ -4,12 +4,13 @@ import { marked } from 'https://esm.sh/marked';
 let currentPath = [];
 let currentFile = null;
 let rawContentPath = './';
-
 let fileStructure = null;
+let renderMode = 'rendered'; // 新增：預設渲染模式
 
 document.addEventListener('DOMContentLoaded', async () => {
     setMarkdownTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
     setupPathNavigation();
+    setupToggleButton();
     try {
         const response = await fetch('./file_structure.json');
         fileStructure = await response.json();
@@ -19,12 +20,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     setMarkdownTheme(e.matches);
 });
 
-// ---------- 主題切換：Markdown ----------
 function setMarkdownTheme(isDarkMode) {
     const existing = document.getElementById('markdown-theme');
     if (existing) existing.remove();
@@ -38,7 +37,6 @@ function setMarkdownTheme(isDarkMode) {
     document.head.appendChild(link);
 }
 
-// ---------- 檔案管理 ----------
 function renderFileTree() {
     const fileTree = document.getElementById('file-tree');
     fileTree.innerHTML = '';
@@ -73,9 +71,7 @@ function renderFileTree() {
             itemElement.addEventListener('click', () => {
                 const extension = itemName.split('.').pop().toLowerCase();
                 let language = item.language || 'plaintext';
-                if (extension === 'md') {
-                    language = 'markdown';
-                }
+                if (extension === 'md') language = 'markdown';
                 selectFile(itemName, language);
             });
         }
@@ -124,13 +120,16 @@ async function selectFile(fileName, language) {
     filePath = rawContentPath + filePath;
     document.getElementById('current-file').textContent = fileName;
     document.getElementById('file-language').textContent = language;
-    currentFile = { name: fileName, language }; // 儲存目前檔案
+    currentFile = { name: fileName, language };
     document.querySelectorAll('.file-item').forEach(item => {
         item.classList.remove('active');
         if (item.querySelector('.item-name').textContent === fileName) {
             item.classList.add('active');
         }
     });
+    document.getElementById('mode-toggle-container').style.display = ['html', 'markdown'].includes(language) ? 'block' : 'none';
+    renderMode = 'rendered';
+    document.getElementById('toggle-mode-btn').textContent = '切換為原始碼模式';
     document.getElementById('code-block').innerHTML = '<div id="loading">Loading content...</div>';
     try {
         await fetchAndRenderContent(fileName, language, filePath);
@@ -139,7 +138,6 @@ async function selectFile(fileName, language) {
     }
 }
 
-// ---------- 顯示檔案 ----------
 async function fetchAndRenderContent(fileName, language, filePath) {
     try {
         let code = '';
@@ -152,43 +150,49 @@ async function fetchAndRenderContent(fileName, language, filePath) {
 
         const extension = fileName.split('.').pop().toLowerCase();
 
-        if (extension === 'md') {
-            const html = marked.parse(code);
-            document.getElementById('code-block').innerHTML = `<div class="markdown-body">${html}</div>`;
+        if (['md', 'html'].includes(extension)) {
+            if (renderMode === 'rendered') {
+                const html = extension === 'md' ? marked.parse(code) : code;
+                document.getElementById('code-block').innerHTML = `<div class="${extension === 'md' ? 'markdown-body' : ''}">${html}</div>`;
+            } else {
+                const htmlLight = await codeToHtml(code, { lang: language, theme: 'light-plus' });
+                const htmlDark = await codeToHtml(code, { lang: language, theme: 'dark-plus' });
+                document.getElementById('code-block').innerHTML = `
+                    <div class="code-theme-light">${htmlLight}</div>
+                    <div class="code-theme-dark">${htmlDark}</div>`;
+            }
         } else {
-            const htmlLight = await codeToHtml(code, {
-                lang: language,
-                theme: 'light-plus',
-            });
-            const htmlDark = await codeToHtml(code, {
-                lang: language,
-                theme: 'dark-plus',
-            });
-
+            const htmlLight = await codeToHtml(code, { lang: language, theme: 'light-plus' });
+            const htmlDark = await codeToHtml(code, { lang: language, theme: 'dark-plus' });
             document.getElementById('code-block').innerHTML = `
                 <div class="code-theme-light">${htmlLight}</div>
-                <div class="code-theme-dark">${htmlDark}</div>
-            `;
-
-            document.querySelectorAll('#code-block pre, #code-block code, #code-block .shiki, #code-block .shiki span').forEach(el => {
-                el.style.fontFamily = "Consolas, 'Courier New', monospace";
-            });
+                <div class="code-theme-dark">${htmlDark}</div>`;
         }
+
+        document.querySelectorAll('#code-block pre, #code-block code, #code-block .shiki, #code-block .shiki span').forEach(el => {
+            el.style.fontFamily = "Consolas, 'Courier New', monospace";
+        });
     } catch (error) {
         console.error('Error rendering file:', error);
         throw error;
     }
 }
 
-// ---------- 假資料 ----------
 function generatePlaceholderContent(fileName, language) {
-    if (language === 'python') {
-        return `# ${fileName}\n# This is a placeholder for demonstration purposes\n\ndef main():\n    print("This is a sample function in ${fileName}")\n\nif __name__ == "__main__":\n    main()`;
-    } else if (language === 'markdown') {
-        return `# ${fileName}\n\nThis is a placeholder markdown file.\n\n## Features\n\n- Feature A\n- Feature B\n\n\`\`\`python\nprint("Hello from markdown")\n\`\`\``;
-    } else {
-        return `// ${fileName}\n// Placeholder content`;
-    }
+    return `// ${fileName}\n// Placeholder content`;
+}
+
+function setupToggleButton() {
+    const btn = document.getElementById('toggle-mode-btn');
+    if (!btn) return;
+    btn.addEventListener('click', async () => {
+        renderMode = renderMode === 'rendered' ? 'code' : 'rendered';
+        btn.textContent = renderMode === 'rendered' ? '切換為原始碼模式' : '切換為渲染模式';
+        if (currentFile) {
+            const filePath = rawContentPath + [...currentPath, currentFile.name].join('/');
+            await fetchAndRenderContent(currentFile.name, currentFile.language, filePath);
+        }
+    });
 }
 
 renderFileTree();
