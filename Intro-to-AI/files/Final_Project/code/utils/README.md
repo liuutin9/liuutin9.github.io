@@ -1,4 +1,6 @@
-# `objects.py 說明
+# `objects.py` 說明
+
+***請不要用 Test class 估算 energy consumption !!!***
 
 ## 類別說明
 

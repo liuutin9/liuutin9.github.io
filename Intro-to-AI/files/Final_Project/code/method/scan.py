@@ -1,4 +1,4 @@
-from utils.objects import Building, Direction
+from utils.objects import Building, Direction, Elevator
 import random
 
 def scan_algorithm(building:Building) -> list:
@@ -6,8 +6,10 @@ def scan_algorithm(building:Building) -> list:
     This function implements a simple scanning algorithm.
     It scans through a list of numbers and returns the sum of all even numbers.
     """
-    dest_picked = []
+    dest_picked = [x.dest_floor for x in building.elevators]
     scheduled_lists = []
+    
+    elevator:Elevator
     for elevator in building.elevators:
         
         scheduled_list = elevator.scheduled_list[:]
@@ -16,7 +18,7 @@ def scan_algorithm(building:Building) -> list:
             if i in scheduled_list:
                 scheduled_list.remove(i)
                 
-        if len(scheduled_list) <= 1:
+        if (elevator.dest_floor != None and elevator.curr_floor != elevator.dest_floor) or len(scheduled_list) <= 1:
             scheduled_lists.append(scheduled_list)
             continue
         

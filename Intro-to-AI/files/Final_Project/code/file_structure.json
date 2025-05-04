@@ -2,6 +2,32 @@
     "root": {
         "type": "folder",
         "items": {
+            "animation_log": {
+                "type": "folder",
+                "items": {
+                    "simulation_log.json": {
+                        "type": "file",
+                        "language": "json"
+                    }
+                }
+            },
+            "animation_web": {
+                "type": "folder",
+                "items": {
+                    "index.html": {
+                        "type": "file",
+                        "language": "html"
+                    },
+                    "scripts.js": {
+                        "type": "file",
+                        "language": "javascript"
+                    },
+                    "styles.css": {
+                        "type": "file",
+                        "language": "css"
+                    }
+                }
+            },
             "config": {
                 "type": "folder",
                 "items": {

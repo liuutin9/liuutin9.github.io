@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>電梯模擬動畫</title>
+  <link href="styles.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>電梯模擬動畫</h1>
+    
+    <div class="control-panel">
+      <button id="prevBtn" disabled>上一步</button>
+      <button id="playPauseBtn">播放</button>
+      <button id="nextBtn">下一步</button>
+      <div class="slider-container">
+        <span class="slider-label">動畫間隔時間:</span>
+        <input type="range" id="speedSlider" min="200" max="2000" value="1000">
+      </div>
+      <div id="stepDisplay" class="step-info">步驟: 0</div>
+    </div>
+    
+    <div class="simulation-container">
+      <div class="building">
+        <div class="floors" id="floors">
+          <!-- Floors will be generated here -->
+        </div>
+        <div class="elevator-shafts" id="elevatorShafts">
+          <!-- Elevator shafts will be generated here -->
+        </div>
+      </div>
+      
+      <div class="info-panel" id="infoPanel">
+        <!-- Info will be displayed here -->
+      </div>
+    </div>
+  </div>
+  
+  <script src="scripts.js"></script>
+</body>
+</html>

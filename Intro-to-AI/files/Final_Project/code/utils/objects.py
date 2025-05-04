@@ -1,5 +1,7 @@
 from enum import Enum
+import json
 import random
+import sys
 import time
 from utils.data_structures import Queue
 import copy
@@ -15,6 +17,7 @@ class Direction(Enum):
     UP = 1
     DOWN = 2
     IDLE = 3
+    OPEN = 4
     
 class Human():
     """Only use when a new human is generated outside an elavator.
@@ -65,6 +68,15 @@ class Motor():
     def __init__(self, config:dict, debug:bool=False):
         self.__startup_energy_loss:dict = config['startup_energy_loss']
         self.__debug:bool = debug
+        
+    @property
+    def startup_energy_loss(self)->float:
+        """Get the startup energy loss of the motor.
+
+        Returns:
+            float: The startup energy loss of the motor in Joules.
+        """
+        return self.__startup_energy_loss
     
     def energy_consumption(self, start_floor:int, dest_floor:int, floor_height:float, total_weight:int)->float:
         """Calculate the energy consumption of the elevator based on the distance traveled.
@@ -84,22 +96,23 @@ class Motor():
         return m * g * s + self.__startup_energy_loss
     
 class Elevator():
-    def __init__(self, config:dict, schedule_func:callable, num_floors:int, floor_height:float, debug:bool=False, ticktime:int=1):
+    def __init__(self, config:dict, num_floors:int, floor_height:float, debug:bool=False, ticktime:int=1):
         self.__ticktime:int = ticktime
         self.__weight:int = config['weight']
         self.__capacity:int = config['capacity']
         self.__curr_floor:int = config['init_floor']
+        self.__dest_floor:int = None
         self.__scheduling_win_size:int = config['scheduling_win_size']
-        self.__door_open_time:int = config['door_open_time']
         self.__floor_height:float = floor_height
-        self.__schedule_func:callable = schedule_func
         self.__debug:bool = debug
+        self.__curr_direction:Direction = Direction.IDLE
         self.__prev_direction:Direction = Direction.IDLE
         self.__num_people:int = 0
         self.__in_pending:list = [0 for _ in range(num_floors)]
         self.__scheduled_list:list = []
         self.__energy_comsumption:float = 0.0
         self.__motor:Motor = Motor(config['motor_config'], self.__debug)
+        self.__accu_ticktime:int = 0
         
     @property
     def ticktime(self)->int:
@@ -138,6 +151,15 @@ class Elevator():
         return self.__curr_floor
     
     @property
+    def dest_floor(self)->int:
+        """Get the destination floor of the elevator.
+
+        Returns:
+            int: The destination floor of the elevator.
+        """
+        return self.__dest_floor
+    
+    @property
     def scheduling_win_size(self)->int:
         """Get the scheduling window size of the elevator.
 
@@ -145,15 +167,6 @@ class Elevator():
             int: The scheduling window size of the elevator in seconds.
         """
         return self.__scheduling_win_size
-    
-    @ property
-    def door_open_time(self)->int:
-        """Get the door open time of the elevator.
-
-        Returns:
-            int: The door open time of the elevator in seconds.
-        """
-        return self.__door_open_time
     
     @property
     def debug(self)->bool:
@@ -163,6 +176,15 @@ class Elevator():
             bool: True if debug mode is enabled, False otherwise.
         """
         return self.__debug
+    
+    @property
+    def curr_direction(self)->Direction:
+        """Get the current direction of the elevator.
+
+        Returns:
+            Direction: The current direction of the elevator.
+        """
+        return self.__curr_direction
     
     @property
     def prev_direction(self)->Direction:
@@ -218,6 +240,15 @@ class Elevator():
         """
         return self.__motor
     
+    @property
+    def accu_ticktime(self)->int:
+        """Get the accumulated tick time of the elevator.
+
+        Returns:
+            int: The accumulated tick time of the elevator in seconds.
+        """
+        return self.__accu_ticktime
+    
     def set_scheduled_list(self, scheduled_list:list)->None:
         """set the scheduled list of the elevator.
         
@@ -225,29 +256,64 @@ class Elevator():
             scheduled_list (list): The scheduled list of the elevator.
         """
         self.__scheduled_list = scheduled_list
-    
-    def move(self, dest_floor:int, num_floors:int)->None:
-        """Move the elevator to the destination floor.
+        
+    def set_dest_floor(self, dest_floor:int, num_floors:int)->None:
+        """Set the destination floor of the elevator.
         
         Args:
             dest_floor (int): The destination floor of the elevator.
-            num_floors (int): The total number of floors in the building.
         """
         if dest_floor < 0 or dest_floor >= num_floors:
             raise ValueError("Invalid destination floor.")
         
-        # Calculate energy consumption
-        self.__energy_comsumption += self.__motor.energy_consumption(self.__curr_floor, dest_floor, self.__floor_height, self.total_weight)
+        if self.__curr_floor != dest_floor:
+            self.__energy_comsumption += self.__motor.startup_energy_loss
+            
+        self.__dest_floor = dest_floor
         
-        if self.__curr_floor < dest_floor:
-            self.__prev_direction = Direction.UP
-        elif self.__curr_floor > dest_floor:
-            self.__prev_direction = Direction.DOWN
+    def set_accu_ticktime(self, ticktime:int)->None:
+        """Set the accumulated tick time of the elevator.
+        
+        Args:
+            ticktime (int): The accumulated tick time of the elevator in seconds.
+        """
+        self.__accu_ticktime = ticktime
+    
+    def set_curr_direction(self, direction:Direction)->None:
+        """Set the current direction of the elevator.
+        
+        Args:
+            direction (Direction): The current direction of the elevator.
+        """
+        self.__curr_direction = direction
+    
+    def set_prev_direction(self, direction:Direction)->None:
+        """Set the previous direction of the elevator.
+        
+        Args:
+            direction (Direction): The previous direction of the elevator.
+        """
+        self.__prev_direction = direction
+    
+    def move(self)->None:
+        """Move the elevator to the destination floor.
+        """
+        self.__energy_comsumption += self.__motor.energy_consumption(0, 1, self.__floor_height, self.total_weight) - self.__motor.startup_energy_loss
+        if self.__curr_floor < self.__dest_floor:
+            self.__curr_direction = Direction.UP
+        elif self.__curr_floor > self.__dest_floor:
+            self.__curr_direction = Direction.DOWN
         else:
-            self.__prev_direction = Direction.IDLE
+            self.__dest_floor = None
+            self.__prev_direction = self.__curr_direction
+            self.__curr_direction = Direction.OPEN
+            self.__accu_ticktime = 0
         
         # Update current floor
-        self.__curr_floor = dest_floor
+        if self.__curr_direction == Direction.UP:
+            self.__curr_floor = self.__curr_floor + 1
+        elif self.__curr_direction == Direction.DOWN:
+            self.__curr_floor = self.__curr_floor - 1
         
     def open_door(self, out_pending:list, num_floors:int, enter_func:callable)->list:
         """Open the elevator door and let people in/out.
@@ -288,10 +354,14 @@ class Building():
         self.__num_floors:int = config['num_floors']
         self.__floor_height:int = config['floor_height']
         self.__num_elevators:int = config['num_elevators']
+        self.__door_open_time:int = config['door_open_time']
+        self.__move_time_per_floor:int = config['move_time_per_floor']
         self.__each_floor_waiting_queue:list = [Queue() for _ in range(config['num_floors'])]
         self.__schedule_func:callable = schedule_func
-        self.__elevators:list = [Elevator(ec, schedule_func, self.__num_floors, self.__floor_height, debug, ticktime) for ec in config['elevator_configs']]
-        self.__scheduled_lists:list = []
+        self.__elevators:list = [Elevator(ec, self.__num_floors, self.__floor_height, debug, ticktime) for ec in config['elevator_configs']]
+        self.__scheduled_lists:list = [[] for _ in range(self.__num_elevators)]
+        self.__ratio:int = self.__door_open_time // self.__move_time_per_floor
+        self.__log = {}
     
     def __repr__(self):
         rt = "========= Building Info =========\n"
@@ -339,6 +409,24 @@ class Building():
             int: The number of floors in the building.
         """
         return self.__num_floors
+    
+    @property
+    def door_open_time(self)->int:
+        """Get the door open time of the building.
+
+        Returns:
+            int: The door open time of the building in seconds.
+        """
+        return self.__door_open_time
+    
+    @property
+    def move_time_per_floor(self)->int:
+        """Get the move time per floor of the building.
+
+        Returns:
+            int: The move time per floor of the building in seconds.
+        """
+        return self.__move_time_per_floor
     
     @property
     def floor_height(self)->int:
@@ -405,17 +493,18 @@ class Building():
             energy_comsumption += elevator.energy_comsumption
         return energy_comsumption
         
-    def print_simulation_step(self)->None:
+    def print_simulation_step(self, step:int)->None:
         """Print the current state of the elevator system.
         """
         if self.__clr:
             system('cls' if os.name == 'nt' else 'clear')
-        print(f"===== Simulation Step =====")
+        print(f"===== Simulation Step {step} =====")
         for i in range(self.__num_elevators):
             elevator = self.__elevators[i]
             print(f"Elevator {i}: [Floor {elevator.curr_floor}]")
             print(f"    - #Passengers inside: {elevator.num_people}")
             print(f"    - Pending (In elevator): {elevator.in_pending}")
+            print(f"    - Destination floor: {elevator.dest_floor}")
             print(f"    - Schedule list: {elevator.scheduled_list}")
             print()
         print("Floors:")
@@ -423,12 +512,47 @@ class Building():
             marker = ''
             elevator:Elevator
             for elevator in self.__elevators:
-                marker += '🛗 ' if elevator.curr_floor == floor else '   '
+                if elevator.curr_direction == Direction.IDLE:
+                    e_marker = '[><]'
+                elif elevator.curr_direction == Direction.UP:
+                    e_marker = '[^^]'
+                elif elevator.curr_direction == Direction.DOWN:
+                    e_marker = '[vv]'
+                elif elevator.curr_direction == Direction.OPEN:
+                    e_marker = '[<>]'
+                marker += f'{e_marker} ' if elevator.curr_floor == floor else '     '
             waiting = len(self.__each_floor_waiting_queue[floor])
             print(f"[{floor}] ⬆️  {waiting:3d} waiting {marker}")
         print()
         print(f"Energy Consumption so far: {self.accumulated_comsumption():.3f} J")
         print("=" * 30)
+        
+    def add_log(self, step:int)->None:
+        """Add a log entry for the current simulation step.
+        
+        Args:
+            step (int): The current simulation step.
+        """
+        self.__log[step] = {}
+        self.__log[step]['elevators'] = []
+        for i in range(self.__num_elevators):
+            elevator = self.__elevators[i]
+            self.__log[step]['elevators'].append({
+                'curr_floor': elevator.curr_floor,
+                'dest_floor': elevator.dest_floor,
+                'num_people': elevator.num_people,
+                'in_pending': elevator.in_pending,
+                'scheduled_list': elevator.scheduled_list,
+                'curr_direction': elevator.curr_direction.name,
+            })
+        self.__log[step]['floors'] = []
+        for floor in range(self.__num_floors):
+            waiting = len(self.__each_floor_waiting_queue[floor])
+            self.__log[step]['floors'].append({
+                'floor': floor,
+                'waiting': waiting
+            })
+        self.__log[step]['energy_consumption'] = self.accumulated_comsumption()
         
     def enter_func(self, curr_floor:int)->Human:
         """Enter the elevator.
@@ -442,56 +566,94 @@ class Building():
             human = self.__each_floor_waiting_queue[curr_floor].pop()
             return human
         
-    def start(self)->None:
+    def start(self)->float:
         """Start the elevator system.
         """
+        self.__scheduled_lists = [[x for x in range(self.__num_floors) if self.out_pending[x] > 0] for _ in range(self.__num_elevators)]
+        print(self.__scheduled_lists)
+        
+        for elevator, scheduled_list in zip(self.__elevators, self.__scheduled_lists):
+            elevator.set_scheduled_list(list(scheduled_list))
+        
+        step = 0
         while True:
-            self.__scheduled_lists.clear()
             
-            elevator:Elevator
             for elevator in self.__elevators:
-                sl = elevator.open_door(self.out_pending, self.__num_floors, self.enter_func)
-                self.__scheduled_lists.append(sl)
+                elevator.set_accu_ticktime(max(0, elevator.accu_ticktime - 1))
             
             self.__scheduled_lists = self.__schedule_func(copy.deepcopy(self))
             
             for elevator, scheduled_list in zip(self.__elevators, self.__scheduled_lists):
-                elevator.set_scheduled_list(scheduled_list)
+                elevator.set_scheduled_list(list(scheduled_list))
             
+            self.add_log(step)
             if self.__debug:
-                self.print_simulation_step()
+                self.print_simulation_step(step)
                 time.sleep(self.__ticktime)
+            step += 1
             
-            done = 0
             for elevator in self.__elevators:
-                if len(elevator.scheduled_list) > 0:
-                    elevator.move(elevator.scheduled_list.pop(0), self.__num_floors)
+                if elevator.accu_ticktime > 0:
+                    if len(elevator.scheduled_list) > 0 and elevator.dest_floor is None:
+                        elevator.set_dest_floor(elevator.scheduled_list.pop(0), self.__num_floors)
                 else:
-                    done += 1
-            if done == len(self.__elevators):
+                    if len(elevator.scheduled_list) > 0 and elevator.dest_floor is None:
+                        elevator.set_dest_floor(elevator.scheduled_list.pop(0), self.__num_floors)
+                        
+                    if elevator.dest_floor is not None:
+                        elevator.move()
+                    else:
+                        elevator.set_prev_direction(Direction.IDLE)
+                        elevator.set_curr_direction(Direction.IDLE)
+            
+            sum_out_pending = sum(self.out_pending)
+            sum_pending = sum_out_pending
+            for i in range(self.__num_elevators):
+                elevator:Elevator = self.__elevators[i]
+                sum_in_pending = sum(elevator.in_pending)
+                sum_pending += sum_in_pending + 0 if elevator.curr_direction == Direction.IDLE else 1
+                if sum_out_pending + sum_in_pending > 0 and elevator.dest_floor is None:
+                    self.__scheduled_lists[i] = elevator.open_door(self.out_pending, self.__num_floors, self.enter_func)
+                    elevator.set_curr_direction(Direction.OPEN)
+                    elevator.set_accu_ticktime(self.__ratio)
+            if sum_pending == 0:
                 break
         
+        self.add_log(step)
         if self.__debug:
-            self.print_simulation_step()
+            self.print_simulation_step(step)
+        
+        # save log to json file
+        with open('animation_log/simulation_log.json', 'w') as f:
+            json.dump(self.__log, f, indent=4)
         
         return self.accumulated_comsumption()
     
-class Test():
-    def __init__(self, config:dict, debug:bool=False, ticktime:int=1, clr:bool=False):
-        self.__schedule_func:callable = config['strategy']
-        self.__total_flow:int = config['total_flow']
-        self.__building:Building = Building(config['building_config'], self.__schedule_func, debug, ticktime, clr)
-        
+class Test:
+    """This class is used to run the simulation and get the energy consumption of the elevator system.  
+    Do not use this class to estimate the energy consumption of the elevator system!
+    """
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super(Test, cls).__new__(cls)
+        return cls._instance
+
+    def __init__(self, config: dict, debug: bool = False, ticktime: int = 1, clr: bool = False):
+        if hasattr(self, "_initialized") and self._initialized:
+            print(f"Error: It is allowed to create only one instance of Test.")
+            sys.exit(1)
+            return
+        self.__total_flow: int = config['total_flow']
+        self.__building: Building = Building(config['building_config'], config['strategy'], debug, ticktime, clr)
+        self._initialized = True
+
     @property
-    def building(self)->Building:
+    def building(self) -> Building:
         return self.__building
-        
-    def run(self)->float:
-        """Run the elevator system.
-        
-        Returns:
-            float: The accumulated energy consumption of the elevator system in Joules.
-        """
+
+    def run(self) -> float:
         for _ in range(self.__total_flow):
             self.__building.random_generate_human()
         return self.__building.start()

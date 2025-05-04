@@ -37,13 +37,14 @@ This directory provides example configuration files and a validation tool to hel
         "num_floors": (int) Total number of floors,
         "floor_height": (float) Height per floor [m],
         "num_elevators": (int) Number of elevators,
+        "door_open_time": (int) Time for door opening and closing [s],
+        "move_speed_per_floor": (int) Time for moving 1 floor [s]
         "elevator_configs": [
             {
                 "weight": (int) Elevator empty weight [kg],
                 "capacity": (int) Maximum number of people per elevator,
                 "init_floor": (int) Initial floor position,
                 "scheduling_win_size": (int) Size of the scheduling list,
-                "door_open_time": (int) Time for door opening and closing [s],
                 "motor_config": {
                     "startup_energy_loss": (float) Motor startup energy loss [J]
                 }
