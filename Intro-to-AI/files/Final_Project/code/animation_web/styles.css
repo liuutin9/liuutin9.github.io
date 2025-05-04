@@ -1,56 +1,84 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f0f2f5;
+    background-color: #f0f8ff;
+    color: #333;
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 25px;
+    overflow: hidden;
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #2c3e50;
     margin-top: 0;
+    font-weight: 600;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e6e6e6;
+    margin-bottom: 20px;
 }
 
 .control-panel {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
-    gap: 10px;
+    margin-bottom: 30px;
+    gap: 15px;
+    padding: 15px;
+    background-color: #f5f9fc;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 button {
-    padding: 8px 16px;
-    background-color: #4CAF50;
+    padding: 10px 20px;
+    background-color: #3498db;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(0);
 }
 
 button:disabled {
-    background-color: #cccccc;
+    background-color: #bdc3c7;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+#playPauseBtn {
+    background-color: #27ae60;
+}
+
+#playPauseBtn:hover {
+    background-color: #219653;
 }
 
 .simulation-container {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     margin-bottom: 20px;
 }
 
@@ -58,9 +86,12 @@ button:disabled {
     flex: 3;
     display: flex;
     position: relative;
-    height: 500px;
-    border: 2px solid #333;
+    height: 550px;
+    border: 2px solid #34495e;
+    border-radius: 12px;
     background-color: #f9f9f9;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .floors {
@@ -68,35 +99,51 @@ button:disabled {
     display: flex;
     flex-direction: column-reverse;
     height: 100%;
+    background-color: #ecf0f1;
+    border-right: 1px solid #bdc3c7;
 }
 
 .floor {
     flex: 1;
-    border-bottom: 1px dashed #ccc;
+    border-bottom: 1px dashed #bdc3c7;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    transition: background-color 0.3s;
 }
 
 .floor:first-child {
     border-bottom: none;
 }
 
+.floor:hover {
+    background-color: #e8f4fc;
+}
+
 .floor-number {
     position: absolute;
-    left: 5px;
+    left: 15px;
     font-weight: bold;
+    font-size: 18px;
+    color: #2c3e50;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 3px 10px;
+    border-radius: 12px;
 }
 
 .waiting {
     position: absolute;
-    right: 10px;
-    background-color: #ff9800;
+    right: 15px;
+    background-color: #e74c3c;
     color: white;
-    padding: 2px 6px;
-    border-radius: 10px;
-    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    min-width: 80px;
+    text-align: center;
 }
 
 .elevator-shafts {
@@ -108,83 +155,205 @@ button:disabled {
 .elevator-shaft {
     flex: 1;
     position: relative;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #bdc3c7;
     height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        #f9f9f9,
+        #f9f9f9 10px,
+        #f0f0f0 10px,
+        #f0f0f0 20px
+    );
 }
 
 .elevator {
     position: absolute;
-    width: 80%;
-    left: 10%;
-    background-color: #2196F3;
-    border: 2px solid #0b7dda;
+    width: 85%;
+    left: 7.5%;
+    background-color: #3498db;
+    border: 2px solid #2980b9;
+    border-radius: 8px;
     box-sizing: border-box;
-    transition: bottom 0.5s ease-in-out;
+    /* Here is where the movement animation duration is set - currently 0.5 seconds */
+    transition: bottom 0.5s linear, background-color 0.3s;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.elevator-doors {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    pointer-events: none;
+}
+
+.door {
+    width: 50%;
+    height: 100%;
+    background-color: #2c3e50;
+    transition: transform 0.3s ease-in-out;
+}
+
+.left-door {
+    transform-origin: left;
+}
+
+.right-door {
+    transform-origin: right;
+}
+
+.door-open.left-door {
+    transform: translateX(-100%);
+}
+
+.door-open.right-door {
+    transform: translateX(100%);
+}
+
+.elevator-content {
+    z-index: 2;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .elevator.moving {
-    background-color: #009688;
+    background-color: #9b59b6;
+    border-color: #8e44ad;
 }
 
 .info-panel {
-    flex: 1;
-    padding: 10px;
-    background-color: #f5f5f5;
-    border-radius: 4px;
+    flex: 1.5;
+    padding: 20px;
+    background-color: #f5f9fc;
+    border-radius: 12px;
     border: 1px solid #ddd;
-    height: 500px;
+    height: 550px;
     overflow-y: auto;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .step-info {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 20px;
+    margin-bottom: 15px;
     text-align: center;
+    color: #2c3e50;
+    font-weight: 600;
 }
 
 .energy-info {
-    font-size: 16px;
-    margin-bottom: 15px;
-    color: #d32f2f;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #c0392b;
+    font-weight: 500;
+    padding: 10px;
+    background-color: rgba(236, 240, 241, 0.7);
+    border-radius: 8px;
+    border-left: 4px solid #e74c3c;
 }
 
 .elevator-info {
-    margin-bottom: 10px;
-    padding: 10px;
+    margin-bottom: 15px;
+    padding: 15px;
     background-color: white;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #3498db;
 }
 
 .elevator-info h3 {
     margin-top: 0;
-    margin-bottom: 8px;
-    color: #2196F3;
+    margin-bottom: 12px;
+    color: #3498db;
+    font-weight: 600;
+}
+
+.elevator-info p {
+    margin: 8px 0;
+    color: #34495e;
 }
 
 .scheduled-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 8px;
+    margin-top: 5px;
 }
 
 .floor-item {
     background-color: #e0e0e0;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    color: #2c3e50;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.slider-container {
+/* .slider-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    padding: 0 10px;
 }
 
 .slider-label {
-    font-size: 14px;
+    font-size: 16px;
+    color: #34495e;
+    white-space: nowrap;
+} */
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 150px;
+    height: 8px;
+    background: #d3d3d3;
+    outline: none;
+    border-radius: 4px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #3498db;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #3498db;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .simulation-container {
+        flex-direction: column;
+    }
+    
+    .building, .info-panel {
+        flex: 1;
+        width: 100%;
+    }
+    
+    .info-panel {
+        height: 350px;
+    }
+    
+    .control-panel {
+        flex-direction: column;
+        padding: 10px;
+    }
 }

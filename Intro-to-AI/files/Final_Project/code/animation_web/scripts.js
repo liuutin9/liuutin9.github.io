@@ -1,12 +1,12 @@
-// 全局變數
+// Global variables
 let simulationData = null;
 let currentStep = 0;
 let maxStep = 0;
 let isPlaying = false;
 let playInterval = null;
-let playSpeed = 1000; // milliseconds
+let playSpeed = 400; // milliseconds
 
-// 選擇元素
+// Select elements
 const prevBtn = document.getElementById('prevBtn');
 const playPauseBtn = document.getElementById('playPauseBtn');
 const nextBtn = document.getElementById('nextBtn');
@@ -16,11 +16,10 @@ const floorsContainer = document.getElementById('floors');
 const elevatorShaftsContainer = document.getElementById('elevatorShafts');
 const infoPanel = document.getElementById('infoPanel');
 
-// 載入JSON數據
+// Load JSON data
 async function loadData() {
     try {
-
-        // 讀取 json 數據
+        // Load simulation data
         const response = await fetch('../animation_log/simulation_log.json');
         const jsonData = await response.json();
 
@@ -31,18 +30,18 @@ async function loadData() {
 
     } catch (error) {
         console.error('Error loading data:', error);
-        alert('加載數據時發生錯誤！');
+        alert('Error loading simulation data!');
     }
 }
 
-// 初始化模擬
+// Initialize simulation
 function initializeSimulation() {
-    // 獲取第一步的樓層數量
+    // Get floor and elevator count from first step
     const firstStep = simulationData['0'];
     const floorCount = firstStep.floors.length;
     const elevatorCount = firstStep.elevators.length;
 
-    // 生成樓層
+    // Generate floors
     floorsContainer.innerHTML = '';
     for (let i = 0; i < floorCount; i++) {
         const floorEl = document.createElement('div');
@@ -54,7 +53,7 @@ function initializeSimulation() {
         floorsContainer.appendChild(floorEl);
     }
 
-    // 生成電梯井
+    // Generate elevator shafts
     elevatorShaftsContainer.innerHTML = '';
     for (let i = 0; i < elevatorCount; i++) {
         const shaftEl = document.createElement('div');
@@ -63,37 +62,54 @@ function initializeSimulation() {
         const elevatorEl = document.createElement('div');
         elevatorEl.id = `elevator-${i}`;
         elevatorEl.className = 'elevator';
+        
+        // Add doors to elevator
+        elevatorEl.innerHTML = `
+            <div class="elevator-doors">
+                <div class="door left-door"></div>
+                <div class="door right-door"></div>
+            </div>
+            <div class="elevator-content">0</div>
+        `;
 
         shaftEl.appendChild(elevatorEl);
         elevatorShaftsContainer.appendChild(shaftEl);
     }
 
-    // 設置電梯高度
+    // Set elevator height
     const floorHeight = 100 / floorCount;
     document.querySelectorAll('.elevator').forEach(el => {
         el.style.height = `${floorHeight}%`;
     });
 }
 
-// 渲染當前步驟
+// Keep track of previous elevator positions for smooth transitions
+let previousElevatorPositions = [];
+
+// Render current step
 function renderStep(step) {
     if (!simulationData || !simulationData[step]) return;
 
     const data = simulationData[step];
     const { elevators, floors, energy_consumption } = data;
 
-    // 更新步驟顯示
-    stepDisplay.textContent = `步驟: ${step}`;
+    // Initialize previous positions array if needed
+    if (previousElevatorPositions.length === 0) {
+        previousElevatorPositions = elevators.map(e => e.curr_floor);
+    }
 
-    // 更新樓層等待人數
+    // Update step display
+    stepDisplay.textContent = `Step: ${step}`;
+
+    // Update waiting people on floors
     floors.forEach(floor => {
         const waitingEl = document.getElementById(`floor-${floor.floor}-waiting`);
         if (waitingEl) {
-            waitingEl.textContent = `等待: ${floor.waiting}`;
+            waitingEl.textContent = `Waiting: ${floor.waiting}`;
         }
     });
 
-    // 更新電梯位置和信息
+            // Update elevator positions and information
     elevators.forEach((elevator, index) => {
         const elevatorEl = document.getElementById(`elevator-${index}`);
         if (!elevatorEl) return;
@@ -102,39 +118,77 @@ function renderStep(step) {
         const floorHeight = 100 / floorCount;
         const bottomPosition = elevator.curr_floor * floorHeight;
 
+        // Smooth animation for elevator movement
+        // Only animate when the current bottom position is different from the target position
+        const currentBottom = parseFloat(elevatorEl.style.bottom) || 0;
+        
+        // If we're in continuous movement, animate smoothly
+        if (Math.abs(currentBottom - bottomPosition) > 0.1) {
+            // Remove the transition temporarily if the distance is large (for step jumps)
+            if (Math.abs(currentBottom - bottomPosition) > floorHeight * 2) {
+                elevatorEl.style.transition = 'none';
+                setTimeout(() => {
+                    elevatorEl.style.transition = 'bottom 0.5s linear';
+                }, 10);
+            }
+        }
+        
         elevatorEl.style.bottom = `${bottomPosition}%`;
-        elevatorEl.classList.toggle('moving', elevator.curr_direction !== 'OPEN');
-        elevatorEl.textContent = elevator.num_people;
+        
+        // Set elevator status (moving or open)
+        const isOpen = elevator.curr_direction === 'OPEN';
+        elevatorEl.classList.toggle('moving', !isOpen);
+        
+        // Control door animation
+        const leftDoor = elevatorEl.querySelector('.left-door');
+        const rightDoor = elevatorEl.querySelector('.right-door');
+        
+        if (isOpen) {
+            leftDoor.classList.add('door-open');
+            rightDoor.classList.add('door-open');
+        } else {
+            leftDoor.classList.remove('door-open');
+            rightDoor.classList.remove('door-open');
+        }
+        
+        // Update passenger count
+        const contentEl = elevatorEl.querySelector('.elevator-content');
+        contentEl.textContent = elevator.num_people;
     });
 
-    // 更新信息面板
+    // Update info panel
     updateInfoPanel(step, data);
 
-    // 更新按鈕狀態
+    // Update button states
     prevBtn.disabled = step <= 0;
     nextBtn.disabled = step >= maxStep;
 }
 
-// 更新信息面板
+// Update information panel
 function updateInfoPanel(step, data) {
     const { elevators, energy_consumption } = data;
 
+    // units: J
+    // Convert energy consumption to MJ for display
+    const energyConsumptionInMJ = energy_consumption / 1e6; // Convert to MJ
+    const energyConsumptionInKWh = energy_consumption / 3.6e6; // Convert to kWh
+
     let html = `
-    <div class="energy-info">能源消耗: ${energy_consumption.toLocaleString()} 單位</div>
+    <div class="energy-info">Energy Consumption: ${energyConsumptionInKWh.toLocaleString()} kWh</div>
   `;
 
     elevators.forEach((elevator, index) => {
         const status = elevator.dest_floor !== null ?
-            `移動中 (到達 ${elevator.dest_floor} 樓)` :
-            '靜止';
+            `Moving (to floor ${elevator.dest_floor})` :
+            'Idle';
 
         html += `
       <div class="elevator-info">
-        <h3>電梯 ${index + 1}</h3>
-        <p>當前樓層: ${elevator.curr_floor}</p>
-        <p>狀態: ${status}</p>
-        <p>乘客數: ${elevator.num_people}</p>
-        <p>預定樓層:</p>
+        <h3>Elevator ${index + 1}</h3>
+        <p>Current Floor: ${elevator.curr_floor}</p>
+        <p>Status: ${status}</p>
+        <p>Passengers: ${elevator.num_people}</p>
+        <p>Scheduled Floors:</p>
         <div class="scheduled-list">
           ${elevator.scheduled_list.map(floor =>
             `<span class="floor-item">${floor}</span>`
@@ -147,63 +201,83 @@ function updateInfoPanel(step, data) {
     infoPanel.innerHTML = html;
 }
 
-// 播放控制
+// Play control
 function togglePlay() {
     isPlaying = !isPlaying;
 
     if (isPlaying) {
-        playPauseBtn.textContent = '暫停';
+        playPauseBtn.textContent = 'Pause';
         playInterval = setInterval(() => {
             if (currentStep < maxStep) {
+                // Store previous positions before changing step
+                if (simulationData && simulationData[currentStep]) {
+                    previousElevatorPositions = simulationData[currentStep].elevators.map(e => e.curr_floor);
+                }
+                
                 currentStep++;
                 renderStep(currentStep);
             } else {
-                togglePlay(); // 自動停止
+                togglePlay(); // Auto stop
             }
         }, playSpeed);
     } else {
-        playPauseBtn.textContent = '播放';
+        playPauseBtn.textContent = 'Play';
         clearInterval(playInterval);
     }
 }
 
-// 前進一步
+// Move forward one step
 function nextStep() {
     if (currentStep < maxStep) {
+        // Store previous positions before changing step
+        if (simulationData && simulationData[currentStep]) {
+            previousElevatorPositions = simulationData[currentStep].elevators.map(e => e.curr_floor);
+        }
+        
         currentStep++;
         renderStep(currentStep);
     }
 }
 
-// 后退一步
+// Move back one step
 function prevStep() {
     if (currentStep > 0) {
+        // Store previous positions before changing step
+        if (simulationData && simulationData[currentStep]) {
+            previousElevatorPositions = simulationData[currentStep].elevators.map(e => e.curr_floor);
+        }
+        
         currentStep--;
         renderStep(currentStep);
     }
 }
 
-// 速度控制
+// Speed control
 function updateSpeed() {
-    playSpeed = parseInt(speedSlider.value);
+    // playSpeed = parseInt(speedSlider.value);
     if (isPlaying) {
         clearInterval(playInterval);
         playInterval = setInterval(() => {
             if (currentStep < maxStep) {
+                // Store previous positions before changing step
+                if (simulationData && simulationData[currentStep]) {
+                    previousElevatorPositions = simulationData[currentStep].elevators.map(e => e.curr_floor);
+                }
+                
                 currentStep++;
                 renderStep(currentStep);
             } else {
-                togglePlay(); // 自動停止
+                togglePlay(); // Auto stop
             }
         }, playSpeed);
     }
 }
 
-// 事件監聽器
+// Event listeners
 playPauseBtn.addEventListener('click', togglePlay);
 nextBtn.addEventListener('click', nextStep);
 prevBtn.addEventListener('click', prevStep);
-speedSlider.addEventListener('input', updateSpeed);
+// speedSlider.addEventListener('input', updateSpeed);
 
-// 加載數據並開始模擬
+// Load data and start simulation
 window.addEventListener('DOMContentLoaded', loadData);

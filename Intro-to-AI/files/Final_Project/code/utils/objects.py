@@ -473,13 +473,13 @@ class Building():
         """
         return [self.__each_floor_waiting_queue[i].size for i in range(self.__num_floors)]
     
-    def random_generate_human(self)->None:
-        """Generate a random human and add it to the waiting queue of a random floor.
-        """
-        floor = random.randint(0, self.__num_floors - 1)
-        human = Human(floor)
-        human.pick_direction(self.__num_floors)
-        self.__each_floor_waiting_queue[floor].push(human)
+    # def random_generate_human(self)->None:
+    #     """Generate a random human and add it to the waiting queue of a random floor.
+    #     """
+    #     floor = random.randint(0, self.__num_floors - 1)
+    #     human = Human(floor)
+    #     human.pick_direction(self.__num_floors)
+    #     self.__each_floor_waiting_queue[floor].push(human)
         
     def accumulated_comsumption(self)->float:
         """Calculate the accumulated energy consumption of the elevator system.
@@ -541,10 +541,12 @@ class Building():
                 'curr_floor': elevator.curr_floor,
                 'dest_floor': elevator.dest_floor,
                 'num_people': elevator.num_people,
-                'in_pending': elevator.in_pending,
-                'scheduled_list': elevator.scheduled_list,
+                'in_pending': elevator.in_pending[:],
+                'scheduled_list': elevator.scheduled_list[:],
                 'curr_direction': elevator.curr_direction.name,
             })
+            print(f"Scgheduled list of elevator {i}: {elevator.scheduled_list}")
+        # system('pause')
         self.__log[step]['floors'] = []
         for floor in range(self.__num_floors):
             waiting = len(self.__each_floor_waiting_queue[floor])
@@ -566,6 +568,14 @@ class Building():
             human = self.__each_floor_waiting_queue[curr_floor].pop()
             return human
         
+    def set_each_floor_waiting_queue(self, waiting_queue:list)->None:
+        """Set the waiting queue for each floor.
+        
+        Args:
+            waiting_queue (list): The waiting queue for each floor.
+        """
+        self.__each_floor_waiting_queue = waiting_queue
+        
     def start(self)->float:
         """Start the elevator system.
         """
@@ -584,22 +594,22 @@ class Building():
             self.__scheduled_lists = self.__schedule_func(copy.deepcopy(self))
             
             for elevator, scheduled_list in zip(self.__elevators, self.__scheduled_lists):
-                elevator.set_scheduled_list(list(scheduled_list))
-            
+                elevator.set_scheduled_list(scheduled_list[:])
+                
+            for elevator in self.__elevators:
+                if len(elevator.scheduled_list) > 0 and elevator.dest_floor is None:
+                    elevator.set_dest_floor(elevator.scheduled_list.pop(0), self.__num_floors)
+                    
             self.add_log(step)
             if self.__debug:
                 self.print_simulation_step(step)
                 time.sleep(self.__ticktime)
             step += 1
             
+            # system('pause')
+            
             for elevator in self.__elevators:
-                if elevator.accu_ticktime > 0:
-                    if len(elevator.scheduled_list) > 0 and elevator.dest_floor is None:
-                        elevator.set_dest_floor(elevator.scheduled_list.pop(0), self.__num_floors)
-                else:
-                    if len(elevator.scheduled_list) > 0 and elevator.dest_floor is None:
-                        elevator.set_dest_floor(elevator.scheduled_list.pop(0), self.__num_floors)
-                        
+                if elevator.accu_ticktime == 0:
                     if elevator.dest_floor is not None:
                         elevator.move()
                     else:
@@ -645,7 +655,6 @@ class Test:
             print(f"Error: It is allowed to create only one instance of Test.")
             sys.exit(1)
             return
-        self.__total_flow: int = config['total_flow']
         self.__building: Building = Building(config['building_config'], config['strategy'], debug, ticktime, clr)
         self._initialized = True
 
@@ -653,7 +662,18 @@ class Test:
     def building(self) -> Building:
         return self.__building
 
-    def run(self) -> float:
-        for _ in range(self.__total_flow):
-            self.__building.random_generate_human()
+    def run(self, human_requests:list) -> float:
+        self.__building.set_each_floor_waiting_queue(human_requests)
         return self.__building.start()
+
+
+def random_generate_human(flow:int, num_floors:int)->Queue:
+    """Generate a random huma
+    """
+    queues = [Queue() for _ in range(num_floors)]
+    for _ in range(flow):
+        floor = random.randint(0, num_floors - 1)
+        human = Human(floor)
+        human.pick_direction(num_floors)
+        queues[floor].push(human)
+    return queues

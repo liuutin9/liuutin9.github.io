@@ -47,7 +47,8 @@ This command will:
 
 Currently supported strategies:
 
-- `scan`: Implemented in `method/scan_alg.py` as `scan_algorithm`.
+- `scan`: Implemented in `method/scan.py` as `scan_algorithm`.
+- `scan_plus`: Implemented in `method/scan_plus.py` as `scan_plus_algorithm`.
 
 > Note: Any new strategy must be registered in the `strategy_map` inside [`run_test.py`](run_test.py).
 

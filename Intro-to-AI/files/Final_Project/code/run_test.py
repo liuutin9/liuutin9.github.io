@@ -2,15 +2,17 @@ import argparse
 import json
 import sys
 
-from utils.objects import Test
+from utils.objects import Test, random_generate_human
 from config.tools.config_validation import config_validation
 
 # TODO: 之後可以這邊加更多 strategies 的 import
 from method.scan import scan_algorithm
+from method.scan_plus import scan_plus_algorithm
 
 strategy_map = {
     # TODO: 之後要加新的 strategy，可以在這裡補
     'scan': scan_algorithm,
+    'scan_plus': scan_plus_algorithm,
 }
 
 parser = argparse.ArgumentParser(description="Run test with a configuration file.")
@@ -52,6 +54,7 @@ if args.ticktime:
 else:
     ticktime = 0
 
+human_requests = random_generate_human(config['total_flow'], config['building_config']['num_floors'])
 test = Test(config, debug=args.debug, ticktime=ticktime, clr=args.clear)
-energy_consumption = test.run()
+energy_consumption = test.run(human_requests)
 print(f"Energy consumption: {energy_consumption} J")
