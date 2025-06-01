@@ -1,6 +1,7 @@
 const jsonFilePath = {
     'scan': '../animation_log/simulation_log_scan_algorithm.json',
     'scan_plus': '../animation_log/simulation_log_scan_plus_algorithm.json',
+    'ga': '../animation_log/simulation_log_ga_algorithm.json',
 }
 
 // Global variables
