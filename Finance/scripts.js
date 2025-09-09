@@ -68,7 +68,7 @@ function updateDashboard() {
     returnElement.innerHTML = `${returnPercentage}%`;
     returnElement.className = totalReturn >= 0 ? 'profit' : 'loss';
     
-    document.getElementById('total-positions').innerHTML = stocks.length;
+    // document.getElementById('total-positions').innerHTML = stocks.length;
 
     // Update holdings list
     updateHoldingsList();
@@ -90,16 +90,19 @@ function updateHoldingsList() {
         holdingCard.innerHTML = `
             <div class="holding-header">
                 <div class="holding-name">${stock.name}</div>
-                <div class="holding-price">$${formatNumber(stock.currentPrice, 2)}</div>
             </div>
             <div class="holding-details">
+                <div class="detail-item">
+                    <div class="detail-label">Market Value</div>
+                    <div class="detail-value">$${formatNumber(marketValue)}</div>
+                </div>
                 <div class="detail-item">
                     <div class="detail-label">Shares</div>
                     <div class="detail-value">${formatNumber(stock.shares)}</div>
                 </div>
                 <div class="detail-item">
-                    <div class="detail-label">Market Value</div>
-                    <div class="detail-value">$${formatNumber(marketValue)}</div>
+                    <div class="detail-label">Current Price</div>
+                    <div class="detail-value">${formatNumber(stock.currentPrice, 2)}</div>
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Cost Basis</div>
