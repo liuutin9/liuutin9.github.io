@@ -67,6 +67,7 @@ function updateDashboard() {
     
     // 2. 更新總投入成本 (Total Investment)
     document.getElementById('total-cost').innerHTML = `$${formatNumber(totalCost)}`;
+    console.log(`Total Cost: $${formatNumber(totalCost)}`);
     
     // 3. 更新報酬總額 (Total Return)
     const totalReturnElement = document.getElementById('total-return');

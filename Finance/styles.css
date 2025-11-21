@@ -135,11 +135,6 @@ body::before {
     /* background: var(--primary-color);  */
 }
 
-/* 為了支援單卡佈局，隱藏原始的 H3/Value 樣式 */
-.overview-card h3, .overview-card .value, .overview-card .change {
-    display: none; 
-}
-
 /* ******** 大市值 (Total Market Value) 樣式 ******** */
 .main-value-group {
     margin-bottom: 2rem;
@@ -168,9 +163,10 @@ body::before {
 
 /* ******** 並排的三個細節 (Details) 樣式 ******** */
 .overview-details-grid {
-    /* 修正：確保三個項目平均水平分佈 */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* 修正：使用 auto-fit 和 minmax 確保每個項目至少有 150px 的空間，
+       並允許它們在空間不足時換行 (雖然我們只預期在手機上換行) */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
     gap: 1.5rem;
 }
 
