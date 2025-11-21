@@ -25,7 +25,7 @@ async function fetchStockData() {
         }
         
         updateDashboard();
-        updateCharts();
+        // updateCharts();
     } catch (error) {
         console.error('Error fetching stock data:', error);
     }
@@ -58,18 +58,32 @@ function updateDashboard() {
     const totalReturn = totalMarketValue - totalCost;
     const returnPercentage = totalCost > 0 ? ((totalReturn / totalCost) * 100).toFixed(2) : 0;
 
-    // Update overview cards
-    document.getElementById('total-market-value').innerHTML = `$${formatNumber(totalMarketValue)}`;
-    document.getElementById('total-cost').innerHTML = `$${formatNumber(totalCost)}`;
-    document.getElementById('total-return').innerHTML = `$${formatNumber(totalReturn)}`;
-    document.getElementById('total-return').className = `value ${totalReturn >= 0 ? 'profit' : 'loss'}`;
-    
-    const returnElement = document.getElementById('total-profit-loss-percentage');
-    returnElement.innerHTML = `${returnPercentage}%`;
-    returnElement.className = totalReturn >= 0 ? 'profit' : 'loss';
-    
-    // document.getElementById('total-positions').innerHTML = stocks.length;
+    // ******************************************************
+    // ******** 修正：確保數據寫入和顏色類別正確應用 ********
+    // ******************************************************
 
+    // 1. 更新總市值 (Main Market Value)
+    document.getElementById('total-market-value').innerHTML = `$${formatNumber(totalMarketValue)}`;
+    
+    // 2. 更新總投入成本 (Total Investment)
+    document.getElementById('total-cost').innerHTML = `$${formatNumber(totalCost)}`;
+    
+    // 3. 更新報酬總額 (Total Return)
+    const totalReturnElement = document.getElementById('total-return');
+    // 使用 formatNumber 顯示數值 (會包含正負號，但 CSS 會用 color 覆蓋)
+    totalReturnElement.innerHTML = `$${formatNumber(totalReturn)}`; 
+    // 確保同時賦予 'value' 類別和 'profit/loss' 類別
+    totalReturnElement.className = `value ${totalReturn >= 0 ? 'profit' : 'loss'}`;
+    
+    // 4. 更新報酬率 (Total Return Percentage)
+    const returnPercentageElement = document.getElementById('total-profit-loss-percentage');
+    // 使用 formatNumber 顯示數值 (會包含正負號)
+    returnPercentageElement.innerHTML = `${formatNumber(returnPercentage, 2)}%`;
+    // 確保同時賦予 'value' 類別和 'profit/loss' 類別
+    returnPercentageElement.className = `value ${totalReturn >= 0 ? 'profit' : 'loss'}`;
+    
+    // ******************************************************
+    
     // Update holdings list
     updateHoldingsList();
 }
@@ -110,11 +124,11 @@ function updateHoldingsList() {
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Total Return</div>
-                    <div class="detail-value ${profitLoss >= 0 ? 'profit' : 'loss'}">${formatNumber(Math.abs(profitLoss))}</div>
+                    <div class="detail-value ${profitLoss >= 0 ? 'profit' : 'loss'}">$${formatNumber(profitLoss)}</div>
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Return %</div>
-                    <div class="detail-value ${profitLoss >= 0 ? 'profit' : 'loss'}">${Math.abs(profitLossPercentage)}%</div>
+                    <div class="detail-value ${profitLoss >= 0 ? 'profit' : 'loss'}">${formatNumber(profitLossPercentage, 2)}%</div>
                 </div>
             </div>
         `;
@@ -123,149 +137,153 @@ function updateHoldingsList() {
 }
 
 // Update charts
-function updateCharts() {
-    updatePortfolioChart();
-    updatePerformanceChart();
-}
+// function updateCharts() {
+    // updatePortfolioChart();
+    // updatePerformanceChart();
+// }
 
 // Update portfolio allocation chart
-function updatePortfolioChart() {
-    const ctx = document.getElementById('portfolioChart').getContext('2d');
+// function updatePortfolioChart() {
+//     const ctx = document.getElementById('portfolioChart') ? document.getElementById('portfolioChart').getContext('2d') : null;
     
-    if (portfolioChart) {
-        portfolioChart.destroy();
-    }
+//     if (!ctx) return; 
 
-    const labels = stocks.map(stock => stock.name);
-    const data = stocks.map(stock => stock.shares * stock.currentPrice);
-    const colors = generateModernColors(stocks.length);
+//     if (portfolioChart) {
+//         portfolioChart.destroy();
+//     }
 
-    portfolioChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: labels,
-            datasets: [{
-                data: data,
-                backgroundColor: colors,
-                borderWidth: 2,
-                borderColor: 'rgba(255, 255, 255, 0.1)'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        color: 'rgba(255, 255, 255, 0.8)',
-                        usePointStyle: true,
-                        padding: 20,
-                        font: {
-                            size: 11
-                        }
-                    }
-                }
-            },
-            elements: {
-                arc: {
-                    borderWidth: 2
-                }
-            }
-        }
-    });
-}
+//     const labels = stocks.map(stock => stock.name);
+//     const data = stocks.map(stock => stock.shares * stock.currentPrice);
+//     const colors = generateModernColors(stocks.length);
+
+//     portfolioChart = new Chart(ctx, {
+//         type: 'doughnut',
+//         data: {
+//             labels: labels,
+//             datasets: [{
+//                 data: data,
+//                 backgroundColor: colors,
+//                 borderWidth: 2,
+//                 borderColor: 'rgba(255, 255, 255, 0.1)'
+//             }]
+//         },
+//         options: {
+//             responsive: true,
+//             maintainAspectRatio: false,
+//             plugins: {
+//                 legend: {
+//                     position: 'bottom',
+//                     labels: {
+//                         color: 'rgba(52, 58, 64, 0.8)',
+//                         usePointStyle: true,
+//                         padding: 20,
+//                         font: {
+//                             size: 11
+//                         }
+//                     }
+//                 }
+//             },
+//             elements: {
+//                 arc: {
+//                     borderWidth: 2
+//                 }
+//             }
+//         }
+//     });
+// }
 
 // Update performance chart (mock data for demonstration)
-function updatePerformanceChart() {
-    const ctx = document.getElementById('performanceChart').getContext('2d');
+// function updatePerformanceChart() {
+//     const ctx = document.getElementById('performanceChart') ? document.getElementById('performanceChart').getContext('2d') : null;
     
-    if (performanceChart) {
-        performanceChart.destroy();
-    }
+//     if (!ctx) return; 
 
-    // Generate mock performance data
-    const labels = [];
-    const portfolioData = [];
-    const today = new Date();
+//     if (performanceChart) {
+//         performanceChart.destroy();
+//     }
+
+//     // Generate mock performance data
+//     const labels = [];
+//     const portfolioData = [];
+//     const today = new Date();
     
-    for (let i = 29; i >= 0; i--) {
-        const date = new Date(today);
-        date.setDate(date.getDate() - i);
-        labels.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+//     for (let i = 29; i >= 0; i--) {
+//         const date = new Date(today);
+//         date.setDate(date.getDate() - i);
+//         labels.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
         
-        // Mock portfolio value progression
-        const totalValue = stocks.reduce((sum, stock) => sum + (stock.shares * stock.currentPrice), 0);
-        const variance = (Math.random() - 0.5) * 0.05; // ±2.5% daily variance
-        portfolioData.push(totalValue * (1 + variance * (30 - i) / 30));
-    }
+//         // Mock portfolio value progression
+//         const totalValue = stocks.reduce((sum, stock) => sum + (stock.shares * stock.currentPrice), 0);
+//         const variance = (Math.random() - 0.5) * 0.05; // ±2.5% daily variance
+//         portfolioData.push(totalValue * (1 + variance * (30 - i) / 30));
+//     }
 
-    performanceChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Portfolio Value',
-                data: portfolioData,
-                borderColor: 'rgba(59, 130, 246, 1)',
-                backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.4,
-                pointRadius: 0,
-                pointHoverRadius: 6
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    grid: {
-                        color: 'rgba(255, 255, 255, 0.05)'
-                    },
-                    ticks: {
-                        color: 'rgba(255, 255, 255, 0.6)',
-                        maxTicksLimit: 8
-                    }
-                },
-                y: {
-                    grid: {
-                        color: 'rgba(255, 255, 255, 0.05)'
-                    },
-                    ticks: {
-                        color: 'rgba(255, 255, 255, 0.6)',
-                        callback: function(value) {
-                            return '$' + value.toLocaleString();
-                        }
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            elements: {
-                point: {
-                    hoverBackgroundColor: 'rgba(59, 130, 246, 1)'
-                }
-            }
-        }
-    });
-}
+//     performanceChart = new Chart(ctx, {
+//         type: 'line',
+//         data: {
+//             labels: labels,
+//             datasets: [{
+//                 label: 'Portfolio Value',
+//                 data: portfolioData,
+//                 borderColor: 'rgba(74, 111, 165, 1)',
+//                 backgroundColor: 'rgba(74, 111, 165, 0.1)',
+//                 borderWidth: 3,
+//                 fill: true,
+//                 tension: 0.4,
+//                 pointRadius: 0,
+//                 pointHoverRadius: 6
+//             }]
+//         },
+//         options: {
+//             responsive: true,
+//             maintainAspectRatio: false,
+//             scales: {
+//                 x: {
+//                     grid: {
+//                         color: 'rgba(0, 0, 0, 0.05)'
+//                     },
+//                     ticks: {
+//                         color: 'rgba(33, 37, 41, 0.8)',
+//                         maxTicksLimit: 8
+//                     }
+//                 },
+//                 y: {
+//                     grid: {
+//                         color: 'rgba(0, 0, 0, 0.05)'
+//                     },
+//                     ticks: {
+//                         color: 'rgba(33, 37, 41, 0.8)',
+//                         callback: function(value) {
+//                             return '$' + value.toLocaleString();
+//                         }
+//                     }
+//                 }
+//             },
+//             plugins: {
+//                 legend: {
+//                     display: false
+//                 }
+//             },
+//             elements: {
+//                 point: {
+//                     hoverBackgroundColor: 'rgba(74, 111, 165, 1)'
+//                 }
+//             }
+//         }
+//     });
+// }
 
 // Generate modern color palette
 function generateModernColors(count) {
     const colors = [
-        'rgba(59, 130, 246, 0.8)',   // Blue
-        'rgba(16, 185, 129, 0.8)',   // Green
-        'rgba(139, 92, 246, 0.8)',   // Purple
-        'rgba(245, 101, 101, 0.8)',  // Red
-        'rgba(251, 191, 36, 0.8)',   // Yellow
-        'rgba(236, 72, 153, 0.8)',   // Pink
-        'rgba(6, 182, 212, 0.8)',    // Cyan
-        'rgba(252, 165, 165, 0.8)'   // Light Red
+        'rgba(74, 111, 165, 0.9)',   // Primary Blue
+        'rgba(244, 124, 124, 0.9)',  // Accent Red (Coral)
+        'rgba(220, 53, 69, 0.9)',    // Profit Red (Accent Green CSS var)
+        'rgba(3, 169, 244, 0.9)',    // Light Blue
+        'rgba(40, 167, 69, 0.9)',    // Loss Green (Accent Red CSS var)
+        'rgba(139, 92, 246, 0.9)',   // Purple
+        'rgba(255, 193, 7, 0.9)',    // Yellow
+        'rgba(108, 117, 125, 0.9)'   // Gray
     ];
     
     const result = [];
@@ -277,6 +295,7 @@ function generateModernColors(count) {
 
 // Format number with commas
 function formatNumber(number, decimals = 0) {
+    // 修正：移除 Math.abs()，讓 toLocaleString 處理正負號
     return number.toLocaleString('en-US', {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals

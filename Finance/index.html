@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="../icon.ico" type="image/x-icon">
 
     <title>Investment Portfolio</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -22,61 +22,43 @@
     <div class="header">
         <div class="container">
             <h1>Portfolio</h1>
-            <!-- <p class="subtitle">Professional Investment Dashboard</p> -->
-        </div>
+            </div>
     </div>
 
     <div class="container">
-        <!-- Overview Cards -->
         <div class="overview-grid">
             <div class="overview-card">
-                <h3>Total Portfolio Value</h3>
-                <div class="value" id="total-market-value"><span class="loading"></span></div>
-                <div class="change" id="total-change">
-                    <span>Total Value</span>
+                
+                <div class="main-value-group">
+                    <div class="label">Total Value</div>
+                    <div class="total-value" id="total-market-value"><span class="loading"></span></div> 
+                </div>
+
+                <div class="overview-details-grid">
+                    
+                    <div class="detail-item-overview">
+                        <div class="label">Cost</div>
+                        <div class="value" id="total-cost"><span class="loading"></span></div>
+                    </div>
+                    
+                    <div class="detail-item-overview">
+                        <div class="label">Return</div>
+                        <div class="value" id="total-return"><span class="loading"></span></div> 
+                    </div>
+                    
+                    <div class="detail-item-overview">
+                        <div class="label">Return %</div>
+                        <div class="value" id="total-profit-loss-percentage"><span class="loading"></span></div> 
+                    </div>
+
                 </div>
             </div>
-            <div class="overview-card">
-                <h3>Total Investment</h3>
-                <div class="value" id="total-cost"><span class="loading"></span></div>
-                <div class="change">
-                    <span>Initial Cost</span>
-                </div>
-            </div>
-            <div class="overview-card">
-                <h3>Total Return</h3>
-                <div class="value" id="total-return"><span class="loading"></span></div>
-                <div class="change" id="return-change">
-                    <span id="total-profit-loss-percentage"><span class="loading"></span></span>
-                </div>
-            </div>
-            <!-- <div class="overview-card">
-                <h3>Portfolio Positions</h3>
-                <div class="value" id="total-positions">-</div>
-                <div class="change">
-                    <span>Active Holdings</span>
-                </div>
-            </div> -->
         </div>
 
-        <!-- Charts Section -->
-        <!-- <div class="charts-section">
-            <div class="chart-card">
-                <h3 class="chart-title">Portfolio Performance</h3>
-                <canvas id="performanceChart" width="400" height="200"></canvas>
-            </div>
-            <div class="allocation-card">
-                <h3 class="chart-title">Asset Allocation</h3>
-                <canvas id="portfolioChart" width="300" height="300"></canvas>
-            </div>
-        </div> -->
-
-        <!-- Holdings Section -->
         <div class="holdings-section">
             <h2 class="section-title">Holdings</h2>
             <div class="holdings-grid" id="holdings-list">
-                <!-- Holdings will be populated by JavaScript -->
-            </div>
+                </div>
         </div>
     </div>
 

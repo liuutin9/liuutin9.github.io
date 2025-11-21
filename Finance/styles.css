@@ -1,27 +1,45 @@
 :root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    /* -------------------------------------- */
+    /* 最終配色風格：專業穩重藍調 (淺色背景) */
+    /* -------------------------------------- */
+    --primary-color: #4a6fa5;   /* 主要顏色: 中藍/海軍藍 */
+    --secondary-color: #166088; /* 次要顏色: 深藍/青色 */
+    --accent-color: #f47c7c;    /* 強調顏色: 淡紅/珊瑚紅 */
+    --light-bg: #f8f9fa;        /* 淺色背景: 近白色/淺灰色 (用於主體/細節項目背景) */
+    --dark-bg: #343a40;         /* 深色背景: 頁尾使用 */
+    --text-color: #212529;      /* 主要文字顏色: 深黑/墨黑 */
+    --light-text: #f8f9fa;      /* 淺色文字顏色: 用於深色背景 */
+
+    /* -------------------------------------- */
+    /* 基礎設置與功能色 */
+    /* -------------------------------------- */
+    --primary-gradient: var(--primary-color);
+    --success-gradient: var(--accent-green); 
+    --danger-gradient: var(--accent-red);    
     --neutral-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
     
-    --bg-primary: #0f0f23;
-    --bg-secondary: #1a1a3e;
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --bg-card-hover: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --bg-primary: var(--light-bg);
+    --bg-secondary: #ffffff; 
+    --bg-card: #ffffff;      /* 卡片背景為白色 */
+    --bg-card-hover: #e9ecef; 
+    --glass-border: #dee2e6;  
     
-    --text-primary: #ffffff;
-    --text-secondary: #d1d5db;
-    --text-muted: #9ca3af;
+    --text-primary: var(--text-color);
+    --text-secondary: var(--secondary-color); 
+    --text-muted: #6c757d; 
     
-    --accent-green: #10b981;
-    --accent-red: #ef4444;
-    --accent-blue: #3b82f6;
-    --accent-purple: #8b5cf6;
+    /* 漲跌顏色設置 (上漲紅，下跌綠) */
+    --accent-green: #dc3545; /* 盈利用色 (profit) 顯示為紅色 */
+    --accent-red: #28a745;   /* 虧損用色 (loss) 顯示為綠色 */
     
-    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
-    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.15);
-    --border-radius: 16px;
+    --accent-blue: var(--primary-color); 
+    --accent-purple: #6f42c1; 
+    
+    --shadow-glass: 0 4px 12px rgba(0, 0, 0, 0.08); 
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+    /* 圓角弧度：12px */
+    --border-radius: 12px; 
 }
 
 * {
@@ -32,49 +50,34 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: var(--bg-primary);
+    background: var(--bg-primary); 
     color: var(--text-primary);
     min-height: 100vh;
     overflow-x: hidden;
 }
 
-/* Animated background */
+/* 移除動畫背景效果 (Animated background) */
 body::before {
-    content: '';
-    position: fixed;
-    top: -20px;
-    left: -20px;
-    width: 150%;
-    height: 150%;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(120, 200, 255, 0.1) 0%, transparent 50%);
-    z-index: -1;
-    animation: backgroundShift 30s ease-in-out infinite;
-}
-
-@keyframes backgroundShift {
-    0%, 100% { transform: translateX(0) translateY(0); }
-    25% { transform: translateX(-20px) translateY(-20px); }
-    50% { transform: translateX(20px) translateY(-10px); }
-    75% { transform: translateX(-10px) translateY(20px); }
+    content: none;
 }
 
 /* Header */
 .header {
-    padding: 2rem 0 2rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem; /* 縮小底部間距 */
     text-align: center;
     position: relative;
+    border-bottom: none; /* 移除分隔線 */
 }
 
 .header h1 {
     font-size: 3rem;
     font-weight: 800;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background: none; 
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
+    color: var(--primary-color); 
     margin-bottom: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -93,22 +96,32 @@ body::before {
     padding: 0 2rem;
 }
 
-/* Overview cards */
+/* Overview cards - 總覽卡片區塊 */
 .overview-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    /* 調整為只有一欄 (單一卡片) */
+    display: grid; 
+    grid-template-columns: 1fr; 
     gap: 1.5rem;
+    /* 縮短標題與卡片的間距 */
+    margin-top: 1.5rem; 
     margin-bottom: 3rem;
 }
 
 .overview-card {
-    background: var(--bg-card);
-    backdrop-filter: blur(20px);
+    background: var(--bg-card); 
+    backdrop-filter: none;
     border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius); 
     padding: 2rem;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-card); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.overview-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-glass);
 }
 
 .overview-card::before {
@@ -118,35 +131,80 @@ body::before {
     left: 0;
     right: 0;
     height: 4px;
-    background: var(--primary-gradient);
+    /* 提示色改回海軍藍 */
+    /* background: var(--primary-color);  */
 }
 
-.overview-card h3 {
-    font-size: 0.9rem;
+/* 為了支援單卡佈局，隱藏原始的 H3/Value 樣式 */
+.overview-card h3, .overview-card .value, .overview-card .change {
+    display: none; 
+}
+
+/* ******** 大市值 (Total Market Value) 樣式 ******** */
+.main-value-group {
+    margin-bottom: 2rem;
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 1rem;
+}
+
+.main-value-group .label {
+    font-size: 1.1rem;
     font-weight: 500;
-    color: var(--text-secondary);
+    color: var(--text-muted); 
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
-.overview-card .value {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+.main-value-group .total-value {
+    /* 修正：市值改為黑色 */
+    font-size: 3.5rem; 
+    font-weight: 800;
+    color: var(--text-color); 
+    line-height: 1.1;
+}
+/* ******************************************************* */
+
+
+/* ******** 並排的三個細節 (Details) 樣式 ******** */
+.overview-details-grid {
+    /* 修正：確保三個項目平均水平分佈 */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
 }
 
-.overview-card .change {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+.detail-item-overview {
+    padding: 1rem;
+    background: var(--bg-primary); 
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+}
+
+.detail-item-overview .label {
     font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
     font-weight: 500;
 }
 
-.profit { color: var(--accent-red); }
-.loss { color: var(--accent-green); }
-.neutral { color: var(--text-secondary); }
+.detail-item-overview .value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.detail-item-overview .value.profit {
+    color: var(--accent-green); 
+}
+
+.detail-item-overview .value.loss {
+    color: var(--accent-red); 
+}
+/* ************************************************* */
+
 
 /* Charts section */
 .charts-section {
@@ -156,29 +214,23 @@ body::before {
     margin-bottom: 3rem;
 }
 
-.chart-card {
-    background: var(--bg-card);
-    backdrop-filter: blur(20px);
+.chart-card, .allocation-card {
+    background: var(--bg-card); 
+    backdrop-filter: none;
     border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius); 
     padding: 2rem;
     position: relative;
+    box-shadow: var(--shadow-card);
 }
 
 .chart-title {
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
-    color: var(--text-primary);
-}
-
-/* Portfolio allocation */
-.allocation-card {
-    background: var(--bg-card);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius);
-    padding: 2rem;
+    color: var(--secondary-color); 
+    border-bottom: none; /* 移除分隔線 */
+    padding-bottom: 0; 
 }
 
 /* Holdings grid */
@@ -190,7 +242,9 @@ body::before {
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 2rem;
-    color: var(--text-primary);
+    color: var(--secondary-color); 
+    border-bottom: none; /* 移除分隔線 */
+    padding-bottom: 0;
 }
 
 .holdings-grid {
@@ -200,42 +254,41 @@ body::before {
 }
 
 .holding-card {
-    background: var(--bg-card);
-    backdrop-filter: blur(20px);
+    background: var(--bg-card); 
+    backdrop-filter: none;
     border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius); 
     padding: 1.5rem;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.3s ease;
 }
 
-/* .holding-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 4px;
-    background: var(--accent-blue);
-} */
+.holding-card:hover {
+    box-shadow: var(--shadow-glass);
+}
 
 .holding-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+    /* 股票標題下方的珊瑚紅實線 */
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
 }
 
 .holding-name {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--primary-color); 
 }
 
 .holding-price {
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--accent-blue);
+    color: var(--primary-color);
 }
 
 .holding-details {
@@ -247,9 +300,9 @@ body::before {
 .detail-item {
     text-align: center;
     padding: 0.5rem;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--bg-primary); 
+    border-radius: 4px;
+    border: 1px solid var(--glass-border);
 }
 
 .detail-label {
@@ -267,11 +320,11 @@ body::before {
 }
 
 .detail-value.profit {
-    color: var(--accent-red);
+    color: var(--accent-green); 
 }
 
 .detail-value.loss {
-    color: var(--accent-green);
+    color: var(--accent-red); 
 }
 
 /* Footer */
@@ -280,10 +333,11 @@ body::before {
     padding: 2rem 0;
     border-top: 1px solid var(--glass-border);
     margin-top: 3rem;
+    background-color: var(--dark-bg); 
 }
 
 .footer p {
-    color: var(--text-muted);
+    color: var(--light-text); 
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
 }
@@ -295,7 +349,7 @@ body::before {
     height: 20px;
     border: 2px solid var(--glass-border);
     border-radius: 50%;
-    border-top-color: var(--accent-blue);
+    border-top-color: var(--primary-color); 
     animation: spin 1s linear infinite;
 }
 
@@ -321,6 +375,16 @@ body::before {
         grid-template-columns: 1fr;
     }
 
+    /* 總覽區塊細節在窄畫面時改為單欄佈局 */
+    .overview-details-grid {
+        /* grid-template-columns: 1fr;  */
+        gap: 0.5rem;
+    }
+    
+    .main-value-group .total-value {
+        font-size: 2.5rem; 
+    }
+
     .holding-details {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -332,7 +396,7 @@ body::before {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
+    background: var(--bg-primary); 
 }
 
 ::-webkit-scrollbar-thumb {
@@ -341,5 +405,5 @@ body::before {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-blue);
+    background: var(--primary-color); 
 }
