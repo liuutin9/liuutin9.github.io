@@ -119,10 +119,10 @@ body::before {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.overview-card:hover {
+/* .overview-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-glass);
-}
+} */
 
 .overview-card::before {
     content: '';
@@ -261,9 +261,9 @@ body::before {
     transition: box-shadow 0.3s ease;
 }
 
-.holding-card:hover {
+/* .holding-card:hover {
     box-shadow: var(--shadow-glass);
-}
+} */
 
 .holding-header {
     display: flex;
