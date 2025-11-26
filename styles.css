@@ -370,6 +370,8 @@ footer {
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
     aspect-ratio: 8 / 7;
     background-color: white;
     border-radius: 15px;
@@ -386,11 +388,23 @@ footer {
 
 .card-content {
     padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card-content h3 {
     color: var(--primary-color);
     margin-bottom: 10px;
+
+    /* 新增固定三行高度設定 */
+    line-height: 1.4em;                 /* 每行高度 */
+    min-height: calc(1.4em * 3);        /* 保留三行空間 */
+    display: -webkit-box;
+    line-clamp: 3;              /* 最多顯示三行 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .card-content .date {
