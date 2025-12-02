@@ -153,6 +153,19 @@ section:nth-child(even) {
     min-width: 300px;
 }
 
+.about-description {
+    display: flex;
+    flex-direction: row;
+}
+
+.about-description-front {
+    margin-right: 10px;
+}
+
+.about-description-content {
+    flex: 1;
+}
+
 .skills {
     margin-top: 40px;
 }
