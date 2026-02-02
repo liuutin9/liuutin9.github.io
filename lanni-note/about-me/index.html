@@ -192,6 +192,27 @@
             }
         }
 
+        .social-media {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .social-media.active {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        @media (hover: hover) {
+            .social-media:hover {
+                color: var(--accent-color);
+            }
+        }
+        .social-media:active {
+            color: var(--accent-color);
+        }
+
         /* --- Footer --- */
         .site-footer {
             background-color: var(--dark-bg);
@@ -232,9 +253,9 @@
 <body>
 
     <header class="site-header">
-        <a href="index.html" class="site-logo">爛泥的生存祕笈</a>
+        <a href="../" class="site-logo">爛泥的生存祕笈</a>
         <nav class="site-nav">
-            <a href="index.html">回首頁</a>
+            <a href="../">回首頁</a>
         </nav>
     </header>
 
@@ -263,17 +284,11 @@
             </ul>
             <p>比起追求學術上的成就，在這裡，我更想當個單純的「生活觀察家」，把這些真實的經驗分享出來，讓同樣在摸索的人少走一點彎路。</p>
         </div>
+        
         <div class="content-section">
             <h2>追蹤我</h2>
-            <p>如果你對我的文章有興趣，歡迎追蹤我的 <strong>Threads</strong>。</p>
-            
-            <div class="social-links" style="margin-top: 1rem;">
-                <a href="https://www.threads.net/@lanni_note" class="social-link" target="_blank" title="Threads">
-                    <i class="fa-brands fa-threads"></i>
-                </a>
-            </div>
+            <p>如果你對我的文章有興趣，歡迎追蹤我的 <strong><a class="social-media" href="https://www.threads.net/@lanni_note" target="_blank" rel="noopener noreferrer">Threads</a></strong>。</p>
         </div>
-
     </div>
 
     <footer class="site-footer">
