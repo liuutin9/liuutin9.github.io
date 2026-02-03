@@ -240,3 +240,34 @@ li {
     .container { padding: 2rem 1.5rem; }
     .site-header { padding: 0 1rem; }
 }
+
+/* --- 頁面載入動畫 --- */
+
+/* 1. 定義動畫關鍵影格：由下往上淡入 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 2. 基礎動畫類別 */
+.animate-in {
+    opacity: 0; /* 預設隱藏，等待動畫開始 */
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* 3. 設定延遲時間 (讓元素依序出現，才不會死板) */
+.delay-1 { animation-delay: 0.1s; } /* 標題區 */
+.delay-2 { animation-delay: 0.3s; } /* 分隔線 */
+.delay-3 { animation-delay: 0.5s; } /* 文章內容 */
+.delay-4 { animation-delay: 0.6s; } /* Footer */
+
+/* 讓 Header 也有一個很快的淡入，避免突然閃現 */
+/* .site-header {
+    animation: fadeInUp 0.5s ease-out forwards;
+} */
