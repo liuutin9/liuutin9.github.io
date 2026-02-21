@@ -16,9 +16,9 @@ async function fetchStockData() {
                 stocks.push({
                     name: stock.Name,
                     code: stockCode,
-                    shares: stock.shares,
-                    currentPrice: stock.ClosingPrice,
-                    cost: stock.cost,
+                    shares: stock.Shares,
+                    currentPrice: stock.CurrentPrice,
+                    cost: stock.Cost,
                     market: market
                 });
             }
