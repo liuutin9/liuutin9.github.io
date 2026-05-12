@@ -15,359 +15,198 @@
     <title>You-Ting Liu</title>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <h1>You-Ting Liu</h1>
-            <p class="title">National Tsing Hua University</p>
-        </div>
-    </header>
-    
+
     <nav>
-        <ul>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#honors">Honors</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="logo">YOU-TING <span> LIU</span></div>
+        <div class="nav-right">
+            <ul>
+                <li><a href="#education">學歷</a></li>
+                <li><a href="#experience">經歷</a></li>
+                <li><a href="#projects">專案</a></li>
+                <li><a href="#awards">榮譽</a></li>
+            </ul>
+            <div class="social-links">
+                <a href="https://github.com/liuutin9" target="_blank" class="social-icon" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/you-ting-liu-490b86243/" target="_blank" class="social-icon" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.238 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="切換模式">
+                <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg class="sun-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="選單">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
     </nav>
-    
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="./pictures/Selfie.jpg" alt="個人照片">
-                </div>
-                <div class="about-text">
-                    <div class="about-description">
-                        <b class="about-description-front">•</b><b class="about-description-content">Software-centered EECS student exploring systems, tools, and practical engineering.</b>
-                    </div>
-                    <div class="about-description">
-                        <b class="about-description-front">•</b><b class="about-description-content">Built the NTHU EE Student Association website.</b>
-                    </div>
-                    <div class="about-description">
-                        <b class="about-description-front">•</b><b class="about-description-content">Created a Flutter + BLE control system for the EE Camp.</b>
-                    </div>
-                    <div class="about-description">
-                        <b class="about-description-front">•</b><b class="about-description-content">Shared problem-solving tips through teaching and NTHU OJ Solution.</b>
-                    </div>
-                    <div class="about-description">
-                        <b class="about-description-front">•</b><b class="about-description-content">Always learning, always building.</b>
-                    </div>
-                    
-                    <div class="skills">
-                        <h3>Professional Skills</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">C / C++</span>
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">Verilog</span>
-                            <span class="skill-tag">Flutter</span>
-                            <span class="skill-tag">HTML</span>
-                            <span class="skill-tag">CSS</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">Git</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <div class="card-content">
-                        <h3>EECS Undergraduate</h3>
-                        <div class="card-description">
-                            <p class="date">Sep 2022 - Present</p>
-                            <p>EECS<br/>National Tsing Hua University<br/>Taiwan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <h3>Exchange at College of Science and Engineering</h3>
-                        <div class="card-description">
-                            <p class="date">Jan 2026 - Present</p>
-                            <p>CSE<br/>University of Minnesota<br/>USA</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <h3>Hardware Design and Lab Teaching Assistant</h3>
-                        <div class="card-description">
-                            <p class="date">Sep 2025 - Dec 2025</p>
-                            <p>Verilog, FPGA<br/>National Tsing Hua University<br/>Taiwan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <h3>Mobile App Developer (Contractor)</h3>
-                        <div class="card-description">
-                            <p class="date">Jun 2025 - Aug 2025</p>
-                            <p>Flutter<br/>悅谷生活圈<br/>Taiwan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <h3>國高中數學、國中英文家教</h3>
-                        <div class="card-description">
-                            <p class="date">Aug 2023 - Jul 2025</p>
-                            <p>Math, English<br/>Hsinchu<br/>Taiwan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <h3>高中數物化解題老師</h3>
-                        <div class="card-description">
-                            <p class="date">Aug 2022 - Dec 2022</p>
-                            <p>Math, Physics, Chemistry<br/>新竹儒林補習班<br/>Taiwan</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section id="honors">
-        <div class="container">
-            <h2 class="section-title">Honors</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <div class="card-content">
-                        <h3>2025 潘文淵文教基金會獎學金</h3>
-                        <div class="card-description">
-                            <p class="date">Nov 2025</p>
-                            <p>EECS<br/>National Tsing Hua University<br/>Taiwan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <h3>2025 國立清華大學劉氏獎學金</h3>
-                        <div class="card-description">
-                            <p class="date">Nov 2025</p>
-                            <p>EECS<br/>National Tsing Hua University<br/>Taiwan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <h3>Spring 2026 International Exchange Student Scholarship at UMN, US</h3>
-                        <div class="card-description">
-                            <p class="date">Jul 2025</p>
-                            <p>EECS<br/>National Tsing Hua University<br/>Taiwan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <h3>113 學年度電資院優秀學生獎學金</h3>
-                        <div class="card-description">
-                            <p class="date">May 2025</p>
-                            <p>EECS<br/>National Tsing Hua University<br/>Taiwan</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-                <a href="https://nthu-eesc.github.io/" class="project-card" target="_blank">
-                    <div class="project-image">
-                        <img src="./pictures/EESC.jpg" alt="系學會網站">
-                    </div>
-                    <div class="project-info">
-                        <h3>清大電機系學會網頁</h3>
-                        <p>清大電機系學會官方網站，提供專題資訊、活動招工資訊與系傳。</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://carduible.github.io/" class="project-card" target="_blank">
-                    <div class="project-image">
-                        <img src="./pictures/EECamp_App.jpg" alt="藍芽遙控車專案">
-                    </div>
-                    <div class="project-info">
-                        <h3>Carduible</h3>
-                        <p>專為清大電機營 / 新創營開發之藍芽遙控 Arduino 車車的應用程式。</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Flutter</span>
-                            <span class="project-tag">Bluetooth</span>
-                            <span class="project-tag">Google Admobs</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://liuutin9.github.io/Finance/" class="project-card">
-                    <div class="project-image">
-                        <img src="./pictures/Investment.jpg" alt="Investment Portfolio Dashboard">
-                    </div>
-                    <div class="project-info">
-                        <h3>Investment Portfolio Dashboard</h3>
-                        <p>A financial application that helps users track and manage their investment portfolios.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Python</span>
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://lanni-note.github.io/" class="project-card">
-                    <div class="project-image">
-                        <img src="./pictures/lanni-note.jpg" alt="爛泥的生存祕笈">
-                    </div>
-                    <div class="project-info">
-                        <h3>爛泥的生存祕笈</h3>
-                        <p>紀錄我從金融小白到開始配置資產、從寫程式到架設網站，以及在異地求學的各種筆記。</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- <section id="course-archives">
-        <div class="container">
-            <h2 class="section-title">Course Archives</h2>
-            <div class="course-archives-grid">
-                <a href="./Intro-to-AI/" class="course-archives-card">
-                    <div class="course-archives-image">
-                        <img src="./pictures/Course.jpg" alt="Investment Portfolio Dashboard">
-                    </div>
-                    <div class="course-archives-info">
-                        <h3>Introduction to Artificial Intelligence</h3>
-                        <p>NTHU 2025 Spring</p>
-                        <p>11320 CS460100</p>
-                        <p>Introduction to Artificial Intelligence</p>
-                    </div>
-                </a>
-                <a href="./Formal-Language-and-Automata/" class="course-archives-card">
-                    <div class="course-archives-image">
-                        <img src="./pictures/Course.jpg" alt="Investment Portfolio Dashboard">
-                    </div>
-                    <div class="course-archives-info">
-                        <h3>Formal Language & Automata</h3>
-                        <p>NTHU 2025 Spring</p>
-                        <p>11320 CS337100</p>
-                        <p>Formal Language & Automata</p>
-                    </div>
-                </a>
-                <a href="https://github.com/liuutin9/Introduction_to_Machine_Learning" class="course-archives-card" target="_blank">
-                    <div class="course-archives-image">
-                        <img src="./pictures/Course.jpg" alt="Investment Portfolio Dashboard">
-                    </div>
-                    <div class="course-archives-info">
-                        <h3>Introduction to Machine Learning</h3>
-                        <p>NTHU 2024 Fall</p>
-                        <p>11310 CS460200</p>
-                        <p>Introduction to Machine Learning</p>
-                    </div>
-                </a>
-                <a href="./Computer-Architecture/" class="course-archives-card">
-                    <div class="course-archives-image">
-                        <img src="./pictures/Course.jpg" alt="Investment Portfolio Dashboard">
-                    </div>
-                    <div class="course-archives-info">
-                        <h3>Computer Architecture</h3>
-                        <p>NTHU 2024 Spring</p>
-                        <p>11220 CS410001</p>
-                        <p>Computer Architecture</p>
-                    </div>
-                </a>
-                <a href="./Signal-and-System/" class="course-archives-card">
-                    <div class="course-archives-image">
-                        <img src="./pictures/Course.jpg" alt="Investment Portfolio Dashboard">
-                    </div>
-                    <div class="course-archives-info">
-                        <h3>Signal and System</h3>
-                        <p>NTHU 2024 Spring</p>
-                        <p>11220 EECS202003</p>
-                        <p>Signal and System</p>
-                    </div>
-                </a>
-                <a href="https://github.com/liuutin9/Hardware_Design_and_Lab" class="course-archives-card" target="_blank">
-                    <div class="course-archives-image">
-                        <img src="./pictures/Course.jpg" alt="Investment Portfolio Dashboard">
-                    </div>
-                    <div class="course-archives-info">
-                        <h3>Hardware Design and Lab</h3>
-                        <p>NTHU 2023 Fall</p>
-                        <p>11210 CS210401</p>
-                        <p>Hardware Design and Lab</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section> -->
-    
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Contact Info</h2>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <div class="info-item">
-                        <div class="icon">
-                            <i class="fa-solid fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h4>Email</h4>
-                            <p>liuutin9@gmail.com</p>
-                        </div>
-                    </div>
-
-                    <!-- <div class="info-item">
-                        <div class="icon">
-                            <i class="fa-solid fa-mobile"></i>
-                        </div>
-                        <div>
-                            <h4>Phone</h4>
-                            <p></p>
-                        </div>
-                    </div> -->
-                    
-                    <h4>Social Media</h4>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/share/18pkcLBzWt/" class="social-link" target="_blank">
-                            <i class = "fab fa-facebook"></i>
-                        </a>
-                        <a href="https://www.instagram.com/youting_0402?igsh=OGQyMTR2N28wMzA1" class="social-link" target="_blank">
-                            <i class = "fab fa-instagram"></i>
-                        </a>
-                        <a href="https://github.com/liuutin9" class="social-link" target="_blank">
-                            <i class = "fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/you-ting-liu-490b86243/" class="social-link" target="_blank">
-                            <i class = "fab fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <div class="container">
-            <a href="./Diary" id="diary">
-                <p>Copyright &copy; 2026 Utin</p>
+    <div class="drawer" id="mobileDrawer">
+        <ul>
+            <li><a href="#education" onclick="toggleMenu()">學歷</a></li>
+            <li><a href="#experience" onclick="toggleMenu()">經歷</a></li>
+            <li><a href="#projects" onclick="toggleMenu()">專案</a></li>
+            <li><a href="#awards" onclick="toggleMenu()">榮譽</a></li>
+        </ul>
+        <div class="drawer-socials">
+            <a href="https://github.com/liuutin9" target="_blank" class="social-icon" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/you-ting-liu-490b86243/" target="_blank" class="social-icon" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.238 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-1１h3v１．７６５c１．３９６－２．５８６７－２．７７７７２．４７６ｖ６．７５９ｚ"/></svg>
             </a>
         </div>
+    </div>
+
+    <header>
+        <div class="motto">Always Learning, Always Building.</div>
+        <h1>探索系統底層，<br><span>構築數位未來</span>。</h1>
+        <p class="hero-desc">
+            我是劉祐廷，現就讀於清華大學電資學院。專注於軟硬體協作、嵌入式系統與自動化開發，我熱衷於在複雜的系統邊界尋找效能的最佳解，並致力於打造嚴謹且具備實踐價值的技術方案。
+        </p>
+    </header>
+
+    <section id="education">
+        <span class="section-title">00 / Education</span>
+        <div class="list-container">
+            <div class="list-row">
+                <div class="row-label">2026 - 2028</div>
+                <div class="row-content">
+                    <h3>國立清華大學</h3>
+                    <p>資訊工程學系碩士班</p>
+                </div>
+            </div>
+            <div class="list-row">
+                <div class="row-label">2022 - 2026</div>
+                <div class="row-content">
+                    <h3>國立清華大學</h3>
+                    <p>電機資訊學院學士班</p>
+                </div>
+            </div>
+            <div class="list-row">
+                <div class="row-label">2026 Spring</div>
+                <div class="row-content">
+                    <h3>明尼蘇達大學</h3>
+                    <p>國際交換學生</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <span class="section-title">01 / Work Experience</span>
+        <div class="list-container">
+            <div class="list-row">
+                <div class="row-label">2025.07 - 2025.12</div>
+                <div class="row-content">
+                    <h3>硬體設計與實驗 | 助教</h3>
+                    <p>負責 Verilog 數位電路設計課程、設計考試題目、批改實驗報告，並協助學生理解數位電路設計的核心概念。</p>
+                </div>
+            </div>
+            <div class="list-row">
+                <div class="row-label">2025.06 - 2025.08</div>
+                <div class="row-content">
+                    <h3>悅股生活圈 | 全端工程師</h3>
+                    <p>設計並開發應用程式原型，整合 ESP32 藍牙開發板實現互動功能。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <span class="section-title">02 / Technical Projects</span>
+        <div class="list-container">
+            <a href="https://github.com/liuutin9/FPGA-Acceleration-of-TinyLLaVA-Inference-via-HLS" target="_blank" class="list-row">
+                <div class="row-label">FPGA / HLS</div>
+                <div class="row-content">
+                    <h3>TinyLLaVA 推論加速</h3>
+                    <p>利用高階合成 (HLS) 技術在 FPGA 上實現 TinyLLaVA 模型推論加速。優化硬體運算單元以提升大語言模型在邊緣裝置上的執行效率。</p>
+                    <div class="tag-group">
+                        <span class="tag">Verilog</span><span class="tag">HLS</span><span class="tag">FPGA</span><span class="tag">Inference</span>
+                    </div>
+                </div>
+            </a>
+            <a href="https://carduible.github.io" target="_blank" class="list-row">
+                <div class="row-label">IoT / App</div>
+                <div class="row-content">
+                    <h3>Carduible</h3>
+                    <p>專為清大電機營開發。透過 Flutter 打造跨平台 App，實現與 Arduino 機器車之間的高效藍牙遙控與即時互動。</p>
+                    <div class="tag-group">
+                        <span class="tag">Flutter</span><span class="tag">Bluetooth</span><span class="tag">Arduino</span><span class="tag">C++</span>
+                    </div>
+                </div>
+            </a>
+            <a href="https://lanni-note.github.io" target="_blank" class="list-row">
+                <div class="row-label">Blog</div>
+                <div class="row-content">
+                    <h3>爛泥的生存祕笈</h3>
+                    <p>個人技術與經驗分享網誌。利用 HTML/CSS 打造，紀錄從金融領域轉向工程開發、架設網站及海外求學的心路歷程。</p>
+                    <div class="tag-group">
+                        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Blog</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="awards">
+        <span class="section-title">03 / Awards & Honors</span>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 100px;">年份</th>
+                    <th>獎項名稱</th>
+                    <th>授獎單位</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2025</td>
+                    <td><strong>潘文淵文教基金會獎學金</strong><span class="mobile-institution">潘文淵文教基金會</span></td>
+                    <td>潘文淵文教基金會</td>
+                </tr>
+                <tr>
+                    <td>2025</td>
+                    <td><strong>國立清華大學劉氏獎學金</strong><span class="mobile-institution">國立清華大學</span></td>
+                    <td>國立清華大學</td>
+                </tr>
+                <tr>
+                    <td>2025</td>
+                    <td><strong>113 學年度電資院優秀學生獎學金</strong><span class="mobile-institution">國立清華大學</span></td>
+                    <td>國立清華大學</td>
+                </tr>
+                <tr>
+                    <td>2025</td>
+                    <td><strong>2026 春季赴明尼蘇達大學交換獎學金</strong><span class="mobile-institution">國立清華大學</span></td>
+                    <td>國立清華大學</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://github.com/liuutin9" target="_blank" class="social-icon" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/you-ting-liu-490b86243/" target="_blank" class="social-icon" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.238 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+        </div>
+        <p style="margin-top: 15px;">&copy; 2026 劉祐廷 You-Ting Liu. 
+        <br>Inspired by the Red-winged Blackbird.</p>
     </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
