@@ -140,8 +140,8 @@ nav ul a:hover { color: var(--bird-orange); }
 .theme-toggle svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
 .sun-icon { display: none; }
-[data-theme=\"light\"] .moon-icon { display: none; }
-[data-theme=\"light\"] .sun-icon { display: block; }
+[data-theme="light"] .moon-icon { display: none; }
+[data-theme="light"] .sun-icon { display: block; }
 
 /* 主視覺 - 使用 svh 修正手機端視圖偏移 */
 header {
