@@ -4,7 +4,6 @@ function toggleTheme() {
     const newTheme = currentTheme === 'light' ? '' : 'light';
     body.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-    console.log(`Theme toggled to: ${newTheme || 'default'}`);
 }
 
 function toggleMenu() {
