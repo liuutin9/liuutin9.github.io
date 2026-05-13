@@ -145,8 +145,7 @@ nav ul a:hover { color: var(--bird-orange); }
 
 /* 主視覺 - 使用 svh 修正手機端視圖偏移 */
 header {
-    height: 80vh;
-    height: 80svh; /* 修正手機動態網址列問題 */
+    height: 80lvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
