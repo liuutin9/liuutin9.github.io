@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <script src="https://kit.fontawesome.com/5b119b2aa8.js" crossorigin="anonymous"></script>
+    <title>Zoomex VIP 交易量追蹤 - 彭士瑋</title>
+</head>
+<body>
+    <nav>
+        <div class="logo">ZOOMEX <span> VIP</span></div>
+        <div class="nav-right">
+            <!-- <ul>
+                <li><a href="#stats">交易統計</a></li>
+                <li><a href="#vip-rules">等級規則</a></li>
+            </ul> -->
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="切換模式">
+                <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg class="sun-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <header>
+        <div class="motto">Always Trading, Always Growing.</div>
+        <h1>當前交易等級<br><span id="current-level">加載中...</span></h1>
+        
+        <div class="progress-container">
+            <div class="progress-info">
+                <span id="next-level-hint">正在計算進度...</span>
+                <!-- <span id="progress-percent">0%</span> -->
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <p class="hero-desc">
+            彭士瑋<br>
+            本月累計交易量：<strong id="total-volume">0 USDT</strong><br>
+            預估結算獎勵：<strong id="estimated-reward">0 USDT</strong>
+        </p>
+    </header>
+
+    <!-- <section id="stats">
+        <span class="section-title">01 / Monthly Activity</span>
+        <div class="list-container" id="daily-log">
+            </div>
+    </section> -->
+
+    <section id="vip-rules">
+        <span class="section-title">01 / VIP Structure</span>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>等級</th>
+                    <th>月合約交易量 (USDT)</th>
+                    <th>獎勵金 (USDT)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>VIP 0</strong></td><td>0</td><td>0</td></tr>
+                <tr><td><strong>VIP 1</strong></td><td>≥ 10M</td><td>200</td></tr>
+                <tr><td><strong>VIP 2</strong></td><td>≥ 30M</td><td>400</td></tr>
+                <tr><td><strong>VIP 3</strong></td><td>≥ 50M</td><td>1,000</td></tr>
+                <tr><td><strong>VIP 4</strong></td><td>≥ 100M</td><td>1,600</td></tr>
+                <tr><td><strong>VIP 5</strong></td><td>≥ 300M</td><td>3,000</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 劉祐廷 You-Ting Liu.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
