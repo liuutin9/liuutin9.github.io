@@ -64,8 +64,10 @@ nav {
     gap: 10px;               /* 圖示與名字之間的間距 */
     font-size: 1.2rem;
     font-weight: 800;
-    letter-spacing: 3px;
-    color: var(--text-main);
+    letter-spacing: 2px;
+    z-index: 2100;
+    text-decoration: none;
+    color: inherit;
     cursor: pointer;
 }
 .logo span { color: var(--bird-orange); }
