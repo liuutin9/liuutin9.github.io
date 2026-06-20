@@ -31,7 +31,8 @@
         <span class="section-title">Trading Tool</span>
         <div class="calc-header">
             <h1>交易倉位計算器</h1>
-            <p>根據您甘願負擔的虧損空間、當前價格、目標價格及手續費率，精確計算出最佳開倉價值 (Open Value)。</p>
+            <p>根據您甘願負擔的虧損空間、當前價格、止損價格及手續費率，精確計算出最倉位價值 (Position Value)。</p>
+            <p>計算公式：position_value = tuition_fee / (abs((cross_price - current_price) / current_price) + trading_fee_rate)</p>
         </div>
         
         <div class="calc-form">
@@ -44,16 +45,16 @@
                 <input type="number" id="current_price" step="any" placeholder="請輸入當前入場價格">
             </div>
             <div class="input-group">
-                <label for="cross_price">Cross Price (目標/交叉價格)</label>
-                <input type="number" id="cross_price" step="any" placeholder="請輸入止損或目標交叉價格">
+                <label for="cross_price">Cross Price (止損價格)</label>
+                <input type="number" id="cross_price" step="any" placeholder="請輸入止損價格">
             </div>
             <div class="input-group">
                 <label for="trading_fee_rate">Trading Fee Rate (手續費率)</label>
                 <input type="number" id="trading_fee_rate" step="any" value="0.00055" placeholder="例如: 0.00055">
             </div>
             
-            <button onclick="calculateOpenValue()" class="calc-btn">
-                Calculate Open Value
+            <button onclick="calculatePositionValue()" class="calc-btn">
+                Calculate Position Value
             </button>
 
             <div id="result-display" class="result-box" style="display: none;">
