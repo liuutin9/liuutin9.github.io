@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <script src="https://kit.fontawesome.com/5b119b2aa8.js" crossorigin="anonymous"></script>
+    <title>交易倉位計算器 - You-Ting Liu</title>
+</head>
+<body>
+    <nav>
+        <a class="logo" href="./" style="text-decoration: none;">
+            <img src="../../icon.png" alt="Icon" class="nav-icon">
+            YOU-TING <span> LIU</span>
+        </a>
+        <div class="nav-right">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="切換模式">
+                <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg class="sun-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="calc-container">
+        <span class="section-title">Trading Tool</span>
+        <div class="calc-header">
+            <h1>交易倉位計算器</h1>
+            <p>根據您甘願負擔的虧損空間、當前價格、目標價格及手續費率，精確計算出最佳開倉價值 (Open Value)。</p>
+        </div>
+        
+        <div class="calc-form">
+            <div class="input-group">
+                <label for="tuition_fee">Tuition Fee (甘願負擔的虧損 / 繳給市場的學費)</label>
+                <input type="number" id="tuition_fee" step="any" placeholder="請輸入預估願意承擔的總虧損金額">
+            </div>
+            <div class="input-group">
+                <label for="current_price">Current Price (當前價格)</label>
+                <input type="number" id="current_price" step="any" placeholder="請輸入當前入場價格">
+            </div>
+            <div class="input-group">
+                <label for="cross_price">Cross Price (目標/交叉價格)</label>
+                <input type="number" id="cross_price" step="any" placeholder="請輸入止損或目標交叉價格">
+            </div>
+            <div class="input-group">
+                <label for="trading_fee_rate">Trading Fee Rate (手續費率)</label>
+                <input type="number" id="trading_fee_rate" step="any" value="0.00055" placeholder="例如: 0.00055">
+            </div>
+            
+            <button onclick="calculateOpenValue()" class="calc-btn">
+                Calculate Open Value
+            </button>
+
+            <div id="result-display" class="result-box" style="display: none;">
+                </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 劉祐廷 You-Ting Liu. <br>Inspired by the Red-winged Blackbird.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
