@@ -5,13 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles.css" rel="stylesheet" type="text/css"/>
     <script src="https://kit.fontawesome.com/5b119b2aa8.js" crossorigin="anonymous"></script>
-    <title>交易倉位計算器 - You-Ting Liu</title>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>交易倉位計算機</title>
 </head>
 <body>
     <nav>
         <a class="logo" href="./" style="text-decoration: none;">
             <img src="../../icon.png" alt="Icon" class="nav-icon">
-            YOU-TING <span> LIU</span>
+            TRADING <span> TOOLS</span>
         </a>
         <div class="nav-right">
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="切換模式">
@@ -28,11 +37,13 @@
     </nav>
 
     <main class="calc-container">
-        <span class="section-title">Trading Tool</span>
+        <span class="section-title">Position Value Calculator</span>
         <div class="calc-header">
             <h1>交易倉位計算器</h1>
-            <p>根據您甘願負擔的虧損空間、當前價格、止損價格及手續費率，精確計算出最倉位價值 (Position Value)。</p>
-            <p>計算公式：position_value = tuition_fee / (abs((cross_price - current_price) / current_price) + trading_fee_rate)</p>
+            <p>根據您甘願虧損金額、當前價格、止損價格及手續費率，精確計算出最倉位價值 (Position Value)。</p>
+            <div style="color: var(--bird-gold); margin: 20px 0; overflow-x: auto;">
+                $$倉位價值 = \frac{甘願虧損金額}{\left| \frac{止損價格 - 當前價格}{當前價格} \right| + 手續費率}$$
+            </div>
         </div>
         
         <div class="calc-form">
@@ -63,7 +74,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 劉祐廷 You-Ting Liu. <br>Inspired by the Red-winged Blackbird.</p>
+        <p>&copy; 2026 Utin L. <br>Inspired by the Red-winged Blackbird.</p>
     </footer>
 
     <script src="scripts.js"></script>
