@@ -78,31 +78,83 @@ function updateDashboard() {
     // 總成本
     document.getElementById('total-cost').textContent = `$${formatNumber(totalCost)}`;
 
-    // 報酬總額
+    // 報酬總額（括號內附報酬率）
     const returnEl = document.getElementById('total-return');
-    returnEl.textContent = `$${formatNumber(totalReturn)}`;
+    returnEl.innerHTML = `$${formatNumber(totalReturn)} <span class="stat-sub">(${formatNumber(returnPercentage, 2)}%)</span>`;
     returnEl.className = `stat-value ${gainClass}`;
 
-    // 報酬率
-    const pctEl = document.getElementById('total-profit-loss-percentage');
-    pctEl.textContent = `${formatNumber(returnPercentage, 2)}%`;
-    pctEl.className = `stat-value ${gainClass}`;
-
+    updateAllocation(totalMarketValue);
     updateHoldingsList();
 }
 
 // ============================================
+//  更新投資比重（總覽）
+// ============================================
+function updateAllocation(totalMarketValue) {
+    const bar = document.getElementById('allocation-bar');
+    const legend = document.getElementById('allocation-legend');
+    bar.innerHTML = '';
+    legend.innerHTML = '';
+
+    if (totalMarketValue <= 0) return;
+
+    const sorted = [...stocks]
+        .map(s => ({
+            code: s.code,
+            name: s.name,
+            weight: (s.shares * s.currentPrice / totalMarketValue) * 100
+        }))
+        .sort((a, b) => b.weight - a.weight);
+
+    sorted.forEach((item, i) => {
+        // 橘 → 金 之間插值：比重最大的最接近主色橘
+        const color = rampColor(i, sorted.length);
+
+        const seg = document.createElement('span');
+        seg.className = 'allocation-seg';
+        seg.style.width = `${item.weight}%`;
+        seg.style.background = color;
+        seg.title = `${item.name} ${item.weight.toFixed(1)}%`;
+        bar.appendChild(seg);
+
+        const tag = document.createElement('span');
+        tag.className = 'legend-item';
+        tag.innerHTML = `
+            <i style="background: ${color}"></i>
+            <b>${item.code}</b>
+            <em>${formatNumber(item.weight, 1)}%</em>
+        `;
+        legend.appendChild(tag);
+    });
+}
+
+// 在 bird-orange (#FF4500) 與 bird-gold (#FFB300) 之間取色
+function rampColor(index, total) {
+    const t = total <= 1 ? 0 : index / (total - 1);
+    const from = [255, 69, 0];
+    const to = [255, 179, 0];
+    const rgb = from.map((c, i) => Math.round(c + (to[i] - c) * t));
+    return `rgb(${rgb.join(', ')})`;
+}
+
+// ============================================
 //  更新持股列表
+//  階層：市值（主） → 報酬（次） → 股數/現價/成本（輔）
 // ============================================
 function updateHoldingsList() {
     const holdingsList = document.getElementById('holdings-list');
     holdingsList.innerHTML = '';
 
-    stocks.forEach(stock => {
+    // 依市值由大到小排序，重點部位自然排在最上面
+    const sorted = [...stocks].sort(
+        (a, b) => b.shares * b.currentPrice - a.shares * a.currentPrice
+    );
+
+    sorted.forEach(stock => {
         const marketValue = stock.shares * stock.currentPrice;
         const cost = stock.shares * stock.cost;
         const profitLoss = marketValue - cost;
-        const profitLossPercentage = cost > 0 ? ((profitLoss / cost) * 100).toFixed(2) : 0;
+        const profitLossPct = cost > 0 ? (profitLoss / cost) * 100 : 0;
         const gainClass = profitLoss >= 0 ? 'profit' : 'loss';
 
         const card = document.createElement('div');
@@ -114,36 +166,28 @@ function updateHoldingsList() {
             </div>
             <div class="row-content">
                 <h3>${stock.name}</h3>
-                <div class="metrics-grid">
-                    <div class="metric">
-                        <span class="metric-label">Market Value</span>
-                        <span class="metric-value">$${formatNumber(marketValue)}</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Shares</span>
-                        <span class="metric-value">${formatNumber(stock.shares)}</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Current Price</span>
-                        <span class="metric-value">${formatNumber(stock.currentPrice, 2)}</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Cost Basis</span>
-                        <span class="metric-value">$${formatNumber(stock.cost, 2)}</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Total Return</span>
-                        <span class="metric-value ${gainClass}">$${formatNumber(profitLoss)}</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Return %</span>
-                        <span class="metric-value ${gainClass}">${formatNumber(profitLossPercentage, 2)}%</span>
-                    </div>
+
+                <div class="holding-figures">
+                    <span class="holding-value">$${formatNumber(marketValue)}</span>
+                    <span class="holding-return ${gainClass}">
+                        ${profitLoss >= 0 ? '+' : '−'}$${formatNumber(Math.abs(profitLoss))} (${formatSigned(profitLossPct, 2)}%)
+                    </span>
+                </div>
+
+                <div class="holding-meta">
+                    <span><em>Shares</em>${formatNumber(stock.shares, shareDecimals(stock.market))}</span>
+                    <span><em>Price</em>${formatNumber(stock.currentPrice, 2)}</span>
+                    <span><em>Cost</em>${formatNumber(stock.cost, 2)}</span>
                 </div>
             </div>
         `;
         holdingsList.appendChild(card);
     });
+}
+
+// 美股可有零股，股數取到小數點後兩位；台股取整數
+function shareDecimals(market) {
+    return String(market).toUpperCase() === 'US' ? 2 : 0;
 }
 
 // ============================================
@@ -153,6 +197,15 @@ function formatNumber(number, decimals = 0) {
     return Number(number).toLocaleString('en-US', {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals
+    });
+}
+
+// 帶正負號的格式化（漲時補上 +）
+function formatSigned(number, decimals = 0) {
+    return Number(number).toLocaleString('en-US', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+        signDisplay: 'exceptZero'
     });
 }
 
