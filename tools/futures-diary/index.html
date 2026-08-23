@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>合約日誌</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="合約日誌">
+<meta name="theme-color" content="#0b1220">
+<!--
+  ============================================================
+  永續合約追蹤表 — 前端（單一 HTML 檔）
+  ============================================================
+  使用方式：
+  1. 這個檔案不用改任何程式碼，直接部署（例如開啟 GitHub Pages）即可
+  2. 第一次打開網頁時，會要求貼上你自己的 Apps Script /exec 網址
+     （就是 Code.gs 部署後拿到的那組網址）
+  3. 網址會存在瀏覽器的 localStorage，之後不用重複輸入
+     （只存在你自己的瀏覽器裡，不會送到任何地方）
+  4. 想換一組網址，按頁首右上角的「更換來源」即可重新輸入
+  ============================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1220;
+    --ink-2:#0f1a2c;
+    --card:#131f33;
+    --card-hover:#16253c;
+    --border:rgba(232,230,222,0.09);
+    --border-strong:rgba(232,230,222,0.16);
+    --paper:#e8e6de;
+    --paper-dim:rgba(232,230,222,0.58);
+    --paper-faint:rgba(232,230,222,0.34);
+    --gold:#c9a227;
+    --gold-dim:rgba(201,162,39,0.14);
+    --jade:#4fb286;
+    --jade-dim:rgba(79,178,134,0.14);
+    --brick:#c1554a;
+    --brick-dim:rgba(193,85,74,0.14);
+    --font-display:'Fraunces', serif;
+    --font-mono:'IBM Plex Mono', monospace;
+    --font-sans:'IBM Plex Sans', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(201,162,39,0.06), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(79,178,134,0.05), transparent 55%),
+      var(--ink);
+    color:var(--paper);
+    font-family:var(--font-sans);
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  ::selection{background:var(--gold-dim);color:var(--paper);}
+  a{color:inherit;}
+  button{font-family:inherit;}
+  input:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+
+  .wrap{max-width:880px;margin:0 auto;padding:32px 20px 80px;}
+
+  /* ---------- Header ---------- */
+  .masthead{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    gap:16px;margin-bottom:28px;
+  }
+  .masthead h1{
+    font-family:var(--font-display);
+    font-weight:600;font-size:28px;letter-spacing:0.2px;margin:0;
+  }
+  .masthead .eyebrow{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--gold);margin:0 0 6px;
+  }
+  .source-btn{
+    background:none;border:1px solid var(--border-strong);color:var(--paper-dim);
+    font-size:12px;padding:7px 12px;border-radius:100px;cursor:pointer;
+    transition:border-color .15s, color .15s;white-space:nowrap;
+  }
+  .source-btn:active{border-color:var(--gold);color:var(--paper);}
+
+  /* ---------- Stat band ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--border);border-radius:14px;overflow:hidden;
+    margin-bottom:28px;background:var(--card);
+  }
+  .stat{padding:18px 16px;border-right:1px solid var(--border);}
+  .stat:last-child{border-right:none;}
+  .stat .label{
+    font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--paper-faint);margin-bottom:8px;
+  }
+  .stat .value{
+    font-family:var(--font-mono);font-size:20px;font-weight:500;
+    color:var(--paper);line-height:1.2;
+  }
+  .stat .value.jade{color:var(--jade);}
+  .stat .value.brick{color:var(--brick);}
+  .stat .value.combo{font-size:15px;line-height:1.35;word-break:break-word;}
+  .stat .sub{font-size:11px;color:var(--paper-faint);margin-top:4px;font-family:var(--font-mono);}
+
+  /* ---------- Add-record icon trigger ---------- */
+  .icon-btn{
+    width:32px;height:32px;border-radius:50%;flex-shrink:0;
+    background:var(--gold-dim);border:1px solid rgba(201,162,39,0.4);
+    color:var(--gold);font-family:var(--font-mono);font-size:18px;line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:filter .15s, transform .1s;
+  }
+  .icon-btn:active{transform:scale(0.92);}
+  .icon-btn.danger{
+    background:rgba(232,230,222,0.06);border-color:var(--border-strong);color:var(--paper-dim);
+  }
+  .icon-btn.danger.active{
+    background:var(--brick-dim);border-color:rgba(193,85,74,0.5);color:var(--brick);
+  }
+  .ledger-actions{display:flex;gap:8px;}
+
+  /* ---------- Floating overlay ---------- */
+  .overlay-backdrop{
+    position:fixed;inset:0;z-index:50;display:none;
+    align-items:flex-start;justify-content:center;
+    padding:88px 20px;
+    background:rgba(11,18,32,0.72);backdrop-filter:blur(3px);
+    opacity:0;transition:opacity .18s ease;
+  }
+  .overlay-backdrop.open{opacity:1;}
+
+  /* ---------- Form panel ---------- */
+  .panel{
+    border:1px solid var(--border-strong);border-radius:14px;background:var(--card);
+    padding:20px 22px;margin-bottom:28px;
+  }
+  .panel.floating{
+    max-width:560px;width:100%;margin-bottom:0;
+    box-shadow:0 24px 70px rgba(0,0,0,0.5);
+    transform:translateY(-8px) scale(0.98);
+    transition:transform .18s ease;
+  }
+  .overlay-backdrop.open .panel.floating{transform:translateY(0) scale(1);}
+  .panel-header{display:flex;justify-content:space-between;align-items:flex-start;}
+  .panel-close{
+    background:none;border:none;color:var(--paper-faint);cursor:pointer;
+    font-size:20px;line-height:1;padding:0 2px;font-family:var(--font-sans);
+    transition:color .15s;
+  }
+  .panel-close:active{color:var(--paper);}
+  .panel h2{
+    font-family:var(--font-display);font-weight:600;font-size:17px;margin:0 0 4px;
+  }
+  .panel .hint{font-size:12.5px;color:var(--paper-dim);margin:0 0 18px;}
+  .form-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end;
+  }
+  .field.date-field{grid-column:1 / -1;}
+  .field label{
+    display:block;font-family:var(--font-mono);font-size:10.5px;
+    letter-spacing:0.06em;text-transform:uppercase;color:var(--paper-faint);
+    margin-bottom:6px;
+  }
+  .field input{
+    width:100%;background:var(--ink-2);border:1px solid var(--border-strong);
+    color:var(--paper);border-radius:8px;padding:10px 11px;font-size:14px;
+    font-family:var(--font-mono);
+  }
+  .field input::-webkit-calendar-picker-indicator{filter:invert(0.8);}
+  input[type="number"]{-moz-appearance:textfield;}
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance:none;margin:0;
+  }
+  .date-select{display:flex;gap:6px;}
+  .date-select select,.date-select input{
+    background:var(--ink-2);border:1px solid var(--border-strong);
+    color:var(--paper);border-radius:8px;padding:10px 6px;font-size:13px;
+    font-family:var(--font-mono);flex:1;min-width:0;
+  }
+  .date-select input{flex:1.3;}
+  .date-select select:nth-child(3){flex:0.8;}
+  .form-grid .submit-btn{grid-column:1 / -1;width:100%;padding:12px;margin-top:2px;}
+  .submit-btn{
+    background:var(--gold);color:#1b1607;border:none;border-radius:8px;
+    padding:11px 18px;font-weight:600;font-size:13.5px;cursor:pointer;
+    white-space:nowrap;transition:filter .15s, transform .1s;
+  }
+  .submit-btn:active{transform:translateY(1px);}
+  .submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
+  .form-msg{
+    margin-top:12px;font-size:12.5px;font-family:var(--font-mono);
+    padding:8px 10px;border-radius:6px;display:none;
+  }
+  .form-msg.show{display:block;}
+  .form-msg.error{background:var(--brick-dim);color:#f0a89f;}
+  .form-msg.success{background:var(--jade-dim);color:#a6e3c8;}
+
+  /* ---------- Status modal (confirm / loading / success / error) ---------- */
+  #status-overlay{z-index:60;align-items:center;}
+  .status-panel{
+    text-align:center;max-width:340px;width:100%;padding:30px 26px;
+  }
+  .status-icon{
+    width:46px;height:46px;border-radius:50%;margin:0 auto 14px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;font-weight:700;
+  }
+  .status-icon.warn{background:var(--gold-dim);color:var(--gold);}
+  .status-icon.success{background:var(--jade-dim);color:var(--jade);}
+  .status-icon.error{background:var(--brick-dim);color:var(--brick);}
+  .spinner{
+    width:34px;height:34px;margin:2px auto 16px;
+    border:3px solid rgba(232,230,222,0.15);
+    border-top-color:var(--gold);border-radius:50%;
+    animation:spin .75s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .status-panel h2{
+    font-family:var(--font-display);font-weight:600;font-size:16.5px;margin:0 0 6px;
+  }
+  .status-message{font-size:13px;color:var(--paper-dim);line-height:1.55;margin:0;}
+  .status-actions{display:flex;gap:10px;margin-top:20px;}
+  .status-actions button{
+    flex:1;padding:11px;border-radius:8px;font-size:13.5px;font-weight:600;
+    cursor:pointer;border:none;font-family:var(--font-sans);
+    transition:filter .15s, background .15s;
+  }
+  .status-btn-secondary{background:rgba(232,230,222,0.08);color:var(--paper);}
+  .status-btn-secondary:active{background:rgba(232,230,222,0.14);}
+  .status-btn-danger{background:var(--brick);color:#fff;}
+  .status-btn-danger:active{filter:brightness(1.1);}
+
+  /* ---------- Ledger ---------- */
+  .ledger-head{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:14px;
+  }
+  .ledger-head h2{
+    font-family:var(--font-display);font-weight:600;font-size:17px;
+    margin:0;display:flex;align-items:baseline;gap:10px;
+  }
+  .ledger-head h2 .count{font-family:var(--font-mono);font-size:12px;color:var(--paper-faint);}
+
+  .support-bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:40;
+    background:linear-gradient(180deg, rgba(201,162,39,0.06), rgba(11,18,32,0.96) 55%);
+    border-top:1px solid var(--border-strong);
+    backdrop-filter:blur(6px);
+  }
+  .support-bar-inner{
+    max-width:880px;margin:0 auto;padding:10px 20px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .support-mark{
+    width:32px;height:32px;border-radius:50%;flex-shrink:0;
+    background:var(--gold-dim);border:1px solid rgba(201,162,39,0.4);
+    color:var(--gold);display:flex;align-items:center;justify-content:center;
+  }
+  .support-copy{
+    flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;
+  }
+  .support-headline{
+    font-family:var(--font-display);font-weight:600;font-size:13.5px;
+    color:var(--paper);line-height:1.25;
+  }
+  .support-text{
+    font-family:var(--font-mono);font-size:11px;color:var(--paper-faint);
+    line-height:1.2;
+  }
+  .support-cta{
+    flex-shrink:0;display:flex;align-items:center;gap:5px;
+    background:var(--gold);color:#1b1607;text-decoration:none;
+    font-family:var(--font-sans);font-weight:600;font-size:12.5px;
+    padding:9px 14px;border-radius:100px;white-space:nowrap;
+    transition:filter .15s ease, transform .1s ease;
+  }
+  .support-cta:active{transform:scale(0.96);}
+  .support-cta .cta-arrow{display:inline-block;transition:transform .15s ease;}
+
+  .row-wrap{
+    position:relative;margin-bottom:8px;
+    opacity:0;transform:translateY(6px);
+    animation:rise .35s ease forwards;
+  }
+  @keyframes rise{to{opacity:1;transform:translateY(0);}}
+
+  .row-delete-btn{
+    position:absolute;top:0;right:0;bottom:0;width:80px;
+    background:var(--brick);color:#fff;border:none;border-radius:0 10px 10px 0;
+    font-family:var(--font-sans);font-size:12.5px;font-weight:600;
+    cursor:pointer;pointer-events:none;
+    display:flex;align-items:center;justify-content:center;
+    padding-left:10px;
+    transition:filter .15s ease;
+  }
+  .row-delete-btn:active{filter:brightness(1.1);}
+  body.delete-mode .row-delete-btn{pointer-events:auto;}
+
+  .row{
+    position:relative;
+    display:grid;
+    grid-template-columns:52px 92px 1fr 150px 132px;
+    align-items:center;gap:14px;
+    padding:14px 16px;border:1px solid var(--border);border-radius:10px;
+    background:var(--card);
+    transition:transform .22s ease;
+  }
+  body.delete-mode .row{transform:translateX(-70px);}
+
+  .stamp{
+    font-family:var(--font-mono);font-size:11px;color:var(--gold);
+    border:1px solid rgba(201,162,39,0.4);border-radius:5px;
+    padding:3px 0;text-align:center;letter-spacing:0.02em;
+  }
+  .row .date{font-family:var(--font-mono);font-size:12.5px;color:var(--paper-dim);}
+  .row .assets{display:flex;flex-direction:column;gap:3px;}
+  .row .assets-label{
+    font-family:var(--font-mono);font-size:10px;letter-spacing:0.06em;
+    text-transform:uppercase;color:var(--paper-faint);
+  }
+  .row .assets-value{font-family:var(--font-mono);font-size:13px;color:var(--paper);}
+  .row .assets .arrow{color:var(--paper-faint);margin:0 6px;}
+  .row-footer{display:contents;}
+  .row .daily{
+    font-family:var(--font-mono);font-size:12.5px;text-align:right;
+    white-space:normal;line-height:1.35;
+  }
+  .row .daily.jade{color:var(--jade);}
+  .row .daily.brick{color:var(--brick);}
+  .row .vs-target{
+    font-family:var(--font-mono);font-size:11.5px;text-align:right;
+    padding:4px 9px;border-radius:100px;white-space:nowrap;justify-self:end;
+  }
+  .row .vs-target.jade{background:var(--jade-dim);color:var(--jade);}
+  .row .vs-target.brick{background:var(--brick-dim);color:var(--brick);}
+  .row .vs-target.flat{background:rgba(232,230,222,0.06);color:var(--paper-faint);}
+
+  .state{
+    text-align:center;padding:60px 20px;color:var(--paper-dim);
+    font-size:14px;border:1px dashed var(--border-strong);border-radius:14px;
+  }
+  .state .big{font-family:var(--font-display);font-size:18px;color:var(--paper);margin-bottom:6px;}
+
+  /* ---------- Config gate ---------- */
+  .gate{
+    max-width:420px;margin:80px auto;padding:0 20px;text-align:left;
+  }
+  .gate .eyebrow{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--gold);margin:0 0 8px;
+  }
+  .gate h1{font-family:var(--font-display);font-size:26px;margin:0 0 10px;}
+  .gate p{font-size:13.5px;color:var(--paper-dim);line-height:1.6;margin:0 0 20px;}
+  .gate input{
+    width:100%;background:var(--ink-2);border:1px solid var(--border-strong);
+    color:var(--paper);border-radius:8px;padding:12px;font-size:13px;
+    font-family:var(--font-mono);margin-bottom:12px;
+  }
+  .gate .submit-btn{width:100%;padding:12px;}
+  .gate .err{color:var(--brick);font-size:12.5px;margin-top:10px;display:none;}
+  .gate .err.show{display:block;}
+
+  .gate-tutorial{
+    margin-top:40px;padding-top:26px;border-top:1px solid var(--border);
+  }
+  .gate-tutorial h2{
+    font-family:var(--font-display);font-weight:600;font-size:16.5px;
+    color:var(--paper);margin:0 0 18px;
+  }
+  .tutorial-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px;}
+  .tutorial-steps li{display:flex;gap:12px;align-items:flex-start;}
+  .step-num{
+    flex-shrink:0;width:24px;height:24px;border-radius:50%;margin-top:1px;
+    background:var(--gold-dim);border:1px solid rgba(201,162,39,0.4);color:var(--gold);
+    font-family:var(--font-mono);font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .step-body strong{
+    display:block;font-size:13.5px;font-weight:600;color:var(--paper);margin-bottom:4px;
+  }
+  .step-body p{font-size:12.5px;color:var(--paper-dim);line-height:1.65;margin:0;}
+  .step-body p + p{margin-top:8px;}
+  .step-body a{
+    color:var(--gold);text-decoration:none;
+    border-bottom:1px solid rgba(201,162,39,0.35);
+  }
+  .step-body a:active{border-color:var(--gold);}
+  .step-body code{
+    font-family:var(--font-mono);font-size:11.5px;color:var(--paper);
+    background:var(--ink-2);padding:1px 5px;border-radius:4px;
+  }
+
+  @media (max-width:640px){
+    .stats{grid-template-columns:1fr 1fr;}
+    .stat{border-right:1px solid var(--border);}
+    .stat:nth-child(2n){border-right:none;}
+    .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--border);}
+    .form-grid{grid-template-columns:1fr;}
+    .row{
+      display:grid;
+      grid-template-columns:auto 1fr;
+      grid-template-areas:
+        "stamp date"
+        "assets assets"
+        "footer footer";
+      column-gap:10px;row-gap:8px;
+      padding:13px 14px;
+    }
+    .row .stamp{grid-area:stamp;justify-self:start;width:auto;padding:3px 8px;}
+    .row .date{grid-area:date;justify-self:end;align-self:center;}
+    .row .assets{grid-area:assets;}
+    .row .assets-value{font-size:14px;}
+    .row-footer{
+      display:flex;grid-area:footer;
+      justify-content:space-between;align-items:center;gap:10px;
+    }
+    .row .daily{text-align:left;}
+    body.delete-mode .row{transform:translateX(-50px);}
+    .row-delete-btn{width:60px;}
+    .overlay-backdrop{padding:32px 14px;align-items:flex-start;}
+    .support-bar-inner{padding:9px 14px;gap:10px;}
+    .support-mark{width:28px;height:28px;}
+    .support-headline{font-size:12.5px;}
+    .support-text{display:none;}
+    .support-cta{padding:8px 12px;font-size:12px;}
+  }
+
+  /* ---------- Hover effects: only for devices with a real pointer ----------
+     Touchscreens report hover:none, so this whole block is skipped there —
+     avoids the classic "stuck hover" bug where a tapped button stays lit
+     because there's no mouse-leave event to clear the state. Tap feedback
+     on touch is handled separately via :active rules above. */
+  @media (hover:hover) and (pointer:fine){
+    .source-btn:hover{border-color:var(--gold);color:var(--paper);}
+    .icon-btn:hover{filter:brightness(1.2);}
+    .panel-close:hover{color:var(--paper);}
+    .submit-btn:hover{filter:brightness(1.08);}
+    .status-btn-secondary:hover{background:rgba(232,230,222,0.14);}
+    .status-btn-danger:hover{filter:brightness(1.1);}
+    .row-delete-btn:hover{filter:brightness(1.1);}
+    .support-cta:hover{filter:brightness(1.08);}
+    .support-cta:hover .cta-arrow{transform:translateX(2px);}
+    .step-body a:hover{border-color:var(--gold);}
+  }
+</style>
+</head>
+<body>
+
+  <!-- ============ Config gate (shown when no API URL saved) ============ -->
+  <div id="gate" class="gate" hidden>
+    <p class="eyebrow">開帳前</p>
+    <h1>接上你的帳本</h1>
+    <p>貼上你部署 Apps Script 後拿到的 <code>/exec</code> 網址，資料會直接讀寫你自己的 Google Sheet。這組網址只存在這台裝置的瀏覽器裡。</p>
+    <input id="gate-input" type="text" placeholder="https://script.google.com/macros/s/xxxx/exec" autocomplete="off" spellcheck="false">
+    <button class="submit-btn" onclick="saveApiUrl()">連接帳本</button>
+    <p class="err" id="gate-err">網址看起來不太對，請確認是完整的 /exec 網址。</p>
+
+    <div class="gate-tutorial">
+      <h2>還沒有自己的帳本？四步驟設定好</h2>
+      <ol class="tutorial-steps">
+        <li>
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <strong>複製 Google 試算表模板</strong>
+            <p>打開<a href="https://docs.google.com/spreadsheets/d/1d_DAdCh4pD_h18d4zmTJtia9mqY8C2t693H7KE05XkM/edit?usp=sharing" target="_blank" rel="noopener">這份範本</a>，左上角「檔案 → 建立副本」，存成一份完全屬於你自己的試算表。複製完成後，到 <code>Init</code> 分頁設定「每日目標報酬率」（預設 10%）。</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <strong>部署成你自己的網頁應用程式</strong>
+            <p>在複製出來的試算表裡開啟「擴充功能 → Apps Script」，<code>Code.gs</code> 會自動帶著原本的程式碼，不用改動，直接部署即可。點右上角「部署 → 新增部署作業」，類型選 <code>網頁應用程式</code>，執行身分選 <code>我</code>，誰可以存取選 <code>所有人</code>，按部署。</p>
+            <p>第一次部署會跳出「Google 尚未驗證這個應用程式」的警告畫面，這是正常的——因為這是你自己部署給自己用的程式，不是別人做的。點畫面上的「進階」，再點「前往（不安全）」繼續就可以了。</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <strong>貼上你的網址</strong>
+            <p>部署完成會拿到一組 <code>.../exec</code> 網址，把它貼到最上面的輸入框，按「連接帳本」——之後這個網址都會存在你這台裝置的瀏覽器裡，不用每次重貼。</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <div class="step-body">
+            <strong>加到手機桌面，開起來就像 App</strong>
+            <p>iPhone 用 Safari 打開這個網址，點下方工具列的分享圖示，往下滑找「加入主畫面」。Android 用 Chrome 打開，點右上角選單（⋮），選「加入主畫面」或「安裝應用程式」。</p>
+            <p>加進去之後桌面會多一個圖示，點開會全螢幕顯示、不會看到網址列，用起來跟一般 App 幾乎沒有差別。</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ============ Main app ============ -->
+  <div class="wrap" id="app" hidden>
+    <div class="masthead">
+      <div>
+        <p class="eyebrow" id="day-eyebrow">第 — 天</p>
+        <h1>合約日誌</h1>
+      </div>
+      <button class="source-btn" onclick="changeSource()">更換來源</button>
+    </div>
+
+    <div class="stats" id="stats">
+      <div class="stat"><div class="label">目前資產</div><div class="value" id="s-current">—</div></div>
+      <div class="stat"><div class="label">目標資產</div><div class="value" id="s-target">—</div></div>
+      <div class="stat"><div class="label">實際累計報酬</div><div class="value combo" id="s-actual-return">—</div></div>
+      <div class="stat"><div class="label">目標累計報酬</div><div class="value combo" id="s-target-return">—</div></div>
+    </div>
+
+    <div class="ledger">
+      <div class="ledger-head">
+        <h2>歷史紀錄 <span class="count" id="row-count"></span></h2>
+        <div class="ledger-actions">
+          <button class="icon-btn" id="add-trigger" onclick="openAddPanel()" aria-label="新增今日紀錄">+</button>
+          <button class="icon-btn danger" id="delete-toggle" onclick="toggleDeleteMode()" aria-label="切換刪除模式">−</button>
+        </div>
+      </div>
+      <div id="rows"></div>
+    </div>
+  </div>
+
+  <div class="support-bar">
+    <div class="support-bar-inner">
+      <div class="support-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
+          <path d="M12 2.5L2.5 8H21.5L12 2.5Z" fill="currentColor"/>
+          <rect x="4" y="9.5" width="2" height="8.5" rx="0.5" fill="currentColor"/>
+          <rect x="8.7" y="9.5" width="2" height="8.5" rx="0.5" fill="currentColor"/>
+          <rect x="13.3" y="9.5" width="2" height="8.5" rx="0.5" fill="currentColor"/>
+          <rect x="18" y="9.5" width="2" height="8.5" rx="0.5" fill="currentColor"/>
+          <rect x="2.5" y="19.3" width="19" height="2" rx="0.4" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="support-copy">
+        <span class="support-headline">還沒有交易所嗎？</span>
+        <span class="support-text">Zoomex，專注永續合約交易</span>
+      </div>
+      <a class="support-cta" href="https://www.zoomex.com/en-US/register?affiliate_id=904416&amp;group_id=65169&amp;group_type=1" target="_blank" rel="noopener">
+        前往註冊<span class="cta-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="overlay-backdrop" id="add-overlay" onclick="handleBackdropClick(event)">
+    <div class="panel floating" id="add-panel">
+      <div class="panel-header">
+        <div>
+          <h2>新增今日紀錄</h2>
+          <p class="hint">開合資產已幫你帶入上一筆的結清資產，記得改成今天實際的結清資產。</p>
+        </div>
+        <button class="panel-close" onclick="closeAddPanel()" aria-label="收合">✕</button>
+      </div>
+      <div class="form-grid">
+        <div class="field date-field">
+          <label for="f-year">日期</label>
+          <div class="date-select">
+            <input id="f-year" type="number" inputmode="numeric" min="1970" max="2200" step="1" placeholder="年" aria-label="年">
+            <select id="f-month" aria-label="月"></select>
+            <select id="f-day" aria-label="日"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-open">開合資產</label>
+          <input id="f-open" type="number" step="0.01" inputmode="decimal">
+        </div>
+        <div class="field">
+          <label for="f-close">結清資產</label>
+          <input id="f-close" type="number" step="0.01" inputmode="decimal">
+        </div>
+        <button class="submit-btn" id="submit-btn" onclick="submitRecord()">新增紀錄</button>
+      </div>
+      <div class="form-msg" id="form-msg"></div>
+    </div>
+  </div>
+
+  <div class="overlay-backdrop" id="status-overlay" onclick="handleStatusBackdropClick(event)">
+    <div class="panel floating status-panel" id="status-panel"></div>
+  </div>
+
+<script>
+  const STORAGE_KEY = 'ledgerApiUrl';
+  let API_URL = localStorage.getItem(STORAGE_KEY) || '';
+  let latestData = null;
+
+  // ---- 日期欄位（年／月／日 顯示順序）----
+  // 年：使用者自行輸入西元年，送出前驗證是合理的 4 位數字
+  // 月：1–12 下拉選單
+  // 日：下拉選單，選項會依照當前年份／月份動態調整（例如 2 月只給 28 或 29 天），避免選出不存在的日期
+  function daysInMonth(year, month){
+    // month 是 1–12；用「下個月第 0 天」取得當月最後一天，會自動處理閏年
+    return new Date(year, month, 0).getDate();
+  }
+
+  function populateDateSelects(){
+    const monthSel = document.getElementById('f-month');
+    monthSel.innerHTML = '';
+    for (let m = 1; m <= 12; m++){
+      const opt = document.createElement('option');
+      opt.value = String(m).padStart(2,'0');
+      opt.textContent = m + '月';
+      monthSel.appendChild(opt);
+    }
+
+    refreshDayOptions();
+
+    document.getElementById('f-year').addEventListener('input', refreshDayOptions);
+    monthSel.addEventListener('change', refreshDayOptions);
+  }
+
+  // 依目前年／月重新產生「日」的選項，並盡量保留使用者原本選的日期
+  function refreshDayOptions(){
+    const daySel = document.getElementById('f-day');
+    const yearVal = parseInt(document.getElementById('f-year').value, 10);
+    const monthVal = parseInt(document.getElementById('f-month').value, 10) || 1;
+    const year = (yearVal && yearVal > 0) ? yearVal : new Date().getFullYear();
+    const maxDay = daysInMonth(year, monthVal);
+    const prevSelected = parseInt(daySel.value, 10) || 0;
+
+    daySel.innerHTML = '';
+    for (let d = 1; d <= maxDay; d++){
+      const opt = document.createElement('option');
+      opt.value = String(d).padStart(2,'0');
+      opt.textContent = d + '日';
+      daySel.appendChild(opt);
+    }
+    daySel.value = String(Math.min(prevSelected || 1, maxDay)).padStart(2,'0');
+  }
+
+  function setDateSelects(dateStr){
+    // dateStr 格式 YYYY-MM-DD
+    const parts = (dateStr || '').split('-');
+    if (parts.length !== 3) return;
+    document.getElementById('f-year').value = parseInt(parts[0], 10);
+    document.getElementById('f-month').value = parts[1];
+    refreshDayOptions();
+    document.getElementById('f-day').value = parts[2];
+  }
+
+  // 回傳 { value, error }：value 是 YYYY-MM-DD 純文字（失敗時為 null），error 是要顯示的錯誤訊息
+  function getDateValue(){
+    const yearRaw = document.getElementById('f-year').value.trim();
+    const m = document.getElementById('f-month').value;
+    const d = document.getElementById('f-day').value;
+
+    if (!yearRaw || !/^\d{4}$/.test(yearRaw)){
+      return { value: null, error: '年份請輸入 4 位數字（例如 2026）' };
+    }
+    const year = parseInt(yearRaw, 10);
+    if (year < 1970 || year > 2200){
+      return { value: null, error: '年份看起來不太合理，請確認一下' };
+    }
+    if (!m || !d){
+      return { value: null, error: '請選擇月份與日期' };
+    }
+    return { value: year + '-' + m + '-' + d, error: null };
+  }
+
+  function fmtMoney(n){
+    if (n === '' || n === null || n === undefined || isNaN(n)) return '—';
+    return Number(n).toLocaleString('en-US', {maximumFractionDigits:2});
+  }
+  function fmtPct(n){
+    if (n === '' || n === null || n === undefined || isNaN(n)) return '—';
+    const v = Number(n) * 100;
+    const sign = v > 0 ? '+' : '';
+    return sign + v.toFixed(1) + '%';
+  }
+  function fmtReturnCombo(amount, rate){
+    if (amount === null || amount === undefined || isNaN(amount) ||
+        rate === null || rate === undefined || rate === '' || isNaN(rate)) return '—';
+    const sign = amount > 0 ? '+' : '';
+    const amtStr = sign + Number(amount).toLocaleString('en-US', {maximumFractionDigits:2});
+    return amtStr + ' (' + fmtPct(rate) + ')';
+  }
+
+  function init(){
+    populateDateSelects();
+    setDateSelects(new Date().toISOString().slice(0,10));
+    if (!API_URL){
+      document.getElementById('gate').hidden = false;
+      return;
+    }
+    document.getElementById('app').hidden = false;
+    loadData();
+  }
+
+  function saveApiUrl(){
+    const val = document.getElementById('gate-input').value.trim();
+    const errEl = document.getElementById('gate-err');
+    if (!val || !val.includes('script.google') || !val.endsWith('/exec')){
+      errEl.classList.add('show');
+      return;
+    }
+    errEl.classList.remove('show');
+    localStorage.setItem(STORAGE_KEY, val);
+    API_URL = val;
+    document.getElementById('gate').hidden = true;
+    document.getElementById('app').hidden = false;
+    loadData();
+  }
+
+  function changeSource(){
+    document.getElementById('app').hidden = true;
+    document.getElementById('gate-input').value = API_URL;
+    document.getElementById('gate').hidden = false;
+  }
+
+  function updateBodyScrollLock(){
+    const addOpen = document.getElementById('add-overlay').classList.contains('open');
+    const statusOpen = document.getElementById('status-overlay').classList.contains('open');
+    document.body.style.overflow = (addOpen || statusOpen) ? 'hidden' : '';
+  }
+
+  function openAddPanel(){
+    const overlay = document.getElementById('add-overlay');
+    overlay.style.display = 'flex';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        overlay.classList.add('open');
+        updateBodyScrollLock();
+      });
+    });
+    setTimeout(() => document.getElementById('f-year').focus(), 60);
+  }
+
+  function closeAddPanel(){
+    const overlay = document.getElementById('add-overlay');
+    overlay.classList.remove('open');
+    updateBodyScrollLock();
+    setTimeout(() => { overlay.style.display = 'none'; }, 180);
+  }
+
+  function handleBackdropClick(e){
+    if (e.target.id === 'add-overlay') closeAddPanel();
+  }
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && document.getElementById('add-overlay').classList.contains('open')){
+      closeAddPanel();
+    }
+    if (e.key === 'Escape' && document.getElementById('status-overlay').classList.contains('open') && statusState !== 'loading'){
+      closeStatusModal();
+    }
+  });
+
+  // ---- 狀態彈窗（確認 / 進度中 / 成功 / 錯誤）共用元件 ----
+  let statusState = null;
+  let statusAutoCloseTimer = null;
+
+  function showStatusModal(state, opts){
+    opts = opts || {};
+    clearTimeout(statusAutoCloseTimer);
+    statusState = state;
+    const overlay = document.getElementById('status-overlay');
+    const panel = document.getElementById('status-panel');
+
+    if (state === 'confirm'){
+      panel.innerHTML =
+        '<div class="status-icon warn">!</div>' +
+        '<h2>' + (opts.title || '確定嗎？') + '</h2>' +
+        '<p class="status-message">' + (opts.message || '') + '</p>' +
+        '<div class="status-actions">' +
+          '<button class="status-btn-secondary" id="status-cancel-btn">取消</button>' +
+          '<button class="status-btn-danger" id="status-confirm-btn">' + (opts.confirmLabel || '確定') + '</button>' +
+        '</div>';
+      document.getElementById('status-cancel-btn').onclick = closeStatusModal;
+      document.getElementById('status-confirm-btn').onclick = function(){
+        if (opts.onConfirm) opts.onConfirm();
+      };
+    } else if (state === 'loading'){
+      panel.innerHTML =
+        '<div class="spinner"></div>' +
+        '<p class="status-message">' + (opts.message || '處理中…') + '</p>';
+    } else if (state === 'success'){
+      panel.innerHTML =
+        '<div class="status-icon success">✓</div>' +
+        '<p class="status-message">' + (opts.message || '完成') + '</p>';
+      statusAutoCloseTimer = setTimeout(closeStatusModal, 1100);
+    } else if (state === 'error'){
+      panel.innerHTML =
+        '<div class="status-icon error">✕</div>' +
+        '<p class="status-message">' + (opts.message || '發生錯誤，請稍後再試。') + '</p>' +
+        '<div class="status-actions">' +
+          '<button class="status-btn-secondary" id="status-ok-btn">知道了</button>' +
+        '</div>';
+      document.getElementById('status-ok-btn').onclick = closeStatusModal;
+    }
+
+    overlay.style.display = 'flex';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        overlay.classList.add('open');
+        updateBodyScrollLock();
+      });
+    });
+  }
+
+  function closeStatusModal(){
+    clearTimeout(statusAutoCloseTimer);
+    statusState = null;
+    const overlay = document.getElementById('status-overlay');
+    overlay.classList.remove('open');
+    updateBodyScrollLock();
+    setTimeout(() => { overlay.style.display = 'none'; }, 180);
+  }
+
+  function handleStatusBackdropClick(e){
+    if (e.target.id !== 'status-overlay') return;
+    if (statusState === 'loading') return; // 進行中不給從背景關閉
+    closeStatusModal();
+  }
+
+  // ---- 刪除模式 ----
+  let deleteMode = false;
+
+  function enterDeleteMode(){
+    deleteMode = true;
+    document.body.classList.add('delete-mode');
+    document.getElementById('delete-toggle').classList.add('active');
+  }
+
+  function exitDeleteMode(){
+    if (!deleteMode) return;
+    deleteMode = false;
+    document.body.classList.remove('delete-mode');
+    document.getElementById('delete-toggle').classList.remove('active');
+  }
+
+  function toggleDeleteMode(){
+    if (deleteMode) exitDeleteMode();
+    else enterDeleteMode();
+  }
+
+  // 點空白處（不是卡片、不是刪除按鈕、不是切換鈕本身）就退出刪除模式
+  document.addEventListener('click', function(e){
+    if (!deleteMode) return;
+    if (e.target.closest('.row, .row-delete-btn, #delete-toggle')) return;
+    exitDeleteMode();
+  });
+
+  function deleteRecord(date, day){
+    showStatusModal('confirm', {
+      title: '刪除這筆紀錄？',
+      message: '第 ' + day + ' 天（' + date + '）刪除後無法復原。',
+      confirmLabel: '刪除',
+      onConfirm: function(){ performDelete(date); }
+    });
+  }
+
+  async function performDelete(date){
+    showStatusModal('loading', { message: '刪除中…' });
+    try{
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: {'Content-Type':'text/plain;charset=utf-8'},
+        body: JSON.stringify({action: 'delete', date: date})
+      });
+      const result = await res.json();
+      if (!result.success){
+        showStatusModal('error', { message: result.error || '刪除失敗，請稍後再試。' });
+        return;
+      }
+      await loadData();
+      exitDeleteMode();
+      showStatusModal('success', { message: '刪除成功' });
+    }catch(err){
+      showStatusModal('error', { message: '連不上你的 Apps Script，確認網址跟網路連線。' });
+    }
+  }
+
+  async function loadData(){
+    const rowsEl = document.getElementById('rows');
+    rowsEl.innerHTML = '<div class="state">正在核對帳冊…</div>';
+    try{
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      latestData = data;
+      render(data);
+    }catch(err){
+      rowsEl.innerHTML = '<div class="state"><div class="big">讀取失敗</div>連不上你的 Apps Script 網址，確認網址正確、且部署權限是「Anyone」。</div>';
+    }
+  }
+
+  function render(data){
+    const init = data.init || {};
+    const dailyRate = (init.dailyTargetRate === null || init.dailyTargetRate === undefined || init.dailyTargetRate === '')
+      ? null : Number(init.dailyTargetRate);
+    const records = (data.records || []).slice();
+    const rowsEl = document.getElementById('rows');
+    const rowCountEl = document.getElementById('row-count');
+
+    if (records.length === 0){
+      document.getElementById('day-eyebrow').textContent = '尚未開帳';
+      document.getElementById('s-current').textContent = '—';
+      document.getElementById('s-target').textContent = '—';
+      document.getElementById('s-actual-return').textContent = '—';
+      document.getElementById('s-target-return').textContent = '—';
+      rowsEl.innerHTML = '<div class="state"><div class="big">還沒有任何紀錄</div>用上面的表單新增第一筆，帳本就會開始累積。</div>';
+      rowCountEl.textContent = '';
+      return;
+    }
+
+    // 由天數由小到大排序，第一筆的開合資產視為起始資產，最後一筆視為最新
+    records.sort((a,b) => Number(a.day) - Number(b.day));
+    const startingAsset = Number(records[0].openAsset) || null;
+
+    // 每筆紀錄的累計目標資產／報酬率：起始資產 * (1 + 每日目標報酬率) ^ 天數
+    // 這一步在前端算，後端只存原始資料
+    const computed = records.map(r => {
+      const day = Number(r.day);
+      const targetAsset = (startingAsset && dailyRate != null)
+        ? startingAsset * Math.pow(1 + dailyRate, day) : null;
+      const targetReturnRate = (targetAsset != null && startingAsset)
+        ? (targetAsset / startingAsset - 1) : null;
+      return Object.assign({}, r, { targetAsset, targetReturnRate });
+    });
+
+    const latest = computed[computed.length - 1];
+
+    document.getElementById('day-eyebrow').textContent = '第 ' + latest.day + ' 天';
+    document.getElementById('s-current').textContent = fmtMoney(latest.closeAsset);
+    document.getElementById('s-target').textContent = fmtMoney(latest.targetAsset);
+
+    const actualReturn = startingAsset ? (Number(latest.closeAsset) / startingAsset - 1) : null;
+    const targetReturnVal = latest.targetReturnRate;
+    const actualAmount = startingAsset ? (Number(latest.closeAsset) - startingAsset) : null;
+    const targetAmount = (startingAsset && latest.targetAsset != null) ? (latest.targetAsset - startingAsset) : null;
+
+    const actualEl = document.getElementById('s-actual-return');
+    actualEl.textContent = fmtReturnCombo(actualAmount, actualReturn);
+    actualEl.className = 'value combo ' + (actualReturn == null ? '' : (actualReturn >= (targetReturnVal||0) ? 'jade' : 'brick'));
+
+    document.getElementById('s-target-return').textContent = fmtReturnCombo(targetAmount, targetReturnVal);
+
+    // 表單「開合資產」帶入最新一筆的結清資產
+    const openField = document.getElementById('f-open');
+    if (!openField.dataset.touched){
+      openField.value = latest.closeAsset;
+    }
+
+    // 由新到舊呈現
+    const display = computed.slice().reverse();
+    rowCountEl.textContent = '共 ' + display.length + ' 筆';
+    rowsEl.innerHTML = '';
+    display.forEach((r, i) => {
+      const dailyReturn = (Number(r.closeAsset) / Number(r.openAsset) - 1);
+      const dailyAmount = Number(r.closeAsset) - Number(r.openAsset);
+      const rowActual = startingAsset ? (Number(r.closeAsset) / startingAsset - 1) : null;
+      const rowTarget = r.targetReturnRate;
+
+      let vsClass = 'flat', vsText = '—';
+      if (rowActual != null && rowTarget != null){
+        const diff = rowActual - rowTarget;
+        vsClass = diff >= 0 ? 'jade' : 'brick';
+        vsText = (diff >= 0 ? '超前目標 ' : '落後目標 ') + Math.abs(diff*100).toFixed(1) + '%';
+      }
+
+      const wrap = document.createElement('div');
+      wrap.className = 'row-wrap';
+      wrap.style.animationDelay = (i * 0.02) + 's';
+      wrap.innerHTML =
+        '<button class="row-delete-btn" onclick="deleteRecord(\'' + r.date + '\', ' + r.day + ')">刪除</button>' +
+        '<div class="row">' +
+          '<div class="stamp">No.' + String(r.day).padStart(3,'0') + '</div>' +
+          '<div class="date">' + r.date + '</div>' +
+          '<div class="assets"><span class="assets-label">資產變化</span><span class="assets-value">' + fmtMoney(r.openAsset) + '<span class="arrow">→</span>' + fmtMoney(r.closeAsset) + '</span></div>' +
+          '<div class="row-footer">' +
+            '<div class="daily ' + (dailyReturn >= 0 ? 'jade' : 'brick') + '">' + fmtReturnCombo(dailyAmount, dailyReturn) + '</div>' +
+            '<div class="vs-target ' + vsClass + '">' + vsText + '</div>' +
+          '</div>' +
+        '</div>';
+      rowsEl.appendChild(wrap);
+    });
+  }
+
+  document.getElementById('f-open').addEventListener('input', function(){
+    this.dataset.touched = '1';
+  });
+
+  async function submitRecord(){
+    const dateResult = getDateValue();
+    const open = document.getElementById('f-open').value;
+    const close = document.getElementById('f-close').value;
+    const msg = document.getElementById('form-msg');
+
+    msg.className = 'form-msg';
+    if (dateResult.error){
+      msg.textContent = dateResult.error;
+      msg.classList.add('show','error');
+      return;
+    }
+    if (open === '' || close === ''){
+      msg.textContent = '開合資產、結清資產都要填。';
+      msg.classList.add('show','error');
+      return;
+    }
+    const date = dateResult.value;
+
+    showStatusModal('loading', { message: '新增中…' });
+
+    try{
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: {'Content-Type':'text/plain;charset=utf-8'},
+        body: JSON.stringify({action: 'add', date: date, openAsset: Number(open), closeAsset: Number(close)})
+      });
+      const result = await res.json();
+
+      if (!result.success){
+        showStatusModal('error', { message: result.error || '寫入失敗，請稍後再試。' });
+        return;
+      }
+
+      document.getElementById('f-close').value = '';
+      document.getElementById('f-open').dataset.touched = '';
+      await loadData();
+      showStatusModal('success', { message: '第 ' + result.day + ' 天已記入帳本' });
+      closeAddPanel();
+    }catch(err){
+      showStatusModal('error', { message: '連不上你的 Apps Script，確認網址跟網路連線。' });
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
