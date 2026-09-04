@@ -1,0 +1,152 @@
+:root{
+    --cover:#1B3A2F;
+    --cover-ink:#E9E3CE;
+    --cover-ink-dim:#B9C4B7;
+    --page:#F6F2E7;
+    --panel:#FBF9F2;
+    --ink:#221F19;
+    --ink-soft:#726C5C;
+    --rule:#DCD4BE;
+    --stamp:#A3272B;
+    --seal:#2F6F52;
+    --gold:#93732F;
+    --c1:#2F6F52; --c2:#93732F; --c3:#6E4A34; --c4:#3E6E82; --c5:#8B4A42;
+    --sidenav-w:230px;
+    --tabbar-h:66px;
+    --font-cjk:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;background:var(--page);}
+  body{font-family:var(--font-cjk);color:var(--ink);}
+  button{font-family:inherit;}
+
+  /* ================= 設定 / 讀取 / 錯誤 全螢幕畫面 ================= */
+  .center-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;}
+  .center-screen h1{font-size:17px;margin:14px 0 6px;}
+  .center-screen p{font-size:13px;color:var(--ink-soft);line-height:1.7;margin:0 0 18px;max-width:320px;}
+  .stamp-mark{width:52px;height:52px;border-radius:50%;border:2px solid var(--seal);color:var(--seal);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:20px;transform:rotate(-8deg);flex:none;}
+  .stamp-mark.err{border-color:var(--stamp);color:var(--stamp);}
+  input.url-input{width:100%;max-width:340px;font-family:var(--font-mono);font-size:12.5px;padding:11px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--panel);color:var(--ink);margin-bottom:10px;}
+  input.url-input:focus{outline:2px solid var(--seal);outline-offset:1px;}
+  .primary-btn{font-family:var(--font-cjk);font-size:13.5px;font-weight:500;color:#fff;background:var(--cover);border:none;padding:11px 22px;border-radius:8px;cursor:pointer;width:100%;max-width:340px;}
+  .primary-btn:active{background:#132C22;}
+  .text-btn{margin-top:14px;font-size:12px;color:var(--ink-soft);background:none;border:none;text-decoration:underline;cursor:pointer;}
+  .hint{font-size:11px;color:var(--ink-soft);margin-top:14px;line-height:1.7;max-width:300px;}
+  .error-detail{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-soft);background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:8px 10px;max-width:320px;word-break:break-all;margin-top:12px;text-align:left;}
+  .hidden{display:none !important;}
+
+  /* ================= App Shell ================= */
+  .shell{display:flex;min-height:100vh;}
+  .sidenav{display:none;flex-direction:column;width:var(--sidenav-w);flex:none;background:linear-gradient(180deg,var(--cover) 0%,#132C22 100%);color:var(--cover-ink);padding:22px 16px;}
+  .brand{font-family:var(--font-mono);font-size:17px;font-weight:600;letter-spacing:.01em;margin:2px 4px 26px;display:flex;flex-direction:column;gap:2px;}
+  .brand .brand-sub{font-family:var(--font-cjk);font-size:11px;font-weight:400;color:var(--cover-ink-dim);letter-spacing:.04em;}
+  .navlist{display:flex;flex-direction:column;gap:4px;}
+  .navitem{display:flex;align-items:center;gap:11px;text-align:left;background:none;border:none;color:var(--cover-ink-dim);padding:10px 10px;border-radius:8px;cursor:pointer;font-size:13.5px;border-left:3px solid transparent;}
+  .navitem .glyph{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;border:1px solid rgba(233,227,206,.35);flex:none;}
+  .navitem.active{color:var(--cover-ink);background:rgba(255,255,255,.08);border-left-color:var(--gold);}
+  .navitem.active .glyph{background:rgba(233,227,206,.14);border-color:var(--cover-ink);}
+  .navitem:not(.active):hover{color:var(--cover-ink);}
+  .sidefoot{margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);}
+  .sidefoot .ts{font-family:var(--font-mono);font-size:10.5px;color:var(--cover-ink-dim);}
+
+  .main{flex:1;min-width:0;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--page);z-index:5;}
+  .topbar h1{font-size:16px;margin:0;}
+  .topbar .sub{font-size:11px;color:var(--ink-soft);margin-top:2px;font-family:var(--font-mono);}
+  .top-actions{display:flex;gap:8px;flex:none;}
+  .icon-btn{background:var(--panel);border:1px solid var(--rule);color:var(--ink);width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;}
+  .icon-btn:active{background:var(--rule);}
+
+  .main-inner{max-width:960px;margin:0 auto;padding:22px 20px 90px;}
+  .view{display:block;}
+
+  .panel{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:18px 18px 6px;margin-bottom:18px;}
+  .panel h2{font-size:14px;font-weight:600;margin:0 0 2px;}
+  .panel .sub{font-size:11.5px;color:var(--ink-soft);margin-bottom:10px;}
+
+  .row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--rule);}
+  .row:last-child{border-bottom:none;}
+  .row-name{font-size:13.5px;}
+  .row-sub{display:block;font-size:11px;color:var(--ink-soft);margin-top:1px;}
+  .row-amount{font-family:var(--font-mono);font-size:14px;font-weight:500;white-space:nowrap;}
+  .neg{color:var(--stamp);}
+  .bar-track{height:4px;background:var(--rule);border-radius:2px;margin-top:6px;overflow:hidden;}
+  .bar-fill{height:100%;background:var(--gold);border-radius:2px;}
+
+  /* ---- 總覽：深綠封面卡 ---- */
+  .hero{background:linear-gradient(165deg,var(--cover) 0%,#132C22 100%);color:var(--cover-ink);border-radius:14px;padding:22px 22px 20px;margin-bottom:18px;}
+  .hero .total-label{font-size:12.5px;color:var(--cover-ink-dim);}
+  .hero .total-value{font-family:var(--font-mono);font-size:34px;font-weight:600;letter-spacing:-.01em;margin-top:4px;word-break:break-all;}
+  .hero .total-delta{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-family:var(--font-mono);font-size:13px;padding:3px 9px;border-radius:100px;background:rgba(255,255,255,.08);}
+  .up{color:#8FD9B0;} .down{color:#F0A0A0;} .flat{color:var(--cover-ink-dim);}
+  .hero .spark-hint{font-size:10.5px;color:var(--cover-ink-dim);margin-top:16px;}
+
+  /* ---- 互動折線圖（總覽 / 收入共用） ---- */
+  .spark-wrap{position:relative;margin-top:6px;touch-action:none;}
+  .spark-wrap svg{display:block;width:100%;height:56px;cursor:grab;}
+  .spark-wrap.compact svg{height:44px;}
+  .spark-labels{display:flex;justify-content:space-between;margin-top:6px;font-family:var(--font-mono);font-size:10.5px;}
+  .spark-tooltip{position:absolute;pointer-events:none;transform:translate(-50%,-100%);top:0;left:50%;background:var(--cover-ink);color:var(--cover);font-family:var(--font-mono);font-size:11px;font-weight:600;padding:4px 8px;border-radius:6px;white-space:nowrap;opacity:0;transition:opacity .1s;}
+  .spark-tooltip.on-cream{background:var(--ink);color:var(--panel);}
+  .spark-tooltip.show{opacity:1;}
+
+  /* ---- 收入：安靜的米色卡 + 印章徽章 ---- */
+  .income-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px;}
+  .income-head .stamp-mark{width:44px;height:44px;font-size:16px;}
+  .income-head h2{font-size:15.5px;margin:0 0 3px;}
+  .income-head p{font-size:12px;color:var(--ink-soft);margin:0;line-height:1.6;max-width:420px;}
+  .history-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--rule);font-size:12.5px;}
+  .history-row:last-child{border-bottom:none;}
+  .history-row .m{color:var(--ink-soft);font-family:var(--font-mono);font-size:11.5px;}
+  .history-row .v{font-family:var(--font-mono);}
+
+  /* ---- 甜甜圈圖（總覽資產比例） ---- */
+  .donut-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
+  .donut-wrap svg{width:150px;height:150px;flex:none;}
+  .legend{width:100%;}
+  .legend-row{display:flex;align-items:center;gap:9px;padding:9px 2px;border-bottom:1px dashed var(--rule);font-size:13px;}
+  .legend-row:last-child{border-bottom:none;}
+  .swatch{width:10px;height:10px;border-radius:50%;flex:none;}
+  .legend-row .lname{flex:1;}
+  .legend-row .lamt{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);white-space:nowrap;}
+  .legend-row .lpct{font-family:var(--font-mono);font-size:13px;font-weight:600;width:48px;text-align:right;flex:none;}
+
+  /* ---- 折線圖上的定位圓點（用 HTML 覆蓋，避免 SVG 非等比縮放造成橢圓變形） ---- */
+  .spark-dot{position:absolute;width:8px;height:8px;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 0 2px rgba(0,0,0,.15);}
+
+  /* ---- 帳戶明細：分類標題旁的合計金額 ---- */
+  .panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .panel-total{font-family:var(--font-mono);font-size:14px;font-weight:600;white-space:nowrap;flex:none;}
+
+  /* ---- 信用卡使用率圓環 ---- */
+  .gauge-wrap{position:relative;width:150px;height:150px;margin:4px auto 8px;}
+  .gauge-wrap svg{width:100%;height:100%;}
+  .gauge-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .gauge-pct{font-family:var(--font-mono);font-size:25px;font-weight:600;}
+  .gauge-label{font-size:11px;color:var(--ink-soft);margin-top:2px;}
+  .gauge-figures{text-align:center;font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);margin-bottom:4px;}
+
+  .grid-2{display:block;}
+  .accounts-grid{display:block;}
+
+  footer.foot-note{font-size:10.5px;color:var(--ink-soft);font-family:var(--font-mono);text-align:center;margin-top:6px;}
+
+  /* ---- 底部分頁列（手機） ---- */
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;height:var(--tabbar-h);background:linear-gradient(180deg,#173328 0%,var(--cover) 100%);border-top:1px solid #0F231B;z-index:10;}
+  .tabitem{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:none;border:none;color:var(--cover-ink-dim);cursor:pointer;font-size:10px;}
+  .tabitem .glyph{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:11px;border:1px solid rgba(233,227,206,.3);}
+  .tabitem.active{color:var(--cover-ink);}
+  .tabitem.active .glyph{border-color:var(--gold);color:var(--gold);}
+
+  /* ================= 響應式：桌面 ================= */
+  @media (min-width:860px){
+    .sidenav{display:flex;}
+    .tabbar{display:none;}
+    .main-inner{padding-bottom:40px;}
+    .grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:start;}
+    .grid-2 .hero{margin-bottom:0;}
+    .accounts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+    .accounts-grid .panel{margin-bottom:0;}
+  }

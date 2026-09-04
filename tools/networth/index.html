@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Networth</title>
+<meta name="apple-mobile-web-app-title" content="Networth">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1B3A2F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- ================= 設定畫面 ================= -->
+<div class="center-screen" id="setupScreen">
+  <div class="stamp-mark">帳</div>
+  <h1>連接你的資產帳本</h1>
+  <p>貼上部署好的 Apps Script 網頁應用程式網址（結尾為 <code>/exec</code>），資料只會從你的試算表讀取，不會被寫入或修改。</p>
+  <input class="url-input" id="urlInput" type="url" placeholder="https://script.google.com/macros/s/.../exec" autocapitalize="off" autocorrect="off" spellcheck="false">
+  <button class="primary-btn" id="saveUrlBtn">儲存並讀取</button>
+  <p class="hint" id="setupHint"></p>
+</div>
+
+<!-- ================= 讀取中畫面 ================= -->
+<div class="center-screen hidden" id="loadingScreen">
+  <div class="stamp-mark">…</div>
+  <h1>讀取中</h1>
+  <p>正在向試算表核對最新的餘額。</p>
+</div>
+
+<!-- ================= 錯誤畫面 ================= -->
+<div class="center-screen hidden" id="errorScreen">
+  <div class="stamp-mark err">!</div>
+  <h1>讀取失敗</h1>
+  <p id="errorMessage">暫時無法取得資料。</p>
+  <div class="error-detail hidden" id="errorDetail"></div>
+  <button class="primary-btn" id="retryBtn" style="margin-top:16px;">重試</button>
+  <button class="text-btn" id="changeUrlBtn">更換 / 重新設定網址</button>
+</div>
+
+<!-- ================= App Shell ================= -->
+<div class="shell hidden" id="shell">
+  <aside class="sidenav">
+    <div class="brand">Networth<span class="brand-sub">資產帳本</span></div>
+    <nav class="navlist" id="sideNavList"></nav>
+    <div class="sidefoot"><div class="ts" id="sideTs">—</div></div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <h1 id="topTitle">總覽</h1>
+        <div class="sub" id="topSub">—</div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="refreshBtn" aria-label="重新整理">↻</button>
+        <button class="icon-btn" id="gearBtn" aria-label="設定">⚙</button>
+      </div>
+    </header>
+
+    <main class="main-inner">
+      <!-- 總覽 -->
+      <section class="view" id="view-overview">
+        <div class="grid-2">
+          <div class="hero">
+            <div class="total-label">總資產</div>
+            <div class="total-value" id="totalValue">—</div>
+            <div class="total-delta flat" id="totalDelta">—</div>
+            <div class="spark-wrap" id="sparkWrap">
+              <svg id="sparkSvg" viewBox="0 0 300 56" preserveAspectRatio="none"></svg>
+              <div class="spark-tooltip" id="sparkTooltip"></div>
+            </div>
+            <div class="spark-labels" id="sparkLabels"></div>
+            <div class="spark-hint">按住線條可查看過去月份的數字</div>
+          </div>
+          <div class="panel">
+            <h2>資產配置</h2>
+            <div class="sub">五大類別佔總資產的比例（不含信用卡負債）</div>
+            <div class="donut-wrap">
+              <svg viewBox="0 0 120 120" id="donutSvg"></svg>
+              <div class="legend" id="donutLegend"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 收入（獨立） -->
+      <section class="view hidden" id="view-income">
+        <div class="panel">
+          <div class="income-head">
+            <div class="stamp-mark">收</div>
+            <div>
+              <h2 id="incomeTitle">本月收入</h2>
+              <p>獨立記錄的收入項目，不併入資產總覽的計算。</p>
+            </div>
+          </div>
+          <div class="spark-wrap compact" id="incomeSparkWrap">
+            <svg id="incomeSparkSvg" viewBox="0 0 300 44" preserveAspectRatio="none"></svg>
+            <div class="spark-tooltip on-cream" id="incomeSparkTooltip"></div>
+          </div>
+          <div class="spark-labels" id="incomeSparkLabels" style="color:var(--ink-soft);"></div>
+        </div>
+        <div class="grid-2">
+          <div class="panel">
+            <h2 id="incomeCurrentHeading">本月明細</h2>
+            <div class="sub">依項目列出的收入來源</div>
+            <div id="incomeList"></div>
+          </div>
+          <div class="panel">
+            <h2>歷史月份</h2>
+            <div class="sub">僅列出有收入紀錄的月份</div>
+            <div id="incomeHistory"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 信用卡（獨立） -->
+      <section class="view hidden" id="view-credit">
+        <div class="panel">
+          <h2>總額度使用率</h2>
+          <div class="sub">所有信用卡消費金額 ÷ 總額度</div>
+          <div class="gauge-wrap">
+            <svg viewBox="0 0 120 120" id="creditGaugeSvg"></svg>
+            <div class="gauge-center">
+              <div class="gauge-pct" id="creditGaugePct">—</div>
+              <div class="gauge-label">使用率</div>
+            </div>
+          </div>
+          <div class="gauge-figures" id="creditGaugeFigures">—</div>
+        </div>
+        <div class="panel">
+          <h2>各卡明細</h2>
+          <div class="sub">本期消費與個別額度使用率</div>
+          <div id="creditList"></div>
+        </div>
+        <footer class="foot-note ts-footer">—</footer>
+      </section>
+
+      <!-- 帳戶明細 -->
+      <section class="view hidden" id="view-accounts">
+        <div class="accounts-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <div><h2>台幣帳戶</h2><div class="sub">各銀行活存餘額</div></div>
+              <div class="panel-total" id="twdTotal">—</div>
+            </div>
+            <div id="twdList"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head">
+              <div><h2>台股帳戶</h2><div class="sub">持倉市值（新台幣）</div></div>
+              <div class="panel-total" id="twStockTotal">—</div>
+            </div>
+            <div id="twStockList"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head">
+              <div><h2>美股帳戶</h2><div class="sub">持倉市值（美元）</div></div>
+              <div class="panel-total" id="usStockTotal">—</div>
+            </div>
+            <div id="usStockList"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head">
+              <div><h2>加密貨幣</h2><div class="sub">持倉市值（美元）</div></div>
+              <div class="panel-total" id="cryptoTotal">—</div>
+            </div>
+            <div id="cryptoList"></div>
+          </div>
+        </div>
+        <footer class="foot-note ts-footer">—</footer>
+      </section>
+    </main>
+  </div>
+
+  <nav class="tabbar" id="tabbar"></nav>
+</div>
+<script src="scripts.js"></script>
+</body>
+</html>
