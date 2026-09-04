@@ -20,11 +20,11 @@
   }
 
   async function getStoredUrl(){
-    try{ const res = await window.storage.get(STORAGE_KEY, false); return res && res.value ? res.value : null; }
+    try{ return localStorage.getItem(STORAGE_KEY); }
     catch(e){ return null; }
   }
   async function setStoredUrl(url){
-    try{ await window.storage.set(STORAGE_KEY, url, false); return true; } catch(e){ return false; }
+    try{ localStorage.setItem(STORAGE_KEY, url); return true; } catch(e){ return false; }
   }
 
   function fmtTWD(n){
@@ -99,7 +99,8 @@
     if(id === "overview") return el("sideTs").textContent;
     if(id === "income") return "獨立於資產總覽";
     if(id === "credit") return "獨立於資產配置";
-    return "所有帳戶原始資料";
+    if(id === "accounts") return el("sideTs").textContent;
+    return "";
   }
 
   /* ---------- 互動折線圖：可按住拖動查看歷史數字 ---------- */
@@ -290,7 +291,7 @@
     const lastMonth = monthly[monthly.length - 1];
     const asOf = lastMonth ? "截至 " + lastMonth.month : "—";
     el("sideTs").textContent = asOf;
-    if(currentView === "overview") el("topSub").textContent = asOf;
+    if(currentView === "overview" || currentView === "accounts") el("topSub").textContent = asOf;
 
     const deltaEl = el("totalDelta");
     if(lastMonth && lastMonth.growth !== "" && lastMonth.growth !== null && lastMonth.growth !== undefined){
