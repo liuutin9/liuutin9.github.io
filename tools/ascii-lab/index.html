@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a1a1a">
+  <meta name="description" content="圖片轉 ASCII 文字畫工具。支援裁切、效果調整，以及 Verilog、C、Python、Bash 匯出。" data-i18n-content="圖片轉 ASCII 文字畫工具。支援裁切、效果調整，以及 Verilog、C、Python、Bash 匯出。">
+  <title>ASCII Lab | You-Ting Liu</title>
+  <link rel="icon" href="https://liuutin9.github.io/icon.ico">
+  <link rel="canonical" href="https://liuutin9.github.io/tools/ascii-lab/">
+  <meta property="og:title" content="ASCII Lab | You-Ting Liu">
+  <meta property="og:description" content="把照片與梗圖變成 ASCII 文字畫，匯出純文字、Verilog、C、Python 或 Bash。" data-i18n-content="把照片與梗圖變成 ASCII 文字畫，匯出純文字、Verilog、C、Python 或 Bash。">
+  <meta property="og:image" content="https://liuutin9.github.io/logo_dark.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace" data-i18n="跳到圖片轉換工具">跳到圖片轉換工具</a>
+  <nav class="site-nav" aria-label="網站導覽" data-i18n-aria-label="網站導覽">
+    <a class="logo" href="https://liuutin9.github.io/" aria-label="You-Ting Liu 首頁" data-i18n-aria-label="You-Ting Liu 首頁"><img src="https://liuutin9.github.io/icon.png" alt="" class="nav-icon">YOU-TING <span>LIU</span></a>
+    <div class="nav-right">
+      <div class="site-language"><button id="site-language" class="language-trigger" type="button" aria-label="介面語言" title="介面語言" data-i18n-aria-label="介面語言" data-i18n-title="介面語言" aria-haspopup="menu" aria-expanded="false" aria-controls="site-language-menu"><svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a17 17 0 0 1 0 18 17 17 0 0 1 0-18Z"></path></svg></button><div id="site-language-menu" class="language-menu" role="menu" aria-labelledby="site-language" hidden><button type="button" role="menuitemradio" data-language="zh-TW" aria-checked="true" lang="zh-Hant">繁體中文</button><button type="button" role="menuitemradio" data-language="en" aria-checked="false" lang="en">English</button></div></div>
+      <button id="site-theme" class="theme-toggle" type="button" aria-label="切換網站深淺色模式" aria-pressed="false" data-i18n-aria-label="切換網站深淺色模式"><svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg><svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg></button>
+    </div>
+  </nav>
+  <div class="app">
+    <section class="hero">
+      <div><div class="eyebrow">TOOLS / IMAGE TO TEXT</div><h1>ASCII <span>Lab</span></h1><p class="hero-desc"><span data-i18n="把照片與梗圖，變成可以貼進終端機的文字畫。">把照片與梗圖，變成可以貼進終端機的文字畫。</span><br><span data-i18n="從一張圖片開始，讓字元拼出你的下一個靈感。">從一張圖片開始，讓字元拼出你的下一個靈感。</span></p></div>
+      <div class="hero-meta"><span class="local-badge"><span class="status-dot"></span><span data-i18n="圖片留在你的裝置">圖片留在你的裝置</span></span><div class="hero-tags"><span>ASCII ART</span><span>CODE EXPORT</span></div></div>
+    </section>
+    <main id="workspace">
+      <aside class="source-panel">
+        <div class="section-heading"><span class="step">01 /</span><h2 data-i18n="圖片與設定">圖片與設定</h2></div>
+        <input id="file" type="file" accept="image/*,.heic,.heif" hidden>
+        <button id="upload" class="upload-button"><span>＋</span><span data-i18n="選擇圖片"> 選擇圖片</span><span class="upload-hint" data-i18n="或拖曳、貼上">或拖曳、貼上</span></button>
+        <div id="dropzone" class="source-frame">
+          <canvas id="source" aria-label="原始圖片預覽；開啟裁切後可拖曳框選" data-i18n-aria-label="原始圖片預覽；開啟裁切後可拖曳框選"></canvas>
+          <span id="crop-badge" class="crop-badge" hidden data-i18n="裁切中">裁切中</span>
+        </div>
+        <div class="source-meta"><span id="filename">範例：太空貓</span><span id="image-size"></span></div>
+        <div class="crop-tools"><label class="switch-label"><input id="crop-mode" type="checkbox"><span class="toggle"></span><span data-i18n="拖曳框選裁切">拖曳框選裁切</span></label><button id="crop-reset" class="text-button" data-i18n="還原">還原</button></div>
+        <p id="crop-help" class="helper" hidden data-i18n="在圖片上拖曳，保留想轉換的範圍。">在圖片上拖曳，保留想轉換的範圍。</p>
+        <div class="divider"></div>
+        <div class="control"><label for="columns"><span data-i18n="輸出寬度">輸出寬度 </span><output id="columns-value">84</output></label><input id="columns" type="range" min="24" max="180" value="84" step="1"><div class="range-captions"><span data-i18n="輪廓簡潔">輪廓簡潔</span><span data-i18n="細節豐富">細節豐富</span></div></div>
+        <div class="control"><label for="preset" data-i18n="字元風格">字元風格</label><select id="preset"><option value="classic" data-i18n="經典 ASCII · . : - = + * # % @">經典 ASCII · . : - = + * # % @</option><option value="meme" data-i18n="梗圖風格 · . ! : #">梗圖風格 · . ! : #</option><option value="terminal" data-i18n="終端機 · ! i t f L C G @">終端機 · ! i t f L C G @</option><option value="blocks" data-i18n="圓點 · . o O 0 @">圓點 · . o O 0 @</option><option value="custom" data-i18n="自訂字元">自訂字元</option></select><div id="custom-wrap" hidden><input id="custom" class="text-input mono" type="text" value=" .:-=+*#%@" maxlength="64" spellcheck="false" aria-label="自訂字元，由稀疏排到密集" data-i18n-aria-label="自訂字元，由稀疏排到密集"><p class="helper" data-i18n="由稀疏排到密集，空格也算一個字元。">由稀疏排到密集，空格也算一個字元。</p></div></div>
+        <div class="control"><label for="font-family" data-i18n="字型">字型</label><select id="font-family"><option value="mono" data-i18n="等寬字體（系統）">等寬字體（系統）</option></select></div>
+        <div class="control"><label for="contrast"><span data-i18n="對比">對比 </span><output id="contrast-value">1.2×</output></label><input id="contrast" type="range" min="50" max="250" step="5" value="120"></div>
+        <div class="control"><label for="brightness"><span data-i18n="亮度">亮度 </span><output id="brightness-value">0</output></label><input id="brightness" type="range" min="-100" max="100" step="1" value="0"></div>
+        <div class="toggle-row"><label class="switch-label"><input id="invert" type="checkbox"><span class="toggle"></span><span data-i18n="亮暗反轉">亮暗反轉</span></label><label class="switch-label"><input id="dither" type="checkbox"><span class="toggle"></span><span data-i18n="抖色">抖色</span></label></div>
+        <details><summary><span data-i18n="進階設定">進階設定 </span><span>＋</span></summary><div class="advanced"><div class="control"><label for="gamma"><span data-i18n="中間調">中間調 </span><output id="gamma-value">1.0</output></label><input id="gamma" type="range" min="50" max="200" value="100" step="5"></div><button id="reset-settings" class="secondary small" data-i18n="重設所有效果">重設所有效果</button></div></details>
+      </aside>
+      <section class="result-panel">
+        <div class="section-heading"><span class="step">02 /</span><h2 data-i18n="文字畫預覽">文字畫預覽</h2><span class="live-badge">LIVE</span></div>
+        <div class="terminal">
+          <div class="terminal-bar"><div class="dots"><i></i><i></i><i></i></div><span class="terminal-filename">art.txt</span><button id="theme" class="terminal-theme" aria-label="切換預覽亮暗主題" title="切換預覽亮暗主題" data-i18n-aria-label="切換預覽亮暗主題" data-i18n-title="切換預覽亮暗主題">◐</button></div>
+          <div id="output-wrap" class="output-wrap"><pre id="output" tabindex="0" role="region" aria-label="輸出內容" data-i18n-aria-label="輸出內容"></pre><textarea id="copy-fallback" readonly aria-label="請長按或按 Ctrl+C 複製" hidden data-i18n-aria-label="請長按或按 Ctrl+C 複製"></textarea></div>
+          <div class="terminal-status"><span><span class="status-dot"></span><span id="dimensions">準備中</span></span><span id="char-count"></span></div>
+        </div>
+        <div class="result-tools"><div class="export-format"><label for="export-language" data-i18n="匯出語言">匯出語言</label><select id="export-language" aria-controls="output"><option value="txt" data-i18n="純文字">純文字</option><option value="verilog">Verilog</option><option value="c">C</option><option value="python">Python</option><option value="bash">Bash</option></select></div><div class="exports"><button id="copy" class="secondary export-icon" type="button" aria-label="複製（保留字型）" title="複製（保留字型）" data-i18n-aria-label="複製（保留字型）" data-i18n-title="複製（保留字型）"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button><button id="download-image" class="secondary export-icon" type="button" aria-label="下載文字畫 PNG" title="下載文字畫 PNG" data-i18n-aria-label="下載文字畫 PNG" data-i18n-title="下載文字畫 PNG"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8" cy="8" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg></button><button id="download" class="primary export-icon" type="button" aria-label="下載 art.txt" title="下載 art.txt" data-i18n-aria-label="下載 art.txt" data-i18n-title="下載 art.txt"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path></svg></button></div></div>
+      </section>
+    </main>
+    <footer class="site-footer"><img src="https://liuutin9.github.io/logo_dark.png" alt="Utin Logo" class="footer-logo logo-dark-mode"><img src="https://liuutin9.github.io/logo_light.png" alt="Utin Logo" class="footer-logo logo-light-mode"><p><span data-i18n="© 2026 劉祐廷 You-Ting Liu.">© 2026 劉祐廷 You-Ting Liu.</span><br>Inspired by the Red-winged Blackbird.</p></footer>
+  </div>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+
+</body>
+</html>
