@@ -1,0 +1,70 @@
+/* Home page only. Shared styles live in shared/styles.css. */
+
+/* ---------- hero ---------- */
+.hero .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(24px,5vw,64px);align-items:center;padding-top:clamp(40px,8vw,96px);padding-bottom:clamp(40px,8vw,96px)}
+.hero h1{font-size:clamp(2.4rem,6.4vw,4.4rem);margin:0 0 .15em}
+.hero .zh{font-family:"Noto Serif TC",serif;font-weight:500;font-size:clamp(1.4rem,3vw,2rem);color:#d9c9ee;margin:0 0 1.2rem}
+.hero .role{font-size:1.05rem}
+.hero .role strong,.hero .role span{display:block}
+.hero .role strong{font-weight:500;font-size:1.2rem;margin-bottom:.15rem}
+.hero .role small{display:block;color:#cdbfe3;font-size:.95rem;margin-top:.5rem}
+.contact{margin-top:1.6rem;display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:.95rem;max-width:30em}
+.contact dt{color:#cdbfe3}
+.contact dd{margin:0}
+.portrait{justify-self:center;width:min(100%,340px);background:#fff;border-radius:50% 50% 18px 18px / 38% 38% 18px 18px;padding:10px;box-shadow:0 0 0 1px rgba(255,255,255,.2)}
+.portrait img{border-radius:inherit;width:100%;aspect-ratio:1/1.1;object-fit:cover;object-position:center top;background:#eee}
+
+/* ---------- sections ---------- */
+.lede{max-width:40em;font-size:1.05rem;overflow-wrap:anywhere}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);margin-top:2rem}
+.list{margin:0;padding:0;list-style:none}
+.list li{padding:.55rem 0 .55rem 1.1rem;border-bottom:1px solid var(--line);position:relative}
+.list li::before{content:"";position:absolute;left:0;top:1.2em;width:6px;height:6px;background:var(--copper)}
+.list.plain li{padding-left:0}
+.list.plain li::before{display:none}
+
+/* courses: ruled list, same rhythm as awards */
+.courses{margin:1.4rem 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.courses li{display:grid;grid-template-columns:96px 1fr;gap:4px 24px;padding:16px 0;border-bottom:1px solid var(--line)}
+.courses .code{font-family:var(--serif);font-size:1.25rem;color:var(--purple);line-height:1.4}
+.courses a{color:var(--ink)}
+.courses a:hover{color:var(--purple)}
+.courses .en{display:block;color:var(--ink-soft);font-size:.93rem}
+
+/* awards: left column is the year, right column the awards */
+.awards{margin:0;padding:0;list-style:none}
+.awards>li{display:grid;grid-template-columns:96px 1fr;gap:8px 24px;padding:18px 0;border-bottom:1px solid var(--line)}
+.awards .yr{font-family:var(--serif);font-size:1.5rem;color:var(--purple);line-height:1.2}
+.awards ul{margin:0;padding:0;list-style:none}
+.awards ul li{padding:.15rem 0 .8rem}
+.awards ul li:last-child{padding-bottom:0}
+.awards .zh{display:block;color:var(--ink-soft);font-size:.93rem}
+.awards .who{display:block;color:var(--ink-soft);font-size:.93rem}
+.awards .hi{font-weight:500}
+
+/* news */
+.news{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(20px,4vw,48px);align-items:start;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.news img{width:100%;height:100%;min-height:240px;object-fit:cover}
+.news .body{padding:clamp(20px,3vw,32px)}
+.news .date{color:var(--copper);font-weight:600;font-size:.95rem}
+.news .src{color:var(--ink-soft);font-size:.92rem}
+
+/* quote */
+.quote{background:var(--ink);color:#eee9f6;text-align:left}
+.quote blockquote{margin:0;max-width:30em;font-family:var(--serif);font-size:clamp(1.5rem,3.6vw,2.4rem);line-height:1.3;font-style:italic;font-weight:400}
+.quote cite{display:block;margin-top:1rem;font-family:var(--sans);font-style:normal;font-size:.95rem;color:#b9b1c9}
+.quote .small{margin-top:1.6rem;color:#b9b1c9;font-size:.98rem}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}
+  .portrait{order:-1;width:min(60%,240px);justify-self:start}
+  .two{grid-template-columns:1fr}
+  .news{grid-template-columns:1fr}
+  .news img{min-height:0;height:220px}
+}
+@media (max-width:560px){
+  .awards>li,.courses li{grid-template-columns:1fr;gap:2px}
+  .contact{grid-template-columns:1fr;gap:0}
+  .contact dd{margin-bottom:.6rem}
+}

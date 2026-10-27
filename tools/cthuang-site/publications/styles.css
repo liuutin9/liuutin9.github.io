@@ -1,0 +1,14 @@
+/* Publications page only. Shared styles live in shared/styles.css. */
+
+.hero .wrap{padding-top:clamp(36px,6vw,72px);padding-bottom:clamp(36px,6vw,72px)}
+.hero h1{font-size:clamp(2.2rem,5.6vw,3.6rem);margin:0 0 .5rem}
+.hero p{margin:0}
+.jump{display:flex;flex-wrap:wrap;gap:6px 28px;margin:1.6rem 0 0;padding:0;list-style:none}
+.jump a{color:#fff;text-decoration-color:var(--copper)}
+.jump span{color:#cdbfe3;margin-left:.25em}
+.pubs{margin:0;padding:0;list-style:none;max-width:46em}
+.pubs li{display:grid;grid-template-columns:52px 1fr;gap:0 12px;padding:.9rem 0;border-bottom:1px solid var(--line);font-size:.95rem;line-height:1.65}
+.pubs .no{font-family:var(--serif);font-size:1.05rem;color:var(--purple);line-height:1.55}
+.pubs .ref b{font-weight:600}
+.pubs li:target{background:#efeaf7}
+@media (max-width:560px){.pubs li{grid-template-columns:40px 1fr;gap:0 8px}}
