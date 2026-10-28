@@ -1,0 +1,55 @@
+/* Members page only. Shared styles live in shared/styles.css. */
+
+.hero .wrap{padding-top:clamp(36px,6vw,72px);padding-bottom:clamp(36px,6vw,72px)}
+.hero h1{font-size:clamp(2.2rem,5.6vw,3.6rem);margin:0 0 .5rem}
+.hero p{margin:0}
+.jump{display:flex;flex-wrap:wrap;gap:6px 28px;margin:1.6rem 0 0;padding:0;list-style:none}
+.jump a{color:#fff;text-decoration-color:var(--copper)}
+.jump span{color:#cdbfe3;margin-left:.25em}
+
+/* people: ruled rows, same rhythm as courses and awards */
+.people{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:0 clamp(24px,5vw,64px)}
+.person{display:flex;gap:18px;align-items:center;padding:1.15rem 0;border-bottom:1px solid var(--line)}
+.avatar{flex:none;width:68px;height:68px;border-radius:10px;object-fit:cover;background:var(--purple-deep);color:#e9dff7;
+  display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.5rem;
+  transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.person:hover .avatar{transform:scale(1.05) rotate(-1.5deg)}
+.info{min-width:0}
+.person h3{font-family:var(--serif);font-weight:500;font-size:1.25rem;line-height:1.25;margin:0}
+.person h3 .zh{white-space:nowrap;font-family:"Noto Serif TC",serif;font-size:.78em;color:var(--ink-soft);margin-left:.55em;font-weight:500}
+.meta,.role{margin:.2rem 0 0;color:var(--ink-soft);font-size:.92rem;line-height:1.5}
+
+/* faculty entry is larger and carries contact details */
+.people.lead{grid-template-columns:1fr}
+.lead .person{align-items:flex-start;gap:clamp(18px,3vw,32px)}
+.lead .avatar{width:clamp(88px,14vw,128px);height:auto;aspect-ratio:1;border-radius:14px}
+.lead h3{font-size:clamp(1.5rem,3vw,1.9rem)}
+.lead .role{font-size:1rem;margin-top:.3rem}
+.facts{display:grid;grid-template-columns:max-content 1fr;gap:.25rem 1.1rem;margin:1rem 0 0;font-size:.95rem}
+.facts dt{color:var(--ink-soft)}
+.facts dd{margin:0;overflow-wrap:anywhere}
+
+/* alumni: year on the left, names on the right (same rhythm as awards on the home page) */
+.alumni,.cohorts{margin:0;padding:0;list-style:none}
+.alumni>li,.cohorts>li{display:grid;grid-template-columns:96px 1fr;gap:8px 24px;padding:18px 0;border-bottom:1px solid var(--line)}
+.alumni .yr,.cohorts .yr{font-family:var(--serif);font-size:1.5rem;color:var(--purple);line-height:1.2}
+.alumni ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:.6rem clamp(24px,5vw,64px)}
+.alumni .person{display:block;padding:0;border:0}
+.alumni .name{font-family:var(--serif);font-size:1.15rem;line-height:1.3}
+.alumni .name{display:block}
+.alumni .name .zh{display:inline;font-family:"Noto Serif TC",serif;font-size:.8em;color:var(--ink-soft);margin-left:.55em;white-space:nowrap}
+.alumni .meta{display:block;margin-top:.1rem}
+
+/* enrolment cohorts: year column on the left, same as alumni; the person rows already carry their own rules */
+.cohorts>li{border-bottom:0;padding:0}
+.cohorts>li+li{margin-top:clamp(36px,6vw,64px)}
+.cohorts .yr{padding-top:calc(1.15rem + 9px)}
+.cohorts .yr small{display:block;margin-top:.25rem;font-family:var(--sans);font-size:.75rem;letter-spacing:.04em;color:var(--ink-soft)}
+
+@media (max-width:560px){
+  .alumni>li,.cohorts>li{grid-template-columns:1fr;gap:2px}
+  .cohorts .yr{padding-top:1.1rem}
+  .cohorts .yr small{display:inline;margin-left:.5em}
+  .lead .person{flex-direction:column}
+  .avatar{width:56px;height:56px;font-size:1.25rem}
+}

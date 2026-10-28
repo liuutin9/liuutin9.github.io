@@ -14,8 +14,9 @@
     { label: 'Courses',        href: 'index.html#courses' },
     { label: 'Undergraduate',  href: 'index.html#undergraduate' },
     { label: 'Awards',         href: 'index.html#awards' },
-    { label: 'News',           href: 'index.html#news' },
-    { label: 'Publications',   href: 'publications/index.html', page: 'publications' }
+    // { label: 'News',           href: 'index.html#news' },
+    { label: 'Members',           href: 'members/' },
+    { label: 'Publications',   href: 'publications/', page: 'publications' }
   ];
 
   var items = NAV.map(function (n) {
