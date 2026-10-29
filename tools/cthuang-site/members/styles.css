@@ -35,15 +35,19 @@
 .alumni .yr,.cohorts .yr{font-family:var(--serif);font-size:1.5rem;color:var(--purple);line-height:1.2}
 .alumni ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:.6rem clamp(24px,5vw,64px)}
 .alumni .person{display:block;padding:0;border:0}
-.alumni .name{font-family:var(--serif);font-size:1.15rem;line-height:1.3}
-.alumni .name{display:block}
-.alumni .name .zh{display:inline;font-family:"Noto Serif TC",serif;font-size:.8em;color:var(--ink-soft);margin-left:.55em;white-space:nowrap}
+.alumni .name{font-size:1.15rem;line-height:1.3}
+.alumni .name{display:block;font-family:var(--serif)}
 .alumni .meta{display:block;margin-top:.1rem}
+
+/* students and alumni carry no photo or English name: the Chinese name leads, a few more columns fit */
+.cohorts .people{grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:0 32px}
+.cohorts .person{padding:.95rem 0}
+.cohorts .person h3{font-size:1.2rem}
+.cohorts .yr{padding-top:calc(.95rem + 2px)}
 
 /* enrolment cohorts: year column on the left, same as alumni; the person rows already carry their own rules */
 .cohorts>li{border-bottom:0;padding:0}
 .cohorts>li+li{margin-top:clamp(36px,6vw,64px)}
-.cohorts .yr{padding-top:calc(1.15rem + 9px)}
 .cohorts .yr small{display:block;margin-top:.25rem;font-family:var(--sans);font-size:.75rem;letter-spacing:.04em;color:var(--ink-soft)}
 
 @media (max-width:560px){
